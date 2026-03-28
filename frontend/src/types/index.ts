@@ -95,3 +95,23 @@ export interface StartGameError {
   detail: string
   incomplete_stations: number[]
 }
+
+// Content Library types
+export interface LibraryItem {
+  id: string
+  name: string
+  category: string
+  image_url: string | null
+  metadata_json: Record<string, unknown>
+}
+
+export interface LibraryTask {
+  id: string
+  mini_game_type: MiniGameType
+  category: string
+  reference_items: LibraryItem[]
+  correct_answer: LibraryItem | null
+  answer_options: LibraryItem[]
+  question: string | null
+  options_json: string[] | null
+}

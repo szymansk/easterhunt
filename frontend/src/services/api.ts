@@ -1,4 +1,4 @@
-import type { Game, GameListItem, GameProgress, Station } from '../types'
+import type { Game, GameListItem, GameProgress, LibraryItem, LibraryTask, Station } from '../types'
 
 export interface TileInfo {
   url: string
@@ -158,4 +158,25 @@ export function completeStation(gameId: string): Promise<GameProgress> {
   return request<GameProgress>(`/api/games/${gameId}/progress/complete-station`, {
     method: 'PUT',
   })
+}
+
+// Content Library
+export function listLibraryCategories(): Promise<string[]> {
+  return request<string[]>('/api/library/categories')
+}
+
+export function listLibraryItems(category?: string): Promise<LibraryItem[]> {
+  const qs = category ? `?category=${encodeURIComponent(category)}` : ''
+  return request<LibraryItem[]>(`/api/library/items${qs}`)
+}
+
+export function listLibraryTasks(params?: {
+  mini_game_type?: string
+  category?: string
+}): Promise<LibraryTask[]> {
+  const qs = new URLSearchParams()
+  if (params?.mini_game_type) qs.set('mini_game_type', params.mini_game_type)
+  if (params?.category) qs.set('category', params.category)
+  const query = qs.toString() ? `?${qs.toString()}` : ''
+  return request<LibraryTask[]>(`/api/library/tasks${query}`)
 }

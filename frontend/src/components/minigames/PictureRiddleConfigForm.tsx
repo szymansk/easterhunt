@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import LibraryBrowser from '../ui/LibraryBrowser'
+import type { LibraryTask } from '../../types'
 import type { PictureRiddleConfig } from '../../types'
 import { MiniGameType } from '../../types'
 
@@ -8,6 +11,14 @@ interface Props {
 }
 
 export default function PictureRiddleConfigForm({ value, onChange, errors }: Props) {
+  const [browserOpen, setBrowserOpen] = useState(false)
+  const [selectedTask, setSelectedTask] = useState<LibraryTask | null>(null)
+
+  function handleLibrarySelect(task: LibraryTask) {
+    setSelectedTask(task)
+    onChange({ type: MiniGameType.picture_riddle, question: value.question, library_task_id: task.id } as PictureRiddleConfig & { library_task_id: string })
+  }
+
   return (
     <div className="space-y-4">
       <div>
@@ -26,8 +37,16 @@ export default function PictureRiddleConfigForm({ value, onChange, errors }: Pro
         {errors?.question && <p className="text-sm text-red-600 mt-1">{errors.question}</p>}
       </div>
 
+      {selectedTask && (
+        <div className="rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-xs text-green-700">
+          Bibliothek-Aufgabe ausgewählt: <strong>{selectedTask.category}</strong>
+          {' '}({selectedTask.answer_options.length} Antwortoptionen)
+        </div>
+      )}
+
       <button
         type="button"
+        onClick={() => setBrowserOpen(true)}
         className="w-full flex items-center justify-center gap-2 py-3 px-4 border-2 border-dashed border-gray-300 rounded-xl text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,6 +54,13 @@ export default function PictureRiddleConfigForm({ value, onChange, errors }: Pro
         </svg>
         Aus Bibliothek wählen
       </button>
+
+      <LibraryBrowser
+        isOpen={browserOpen}
+        onClose={() => setBrowserOpen(false)}
+        onSelect={handleLibrarySelect}
+        miniGameType="picture_riddle"
+      />
     </div>
   )
 }
