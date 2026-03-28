@@ -1,6 +1,6 @@
 import uuid
 
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app.db import get_db
@@ -27,7 +27,6 @@ def _get_station_or_404(game_id: str, station_id: str, db: Session) -> Station:
         .first()
     )
     if station is None:
-        from fastapi import HTTPException
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Station {station_id} not found in game {game_id}",

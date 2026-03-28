@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -10,6 +11,12 @@ from app.db import engine
 from app.exceptions import GameNotFoundError, InvalidConfigurationError, StationLimitExceededError
 from app.models import Base
 from app.routers import games, progress, stations
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s %(message)s",
+)
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -37,7 +44,7 @@ app.include_router(progress.router)
 async def game_not_found_handler(request: Request, exc: GameNotFoundError) -> JSONResponse:
     return JSONResponse(
         status_code=404,
-        content={"detail": str(exc)},
+        content={"error": "Game not found", "detail": str(exc)},
     )
 
 
@@ -59,11 +66,10 @@ async def invalid_config_handler(request: Request, exc: InvalidConfigurationErro
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
-    import logging
-    logging.getLogger(__name__).exception("Unhandled exception")
+    logger.exception("Unhandled exception for %s %s", request.method, request.url)
     return JSONResponse(
         status_code=500,
-        content={"error": "Internal server error", "detail": "An unexpected error occurred"},
+        content={"error": "Internal server error", "detail": str(exc)},
     )
 
 
