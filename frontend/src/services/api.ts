@@ -149,3 +149,13 @@ export function updateGameProgress(
     body: JSON.stringify(data),
   })
 }
+
+export function createGameProgress(gameId: string): Promise<GameProgress> {
+  return request<GameProgress>(`/api/games/${gameId}/progress`, { method: 'POST' })
+}
+
+export function completeStation(gameId: string): Promise<GameProgress> {
+  return request<GameProgress>(`/api/games/${gameId}/progress/complete-station`, {
+    method: 'PUT',
+  })
+}
