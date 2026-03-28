@@ -5,7 +5,6 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app.models.game import GameStatus, MiniGameType
 
-
 # Game schemas
 
 
@@ -32,9 +31,23 @@ class GameListItem(BaseModel):
     id: str
     name: str
     status: GameStatus
+    station_count: int = 0
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+    @classmethod
+    def model_validate(cls, obj, **kwargs):  # type: ignore[override]
+        if hasattr(obj, "__dict__") and not isinstance(obj, dict):
+            data = {
+                "id": obj.id,
+                "name": obj.name,
+                "status": obj.status,
+                "station_count": len(obj.stations) if hasattr(obj, "stations") else 0,
+                "created_at": obj.created_at,
+            }
+            return cls(**data)
+        return super().model_validate(obj, **kwargs)
 
 
 # Mini-game config schemas

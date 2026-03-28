@@ -7,7 +7,13 @@ from sqlalchemy.orm import Session
 from app.db import get_db
 from app.exceptions import GameNotFoundError
 from app.models.game import Game, GameStatus
-from app.schemas.game import GameCreate, GameListItem, GameRead, GameReadWithStations, GameUpdate
+from app.schemas.game import (
+    GameCreate,
+    GameListItem,
+    GameRead,
+    GameReadWithStations,
+    GameUpdate,
+)
 
 router = APIRouter(prefix="/api/games", tags=["games"])
 

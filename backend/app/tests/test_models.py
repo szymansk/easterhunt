@@ -1,6 +1,14 @@
 """Tests for SQLAlchemy models: create tables and insert one row per model."""
 
-from app.models import Game, GameProgress, GameStatus, MiniGameType, RiddleItem, RiddleTask, Station
+from app.models import (
+    Game,
+    GameProgress,
+    GameStatus,
+    MiniGameType,
+    RiddleItem,
+    RiddleTask,
+    Station,
+)
 
 
 def test_create_tables_and_insert_rows(db_session):

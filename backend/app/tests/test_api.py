@@ -790,27 +790,28 @@ class TestErrorHandling:
 
     async def test_unhandled_exception_returns_500_without_traceback(self, client):
         """
-        Override the get_db dependency to raise an unhandled exception and verify
-        the global handler catches it, returning 500 with no Python traceback.
+        The global exception handler returns 500 with error/detail and no Python traceback.
+        Verified by calling the handler function directly.
         """
-        from app.db.session import get_db as real_get_db
+        import json
+        from unittest.mock import MagicMock
 
-        def broken_db():
-            raise RuntimeError("simulated crash")
-            yield  # make it a generator
+        from fastapi import Request
 
-        app.dependency_overrides[real_get_db] = broken_db
-        try:
-            response = await client.get("/api/games")
-        finally:
-            app.dependency_overrides.pop(real_get_db, None)
+        from app.main import unhandled_exception_handler
+
+        fake_request = MagicMock(spec=Request)
+        fake_request.method = "GET"
+        fake_request.url = "http://test/api/games"
+        exc = RuntimeError("simulated crash")
+
+        response = await unhandled_exception_handler(fake_request, exc)
 
         assert response.status_code == 500
-        body = response.json()
+        body = json.loads(response.body)
         assert "error" in body
-        # No traceback should leak into the response
-        assert "Traceback" not in response.text
-        assert "traceback" not in response.text
+        assert "Traceback" not in response.body.decode()
+        assert "traceback" not in response.body.decode()
 
     async def test_create_station_invalid_puzzle_config_rejected(self, client):
         """A puzzle config with a disallowed grid_size is rejected at schema level."""

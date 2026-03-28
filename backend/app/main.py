@@ -8,7 +8,11 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.db import engine
-from app.exceptions import GameNotFoundError, InvalidConfigurationError, StationLimitExceededError
+from app.exceptions import (
+    GameNotFoundError,
+    InvalidConfigurationError,
+    StationLimitExceededError,
+)
 from app.models import Base
 from app.routers import games, progress, stations
 
