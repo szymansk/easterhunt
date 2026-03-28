@@ -34,7 +34,12 @@ function defaultConfig(type: MiniGameType): MiniGameConfig {
         options: ['', ''],
       }
     case MiniGameType.picture_riddle:
-      return { type: MiniGameType.picture_riddle, question: '' }
+      return {
+        type: MiniGameType.picture_riddle,
+        category: '',
+        reference_items: [],
+        answer_options: [],
+      }
   }
 }
 
@@ -55,7 +60,9 @@ function validateConfig(type: MiniGameType, config: MiniGameConfig): Record<stri
     }
     case MiniGameType.picture_riddle: {
       const c = config as import('../../types').PictureRiddleConfig
-      if (!c.question.trim()) errs.question = 'Frage ist erforderlich'
+      if (!c.category?.trim()) errs.category = 'Kategorie ist erforderlich'
+      if (c.reference_items.length !== 2) errs.reference_items = 'Genau 2 Referenzbilder erforderlich'
+      if (c.answer_options.length !== 4) errs.answer_options = 'Genau 4 Antwortoptionen erforderlich'
       break
     }
   }

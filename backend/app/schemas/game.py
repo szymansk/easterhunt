@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Annotated, Literal, Union
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.models.game import GameStatus, MiniGameType
 
@@ -67,9 +67,32 @@ class TextRiddleConfig(BaseModel):
     options: list[str]
 
 
+class PictureRiddleReferenceItem(BaseModel):
+    image_url: str
+    label: str
+    library_item_id: str | None = None
+
+
+class PictureRiddleAnswerOption(BaseModel):
+    image_url: str
+    label: str
+    is_correct: bool
+    library_item_id: str | None = None
+
+
 class PictureRiddleConfig(BaseModel):
     type: Literal["picture_riddle"]
-    question: str
+    category: str
+    reference_items: list[PictureRiddleReferenceItem] = Field(..., min_length=2, max_length=2)
+    answer_options: list[PictureRiddleAnswerOption] = Field(..., min_length=4, max_length=4)
+    question: str | None = None
+
+    @model_validator(mode="after")
+    def validate_exactly_one_correct(self) -> "PictureRiddleConfig":
+        correct_count = sum(1 for opt in self.answer_options if opt.is_correct)
+        if correct_count != 1:
+            raise ValueError("Exactly one answer_option must be marked as correct")
+        return self
 
 
 MiniGameConfig = Annotated[

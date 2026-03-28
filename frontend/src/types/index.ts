@@ -43,9 +43,25 @@ export interface TextRiddleConfig {
   options: string[]
 }
 
+export interface PictureRiddleReferenceItem {
+  image_url: string
+  label: string
+  library_item_id?: string | null
+}
+
+export interface PictureRiddleAnswerOption {
+  image_url: string
+  label: string
+  is_correct: boolean
+  library_item_id?: string | null
+}
+
 export interface PictureRiddleConfig {
   type: MiniGameType.picture_riddle
-  question: string
+  category: string
+  reference_items: PictureRiddleReferenceItem[]
+  answer_options: PictureRiddleAnswerOption[]
+  question?: string | null
 }
 
 export type MiniGameConfig =

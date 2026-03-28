@@ -40,7 +40,20 @@ TEXT_RIDDLE_CONFIG = {
     "answer_mode": "multiple_choice",
     "options": ["red", "green", "blue"],
 }
-PICTURE_RIDDLE_CONFIG = {"type": "picture_riddle", "question": "What do you see?"}
+PICTURE_RIDDLE_CONFIG = {
+    "type": "picture_riddle",
+    "category": "Spielzeug",
+    "reference_items": [
+        {"image_url": "/media/toy1.svg", "label": "Spielzeug 1"},
+        {"image_url": "/media/toy2.svg", "label": "Spielzeug 2"},
+    ],
+    "answer_options": [
+        {"image_url": "/media/ball.svg", "label": "Ball", "is_correct": True},
+        {"image_url": "/media/car.svg", "label": "Auto", "is_correct": False},
+        {"image_url": "/media/doll.svg", "label": "Puppe", "is_correct": False},
+        {"image_url": "/media/book.svg", "label": "Buch", "is_correct": False},
+    ],
+}
 
 
 def _station_body(position: int = 1, image_path: str | None = None) -> dict:
@@ -288,7 +301,20 @@ class TestSchemas:
     def test_mini_game_config_discriminator_picture_riddle(self):
         from pydantic import TypeAdapter
         ta = TypeAdapter(MiniGameConfig)
-        cfg = ta.validate_python({"type": "picture_riddle", "question": "Q"})
+        cfg = ta.validate_python({
+            "type": "picture_riddle",
+            "category": "Spielzeug",
+            "reference_items": [
+                {"image_url": "/media/a.svg", "label": "A"},
+                {"image_url": "/media/b.svg", "label": "B"},
+            ],
+            "answer_options": [
+                {"image_url": "/media/c.svg", "label": "C", "is_correct": True},
+                {"image_url": "/media/d.svg", "label": "D", "is_correct": False},
+                {"image_url": "/media/e.svg", "label": "E", "is_correct": False},
+                {"image_url": "/media/f.svg", "label": "F", "is_correct": False},
+            ],
+        })
         assert isinstance(cfg, PictureRiddleConfig)
 
     def test_mini_game_config_unknown_type_raises(self):
