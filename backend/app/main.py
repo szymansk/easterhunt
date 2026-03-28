@@ -1,10 +1,21 @@
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI(title="Easter Hunt API")
+from app.db import engine
+from app.models import Base
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(engine)
+    yield
+
+
+app = FastAPI(title="Easter Hunt API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
