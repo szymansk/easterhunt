@@ -1,5 +1,17 @@
 import type { Game, GameListItem, GameProgress, Station } from '../types'
 
+export interface TileInfo {
+  url: string
+  index: number
+  row: number
+  col: number
+}
+
+export interface PuzzleApiResponse {
+  tiles: TileInfo[]
+  grid: { rows: number; cols: number }
+}
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
@@ -102,6 +114,25 @@ export function reorderStations(gameId: string, stationIds: string[]): Promise<S
 
 export function deleteStation(gameId: string, stationId: string): Promise<void> {
   return request<void>(`/api/games/${gameId}/stations/${stationId}`, { method: 'DELETE' })
+}
+
+// Puzzle tile generation
+export function generatePuzzleTiles(
+  gameId: string,
+  stationId: string,
+  gridSize: number,
+): Promise<PuzzleApiResponse> {
+  return request<PuzzleApiResponse>(
+    `/api/games/${gameId}/stations/${stationId}/puzzle/generate?grid_size=${gridSize}`,
+    { method: 'POST' },
+  )
+}
+
+export function getPuzzleTiles(
+  gameId: string,
+  stationId: string,
+): Promise<PuzzleApiResponse> {
+  return request<PuzzleApiResponse>(`/api/games/${gameId}/stations/${stationId}/puzzle`)
 }
 
 // Game Progress

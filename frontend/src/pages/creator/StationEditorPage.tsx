@@ -6,7 +6,7 @@ import PictureRiddleConfigForm from '../../components/minigames/PictureRiddleCon
 import PuzzleConfigForm from '../../components/minigames/PuzzleConfigForm'
 import TextRiddleConfigForm from '../../components/minigames/TextRiddleConfigForm'
 import { BigButton, Card, ErrorMessage, LoadingSpinner, Modal } from '../../components/ui'
-import { getStation, updateStation } from '../../services/api'
+import { getStation, listStations, updateStation } from '../../services/api'
 import type { MiniGameConfig, Station } from '../../types'
 import { MiniGameType } from '../../types'
 
@@ -67,6 +67,7 @@ export default function StationEditorPage() {
   const navigate = useNavigate()
 
   const [station, setStation] = useState<Station | null>(null)
+  const [allStations, setAllStations] = useState<Station[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
@@ -79,9 +80,10 @@ export default function StationEditorPage() {
 
   useEffect(() => {
     if (!gameId || !stationId) return
-    getStation(gameId, stationId)
-      .then((s) => {
+    Promise.all([getStation(gameId, stationId), listStations(gameId)])
+      .then(([s, stations]) => {
         setStation(s)
+        setAllStations(stations)
         setMiniGameType(s.mini_game_type)
         // Reconstruct typed config from raw dict
         setConfig({ type: s.mini_game_type, ...s.mini_game_config } as MiniGameConfig)
@@ -209,13 +211,24 @@ export default function StationEditorPage() {
       {/* Config panel */}
       <Card className="mb-6">
         <h2 className="text-sm font-semibold text-gray-700 mb-4">Konfiguration</h2>
-        {miniGameType === MiniGameType.puzzle && (
-          <PuzzleConfigForm
-            value={config as import('../../types').PuzzleConfig}
-            onChange={setConfig}
-            errors={configErrors}
-          />
-        )}
+        {miniGameType === MiniGameType.puzzle && (() => {
+          // Puzzle station N uses the image from station N+1 as source.
+          // For the last station, fall back to the current station.
+          const sorted = [...allStations].sort((a, b) => a.position - b.position)
+          const currentIdx = sorted.findIndex((s) => s.id === stationId)
+          const nextStation = currentIdx >= 0 && currentIdx < sorted.length - 1
+            ? sorted[currentIdx + 1]
+            : sorted[currentIdx] ?? null
+          return (
+            <PuzzleConfigForm
+              value={config as import('../../types').PuzzleConfig}
+              onChange={setConfig}
+              errors={configErrors}
+              gameId={gameId}
+              generateStationId={nextStation?.id}
+            />
+          )
+        })()}
         {miniGameType === MiniGameType.number_riddle && (
           <NumberRiddleConfigForm
             value={config as import('../../types').NumberRiddleConfig}
