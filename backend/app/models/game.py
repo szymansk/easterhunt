@@ -103,3 +103,28 @@ class RiddleTask(Base):
     answer: Mapped[str] = mapped_column(String, nullable=False)
 
     station: Mapped["Station"] = relationship("Station", back_populates="riddle_tasks")
+
+
+class LibraryItem(Base):
+    """Standalone content library item (not tied to a station)."""
+
+    __tablename__ = "library_items"
+
+    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    category: Mapped[str] = mapped_column(String, nullable=False)
+    image_path: Mapped[str | None] = mapped_column(String, nullable=True)
+    metadata_json: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+
+
+class LibraryTask(Base):
+    """Standalone content library task (not tied to a station)."""
+
+    __tablename__ = "library_tasks"
+
+    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    mini_game_type: Mapped[MiniGameType] = mapped_column(Enum(MiniGameType), nullable=False)
+    category: Mapped[str] = mapped_column(String, nullable=False)
+    reference_items_json: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    correct_answer_id: Mapped[str] = mapped_column(String, nullable=False)
+    distractor_ids_json: Mapped[list] = mapped_column(JSON, nullable=False, default=list)

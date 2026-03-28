@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "items": [
+    {"id": "item-ball", "name": "Ball", "category": "spielzeug", "image_path": "content/images/ball.svg", "metadata": {}},
+    {"id": "item-teddy", "name": "Teddybär", "category": "spielzeug", "image_path": "content/images/teddy.svg", "metadata": {}},
+    {"id": "item-car", "name": "Auto", "category": "spielzeug", "image_path": "content/images/car.svg", "metadata": {}},
+    {"id": "item-blocks", "name": "Bauklötze", "category": "spielzeug", "image_path": "content/images/blocks.svg", "metadata": {}},
+    {"id": "item-cup", "name": "Tasse", "category": "haushalt", "image_path": "content/images/cup.svg", "metadata": {}},
+    {"id": "item-spoon", "name": "Löffel", "category": "haushalt", "image_path": "content/images/spoon.svg", "metadata": {}},
+    {"id": "item-book", "name": "Buch", "category": "kita", "image_path": "content/images/book.svg", "metadata": {}},
+    {"id": "item-crayon", "name": "Buntstift", "category": "kita", "image_path": "content/images/crayon.svg", "metadata": {}},
+    {"id": "item-apple", "name": "Apfel", "category": "essen", "image_path": "content/images/apple.svg", "metadata": {}},
+    {"id": "item-banana", "name": "Banane", "category": "essen", "image_path": "content/images/banana.svg", "metadata": {}},
+    {"id": "item-bread", "name": "Brot", "category": "essen", "image_path": "content/images/bread.svg", "metadata": {}},
+    {"id": "item-scissors", "name": "Schere", "category": "basteln", "image_path": "content/images/scissors.svg", "metadata": {}},
+    {"id": "item-paintbrush", "name": "Pinsel", "category": "basteln", "image_path": "content/images/paintbrush.svg", "metadata": {}},
+    {"id": "item-shirt", "name": "T-Shirt", "category": "kleidung", "image_path": "content/images/shirt.svg", "metadata": {}},
+    {"id": "item-hat", "name": "Hut", "category": "kleidung", "image_path": "content/images/hat.svg", "metadata": {}}
+  ],
+  "tasks": [
+    {
+      "id": "task-spielzeug-1",
+      "mini_game_type": "picture_riddle",
+      "category": "spielzeug",
+      "reference_item_ids": ["item-ball", "item-car"],
+      "correct_answer_id": "item-teddy",
+      "distractor_ids": ["item-cup", "item-apple", "item-shirt"]
+    },
+    {
+      "id": "task-haushalt-1",
+      "mini_game_type": "picture_riddle",
+      "category": "haushalt",
+      "reference_item_ids": ["item-cup", "item-spoon"],
+      "correct_answer_id": "item-cup",
+      "distractor_ids": ["item-ball", "item-book", "item-hat"]
+    },
+    {
+      "id": "task-kita-1",
+      "mini_game_type": "picture_riddle",
+      "category": "kita",
+      "reference_item_ids": ["item-book", "item-crayon"],
+      "correct_answer_id": "item-book",
+      "distractor_ids": ["item-car", "item-banana", "item-scissors"]
+    },
+    {
+      "id": "task-essen-1",
+      "mini_game_type": "picture_riddle",
+      "category": "essen",
+      "reference_item_ids": ["item-apple", "item-banana"],
+      "correct_answer_id": "item-bread",
+      "distractor_ids": ["item-blocks", "item-spoon", "item-shirt"]
+    },
+    {
+      "id": "task-basteln-1",
+      "mini_game_type": "picture_riddle",
+      "category": "basteln",
+      "reference_item_ids": ["item-scissors", "item-paintbrush"],
+      "correct_answer_id": "item-crayon",
+      "distractor_ids": ["item-car", "item-apple", "item-hat"]
+    },
+    {
+      "id": "task-kleidung-1",
+      "mini_game_type": "picture_riddle",
+      "category": "kleidung",
+      "reference_item_ids": ["item-shirt", "item-hat"],
+      "correct_answer_id": "item-shirt",
+      "distractor_ids": ["item-ball", "item-bread", "item-book"]
+    }
+  ]
+}
