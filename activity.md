@@ -4,6 +4,39 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-28] Epic easter-2xj Complete
+
+### easter-2xj.1 - Puzzle Board Komponente
+- PuzzleBoard component: CSS Grid (1x3/2x2/2x3/3x3), dashed slot outlines, tile tray
+- getGridConfig helper, PuzzleTile/PuzzleSlot types
+- 10 Vitest tests (all grid sizes, placed/unplaced tiles)
+
+### easter-2xj.2 - Puzzle Drag-and-Drop mit dnd-kit
+- PuzzleGame with DndContext, Mouse+Touch sensors
+- PuzzleTileView (draggable), PuzzleDropZone (droppable)
+- Snap-to-correct, bounce-back animation, DragOverlay
+- 7 Vitest tests
+
+### easter-2xj.3 - Puzzle Completion Detection
+- useEffect monitors tiles state, fires when all placed
+- SuccessOverlay after completion, onComplete after 2.5s delay
+- 7 Vitest tests (N-1 no trigger, N triggers, 8-of-9 no trigger)
+
+### easter-2xj.4 - Puzzle Creator Config
+- api.ts: generatePuzzleTiles() + getPuzzleTiles()
+- PuzzleConfigForm: generate button, tile preview, reload existing
+- StationEditorPage: loads all stations, passes next-station ID
+  (puzzle station N uses image from station N+1; last → self fallback)
+
+### easter-2xj.5 - Puzzle Frontend Tests
+- 13 tests covering all 5 acceptance criteria
+- Board 3x3=9 slots/tiles, correct placement, wrong placement, completion, non-completion
+- All jsdom (no browser)
+
+Total: 56 unit tests, all green. Epic auto-closed.
+
+---
+
 ## [2026-03-28] Claude Session - Epic easter-0qp COMPLETE
 
 **All 7 tasks completed: Epic 5 - Image Upload & Processing**
@@ -271,4 +304,7 @@ Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 
+
+## [2026-03-28 23:26:27] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 
