@@ -1,4 +1,5 @@
 export { default as BigButton } from './BigButton'
+export { default as ImageUpload } from './ImageUpload'
 export { default as Card } from './Card'
 export { default as Modal } from './Modal'
 export { default as LoadingSpinner } from './LoadingSpinner'

@@ -3,7 +3,7 @@ import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -101,14 +101,10 @@ async def serve_media(file_path: str) -> FileResponse:
     data_root = DATA_DIR.resolve()
 
     if not str(requested).startswith(str(data_root) + os.sep) and requested != data_root:
-        from fastapi import HTTPException as _HTTPException
-
-        raise _HTTPException(status_code=400, detail="Invalid path")
+        raise HTTPException(status_code=400, detail="Invalid path")
 
     if not requested.exists() or not requested.is_file():
-        from fastapi import HTTPException as _HTTPException
-
-        raise _HTTPException(status_code=404, detail="File not found")
+        raise HTTPException(status_code=404, detail="File not found")
 
     return FileResponse(str(requested))
 
