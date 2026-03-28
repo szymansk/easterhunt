@@ -1,11 +1,26 @@
+import { Routes, Route, Navigate } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import GameListPage from './pages/creator/GameListPage'
+import GameEditorPage from './pages/creator/GameEditorPage'
+import PlayerPage from './pages/play/PlayerPage'
+import NotFoundPage from './pages/NotFoundPage'
+import CreatorLayout from './components/layouts/CreatorLayout'
+import PlayerLayout from './components/layouts/PlayerLayout'
+
 function App() {
   return (
-    <div className="min-h-screen bg-blue-500 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-8 shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800">Easter Hunt</h1>
-        <p className="text-gray-600 mt-2">Willkommen zur Osterschnitzeljagd!</p>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/creator" element={<CreatorLayout />}>
+        <Route index element={<GameListPage />} />
+        <Route path="game/:id" element={<GameEditorPage />} />
+      </Route>
+      <Route path="/play" element={<PlayerLayout />}>
+        <Route path=":id" element={<PlayerPage />} />
+      </Route>
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+    </Routes>
   )
 }
 
