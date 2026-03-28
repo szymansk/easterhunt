@@ -158,5 +158,7 @@ class LibraryTaskRead(BaseModel):
     reference_items: list["LibraryItemRead"]
     correct_answer: "LibraryItemRead | None"
     answer_options: list["LibraryItemRead"]
+    question: str | None = None
+    options_json: list | None = None
 
     model_config = ConfigDict(from_attributes=True)

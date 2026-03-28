@@ -126,5 +126,7 @@ class LibraryTask(Base):
     mini_game_type: Mapped[MiniGameType] = mapped_column(Enum(MiniGameType), nullable=False)
     category: Mapped[str] = mapped_column(String, nullable=False)
     reference_items_json: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
-    correct_answer_id: Mapped[str] = mapped_column(String, nullable=False)
+    correct_answer_id: Mapped[str | None] = mapped_column(String, nullable=True)
     distractor_ids_json: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    question: Mapped[str | None] = mapped_column(String, nullable=True)
+    options_json: Mapped[list | None] = mapped_column(JSON, nullable=True)

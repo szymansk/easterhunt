@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "items": [
     {"id": "item-ball", "name": "Ball", "category": "spielzeug", "image_path": "content/images/ball.svg", "metadata": {}},
     {"id": "item-teddy", "name": "Teddybär", "category": "spielzeug", "image_path": "content/images/teddy.svg", "metadata": {}},
@@ -15,7 +15,12 @@
     {"id": "item-scissors", "name": "Schere", "category": "basteln", "image_path": "content/images/scissors.svg", "metadata": {}},
     {"id": "item-paintbrush", "name": "Pinsel", "category": "basteln", "image_path": "content/images/paintbrush.svg", "metadata": {}},
     {"id": "item-shirt", "name": "T-Shirt", "category": "kleidung", "image_path": "content/images/shirt.svg", "metadata": {}},
-    {"id": "item-hat", "name": "Hut", "category": "kleidung", "image_path": "content/images/hat.svg", "metadata": {}}
+    {"id": "item-hat", "name": "Hut", "category": "kleidung", "image_path": "content/images/hat.svg", "metadata": {}},
+    {"id": "item-count-1", "name": "1 Kreis", "category": "zählen", "image_path": "content/images/count_1.svg", "metadata": {"count": 1}},
+    {"id": "item-count-2", "name": "2 Kreise", "category": "zählen", "image_path": "content/images/count_2.svg", "metadata": {"count": 2}},
+    {"id": "item-count-3", "name": "3 Kreise", "category": "zählen", "image_path": "content/images/count_3.svg", "metadata": {"count": 3}},
+    {"id": "item-count-5", "name": "5 Kreise", "category": "zählen", "image_path": "content/images/count_5.svg", "metadata": {"count": 5}},
+    {"id": "item-count-7", "name": "7 Kreise", "category": "zählen", "image_path": "content/images/count_7.svg", "metadata": {"count": 7}}
   ],
   "tasks": [
     {
@@ -27,12 +32,28 @@
       "distractor_ids": ["item-cup", "item-apple", "item-shirt"]
     },
     {
+      "id": "task-spielzeug-2",
+      "mini_game_type": "picture_riddle",
+      "category": "spielzeug",
+      "reference_item_ids": ["item-teddy", "item-blocks"],
+      "correct_answer_id": "item-car",
+      "distractor_ids": ["item-hat", "item-bread", "item-book"]
+    },
+    {
       "id": "task-haushalt-1",
       "mini_game_type": "picture_riddle",
       "category": "haushalt",
       "reference_item_ids": ["item-cup", "item-spoon"],
       "correct_answer_id": "item-cup",
       "distractor_ids": ["item-ball", "item-book", "item-hat"]
+    },
+    {
+      "id": "task-haushalt-2",
+      "mini_game_type": "picture_riddle",
+      "category": "haushalt",
+      "reference_item_ids": ["item-spoon", "item-cup"],
+      "correct_answer_id": "item-spoon",
+      "distractor_ids": ["item-car", "item-apple", "item-crayon"]
     },
     {
       "id": "task-kita-1",
@@ -43,12 +64,28 @@
       "distractor_ids": ["item-car", "item-banana", "item-scissors"]
     },
     {
+      "id": "task-kita-2",
+      "mini_game_type": "picture_riddle",
+      "category": "kita",
+      "reference_item_ids": ["item-crayon", "item-scissors"],
+      "correct_answer_id": "item-crayon",
+      "distractor_ids": ["item-ball", "item-banana", "item-shirt"]
+    },
+    {
       "id": "task-essen-1",
       "mini_game_type": "picture_riddle",
       "category": "essen",
       "reference_item_ids": ["item-apple", "item-banana"],
       "correct_answer_id": "item-bread",
       "distractor_ids": ["item-blocks", "item-spoon", "item-shirt"]
+    },
+    {
+      "id": "task-essen-2",
+      "mini_game_type": "picture_riddle",
+      "category": "essen",
+      "reference_item_ids": ["item-banana", "item-bread"],
+      "correct_answer_id": "item-apple",
+      "distractor_ids": ["item-teddy", "item-book", "item-hat"]
     },
     {
       "id": "task-basteln-1",
@@ -59,12 +96,120 @@
       "distractor_ids": ["item-car", "item-apple", "item-hat"]
     },
     {
+      "id": "task-basteln-2",
+      "mini_game_type": "picture_riddle",
+      "category": "basteln",
+      "reference_item_ids": ["item-paintbrush", "item-crayon"],
+      "correct_answer_id": "item-scissors",
+      "distractor_ids": ["item-ball", "item-cup", "item-shirt"]
+    },
+    {
       "id": "task-kleidung-1",
       "mini_game_type": "picture_riddle",
       "category": "kleidung",
       "reference_item_ids": ["item-shirt", "item-hat"],
       "correct_answer_id": "item-shirt",
       "distractor_ids": ["item-ball", "item-bread", "item-book"]
+    },
+    {
+      "id": "task-zaehlen-1",
+      "mini_game_type": "number_riddle",
+      "category": "zählen",
+      "reference_item_ids": ["item-count-1"],
+      "correct_answer_id": "item-count-1",
+      "distractor_ids": ["item-count-2", "item-count-3"],
+      "question": "Wie viele Kreise siehst du?",
+      "options": ["1", "2", "3"]
+    },
+    {
+      "id": "task-zaehlen-2",
+      "mini_game_type": "number_riddle",
+      "category": "zählen",
+      "reference_item_ids": ["item-count-2"],
+      "correct_answer_id": "item-count-2",
+      "distractor_ids": ["item-count-1", "item-count-3"],
+      "question": "Wie viele Kreise siehst du?",
+      "options": ["1", "2", "3"]
+    },
+    {
+      "id": "task-zaehlen-3",
+      "mini_game_type": "number_riddle",
+      "category": "zählen",
+      "reference_item_ids": ["item-count-3"],
+      "correct_answer_id": "item-count-3",
+      "distractor_ids": ["item-count-2", "item-count-5"],
+      "question": "Wie viele Kreise siehst du?",
+      "options": ["2", "3", "5"]
+    },
+    {
+      "id": "task-zaehlen-4",
+      "mini_game_type": "number_riddle",
+      "category": "zählen",
+      "reference_item_ids": ["item-count-5"],
+      "correct_answer_id": "item-count-5",
+      "distractor_ids": ["item-count-3", "item-count-7"],
+      "question": "Wie viele Kreise siehst du?",
+      "options": ["3", "5", "7"]
+    },
+    {
+      "id": "task-zaehlen-5",
+      "mini_game_type": "number_riddle",
+      "category": "zählen",
+      "reference_item_ids": ["item-count-7"],
+      "correct_answer_id": "item-count-7",
+      "distractor_ids": ["item-count-5", "item-count-3"],
+      "question": "Wie viele Kreise siehst du?",
+      "options": ["3", "5", "7"]
+    },
+    {
+      "id": "task-text-1",
+      "mini_game_type": "text_riddle",
+      "category": "essen",
+      "reference_item_ids": [],
+      "correct_answer_id": null,
+      "distractor_ids": [],
+      "question": "Ich bin rot, rund und süß. Man findet mich auf Bäumen. Was bin ich?",
+      "options": ["Apfel", "Banane", "Brot"]
+    },
+    {
+      "id": "task-text-2",
+      "mini_game_type": "text_riddle",
+      "category": "spielzeug",
+      "reference_item_ids": [],
+      "correct_answer_id": null,
+      "distractor_ids": [],
+      "question": "Ich bin rund und du kannst mich werfen und fangen. Was bin ich?",
+      "options": ["Ball", "Buch", "Tasse"]
+    },
+    {
+      "id": "task-text-3",
+      "mini_game_type": "text_riddle",
+      "category": "kita",
+      "reference_item_ids": [],
+      "correct_answer_id": null,
+      "distractor_ids": [],
+      "question": "Ich habe viele Seiten und du kannst mich lesen. Was bin ich?",
+      "options": ["Buch", "Schere", "Pinsel"]
+    },
+    {
+      "id": "task-text-4",
+      "mini_game_type": "text_riddle",
+      "category": "haushalt",
+      "reference_item_ids": [],
+      "correct_answer_id": null,
+      "distractor_ids": [],
+      "question": "Ich bin ein Behälter für heißen Tee oder Kakao. Was bin ich?",
+      "options": ["Tasse", "Löffel", "Ball"]
+    },
+    {
+      "id": "task-text-5",
+      "mini_game_type": "text_riddle",
+      "category": "basteln",
+      "reference_item_ids": [],
+      "correct_answer_id": null,
+      "distractor_ids": [],
+      "question": "Mit mir kann ich Papier schneiden. Ich habe zwei Griffe. Was bin ich?",
+      "options": ["Schere", "Pinsel", "Buntstift"]
     }
   ]
 }

@@ -33,7 +33,6 @@ def test_seed_tasks_queryable(db_session):
         assert task.mini_game_type
         assert task.category
         assert isinstance(task.reference_items_json, list)
-        assert task.correct_answer_id
         assert isinstance(task.distractor_ids_json, list)
 
 

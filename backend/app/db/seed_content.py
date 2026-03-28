@@ -46,9 +46,11 @@ def seed(db: Session, manifest_path: Path = MANIFEST_PATH) -> dict[str, int]:
                     id=task_data["id"],
                     mini_game_type=MiniGameType(task_data["mini_game_type"]),
                     category=task_data["category"],
-                    reference_items_json=task_data["reference_item_ids"],
-                    correct_answer_id=task_data["correct_answer_id"],
-                    distractor_ids_json=task_data["distractor_ids"],
+                    reference_items_json=task_data.get("reference_item_ids", []),
+                    correct_answer_id=task_data.get("correct_answer_id"),
+                    distractor_ids_json=task_data.get("distractor_ids", []),
+                    question=task_data.get("question"),
+                    options_json=task_data.get("options"),
                 )
             )
             tasks_inserted += 1

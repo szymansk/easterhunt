@@ -96,4 +96,6 @@ def _build_task_read(task: LibraryTask, db: Session) -> LibraryTaskRead:
         reference_items=reference_items,
         correct_answer=correct_answer,
         answer_options=answer_options,
+        question=task.question,
+        options_json=task.options_json,
     )
