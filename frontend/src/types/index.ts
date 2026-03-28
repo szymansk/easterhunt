@@ -13,39 +13,39 @@ export enum GameStatus {
   finished = 'finished',
 }
 
-// Mini game config types (discriminated union)
+// Mini game config types matching backend schemas
 export interface PuzzleConfig {
   type: MiniGameType.puzzle
-  image_path: string
-  pieces: number
+  /** Must be one of 3, 4, 6, 9 (maps to 1x3, 2x2, 2x3, 3x3) */
+  grid_size: 3 | 4 | 6 | 9
 }
 
 export interface NumberRiddleConfig {
   type: MiniGameType.number_riddle
   question: string
-  answer: number
-  hint?: string
+  correct_answer: number // 1-10
 }
 
 export interface MazeConfig {
   type: MiniGameType.maze
-  width: number
-  height: number
-  seed?: number
+  maze_data: {
+    difficulty?: 'easy' | 'medium' | 'hard'
+    rows?: number
+    cols?: number
+    [key: string]: unknown
+  }
 }
 
 export interface TextRiddleConfig {
   type: MiniGameType.text_riddle
   question: string
-  answer: string
-  hint?: string
+  answer_mode: 'multiple_choice' | 'single_tap'
+  options: string[]
 }
 
 export interface PictureRiddleConfig {
   type: MiniGameType.picture_riddle
-  image_path: string
   question: string
-  answer: string
 }
 
 export type MiniGameConfig =
@@ -55,18 +55,18 @@ export type MiniGameConfig =
   | TextRiddleConfig
   | PictureRiddleConfig
 
-// Domain types
+// Domain types (IDs are string UUIDs)
 export interface Station {
-  id: number
-  game_id: number
+  id: string
+  game_id: string
   position: number
   image_path: string | null
   mini_game_type: MiniGameType
-  mini_game_config: MiniGameConfig
+  mini_game_config: Record<string, unknown>
 }
 
 export interface Game {
-  id: number
+  id: string
   name: string
   status: GameStatus
   stations: Station[]
@@ -75,17 +75,23 @@ export interface Game {
 }
 
 export interface GameListItem {
-  id: number
+  id: string
   name: string
   status: GameStatus
   station_count: number
   created_at: string
-  updated_at: string
 }
 
 export interface GameProgress {
-  id: number
-  game_id: number
+  id: string
+  game_id: string
   current_station: number
   stations_completed: number[]
+}
+
+// Start game error response
+export interface StartGameError {
+  error: string
+  detail: string
+  incomplete_stations: number[]
 }

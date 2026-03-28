@@ -41,7 +41,16 @@ def create_game(body: GameCreate, db: Session = Depends(get_db)) -> GameRead:
 @router.get("", response_model=list[GameListItem])
 def list_games(db: Session = Depends(get_db)) -> list[GameListItem]:
     games = db.query(Game).order_by(Game.created_at.desc()).all()
-    return [GameListItem.model_validate(g) for g in games]
+    return [
+        GameListItem(
+            id=g.id,
+            name=g.name,
+            status=g.status,
+            station_count=len(g.stations),
+            created_at=g.created_at,
+        )
+        for g in games
+    ]
 
 
 @router.get("/{game_id}", response_model=GameReadWithStations)

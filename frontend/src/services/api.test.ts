@@ -3,7 +3,7 @@ import type { GameListItem, Game } from '../types'
 import { GameStatus } from '../types'
 
 const mockGame: Game = {
-  id: 1,
+  id: 'test-uuid-1',
   name: 'Ostersuche',
   status: GameStatus.draft,
   stations: [],
@@ -12,12 +12,11 @@ const mockGame: Game = {
 }
 
 const mockGameListItem: GameListItem = {
-  id: 1,
+  id: 'test-uuid-1',
   name: 'Ostersuche',
   status: GameStatus.draft,
   station_count: 0,
   created_at: '2026-01-01T00:00:00Z',
-  updated_at: '2026-01-01T00:00:00Z',
 }
 
 describe('api', () => {

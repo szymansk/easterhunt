@@ -1,10 +1,11 @@
 import logging
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.db import engine
@@ -14,7 +15,7 @@ from app.exceptions import (
     StationLimitExceededError,
 )
 from app.models import Base
-from app.routers import games, progress, stations
+from app.routers import games, images, progress, stations
 
 logging.basicConfig(
     level=logging.INFO,
@@ -42,6 +43,7 @@ app.add_middleware(
 app.include_router(games.router)
 app.include_router(stations.router)
 app.include_router(progress.router)
+app.include_router(images.router)
 
 
 @app.exception_handler(GameNotFoundError)
@@ -78,6 +80,7 @@ async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONR
 
 
 DIST_DIR = Path(__file__).parent.parent / "dist"
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 
 @app.get("/api/health")
@@ -88,6 +91,26 @@ async def health():
 @app.get("/")
 async def root():
     return {"status": "ok"}
+
+
+@app.get("/media/{file_path:path}")
+async def serve_media(file_path: str) -> FileResponse:
+    """Serve files from the data/ directory with path traversal protection."""
+    # Resolve the canonical path and ensure it stays within DATA_DIR
+    requested = (DATA_DIR / file_path).resolve()
+    data_root = DATA_DIR.resolve()
+
+    if not str(requested).startswith(str(data_root) + os.sep) and requested != data_root:
+        from fastapi import HTTPException as _HTTPException
+
+        raise _HTTPException(status_code=400, detail="Invalid path")
+
+    if not requested.exists() or not requested.is_file():
+        from fastapi import HTTPException as _HTTPException
+
+        raise _HTTPException(status_code=404, detail="File not found")
+
+    return FileResponse(str(requested))
 
 
 # Serve frontend build in production (when dist/ exists)

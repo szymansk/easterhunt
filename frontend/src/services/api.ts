@@ -4,6 +4,7 @@ export class ApiError extends Error {
   constructor(
     public readonly status: number,
     message: string,
+    public readonly body?: unknown,
   ) {
     super(message)
     this.name = 'ApiError'
@@ -17,14 +18,17 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   })
   if (!res.ok) {
     let message = res.statusText
+    let body: unknown
     try {
-      const body = (await res.json()) as { detail?: string }
-      if (body.detail) message = body.detail
+      body = await res.json()
+      const b = body as { detail?: string }
+      if (b.detail) message = b.detail
     } catch {
       // ignore JSON parse errors
     }
-    throw new ApiError(res.status, message)
+    throw new ApiError(res.status, message, body)
   }
+  if (res.status === 204) return undefined as unknown as T
   return res.json() as Promise<T>
 }
 
@@ -40,25 +44,36 @@ export function createGame(name: string): Promise<Game> {
   })
 }
 
-export function getGame(id: number): Promise<Game> {
+export function getGame(id: string): Promise<Game> {
   return request<Game>(`/api/games/${id}`)
 }
 
-export function startGame(id: number): Promise<Game> {
+export function updateGame(id: string, data: { name?: string }): Promise<Game> {
+  return request<Game>(`/api/games/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+}
+
+export function startGame(id: string): Promise<Game> {
   return request<Game>(`/api/games/${id}/start`, { method: 'POST' })
 }
 
-export function deleteGame(id: number): Promise<void> {
+export function deleteGame(id: string): Promise<void> {
   return request<void>(`/api/games/${id}`, { method: 'DELETE' })
 }
 
 // Stations
-export function listStations(gameId: number): Promise<Station[]> {
+export function listStations(gameId: string): Promise<Station[]> {
   return request<Station[]>(`/api/games/${gameId}/stations`)
 }
 
+export function getStation(gameId: string, stationId: string): Promise<Station> {
+  return request<Station>(`/api/games/${gameId}/stations/${stationId}`)
+}
+
 export function createStation(
-  gameId: number,
+  gameId: string,
   data: Omit<Station, 'id' | 'game_id'>,
 ): Promise<Station> {
   return request<Station>(`/api/games/${gameId}/stations`, {
@@ -68,8 +83,8 @@ export function createStation(
 }
 
 export function updateStation(
-  gameId: number,
-  stationId: number,
+  gameId: string,
+  stationId: string,
   data: Partial<Omit<Station, 'id' | 'game_id'>>,
 ): Promise<Station> {
   return request<Station>(`/api/games/${gameId}/stations/${stationId}`, {
@@ -78,17 +93,24 @@ export function updateStation(
   })
 }
 
-export function deleteStation(gameId: number, stationId: number): Promise<void> {
+export function reorderStations(gameId: string, stationIds: string[]): Promise<Station[]> {
+  return request<Station[]>(`/api/games/${gameId}/stations/reorder`, {
+    method: 'PUT',
+    body: JSON.stringify({ station_ids: stationIds }),
+  })
+}
+
+export function deleteStation(gameId: string, stationId: string): Promise<void> {
   return request<void>(`/api/games/${gameId}/stations/${stationId}`, { method: 'DELETE' })
 }
 
 // Game Progress
-export function getGameProgress(gameId: number): Promise<GameProgress> {
+export function getGameProgress(gameId: string): Promise<GameProgress> {
   return request<GameProgress>(`/api/games/${gameId}/progress`)
 }
 
 export function updateGameProgress(
-  gameId: number,
+  gameId: string,
   data: Partial<Pick<GameProgress, 'current_station' | 'stations_completed'>>,
 ): Promise<GameProgress> {
   return request<GameProgress>(`/api/games/${gameId}/progress`, {
