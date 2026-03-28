@@ -308,3 +308,42 @@ Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 ## [2026-03-28 23:26:27] Headless Ralph
 Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 
+## [2026-03-28 23:36:00] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
+
+## [2026-03-28 23:42:23] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
+
+---
+
+## [2026-03-29] Epic easter-a9a Complete — Content Library
+
+### easter-a9a.1 - DB Schema und Seeding
+- Added LibraryItem (library_items) and LibraryTask (library_tasks) SQLAlchemy models as standalone content library tables (not tied to stations)
+- Created idempotent seed_content.py reading from data/content/manifest.json
+- Created 15 placeholder SVG images across 6 categories (Spielzeug, Haushalt, KiTa, Essen, Basteln, Kleidung)
+- 6 pytest tests (insertion counts, idempotency, manifest validation)
+
+### easter-a9a.2 - API Endpoints
+- 5 read-only endpoints: GET /api/library/categories, /items, /items/{id}, /tasks, /tasks/{id}
+- image_path → /media/... URL resolution in all responses
+- task responses include resolved reference_items, correct_answer, answer_options
+- 16 pytest integration tests
+
+### easter-a9a.3 - Initialen Content-Set
+- Expanded to 20 items (added 5 counting/Zählen items)
+- 21 tasks total: 11 picture_riddle (2/category for 5 categories + 1 Kleidung), 5 number_riddle (counting 1-7), 5 text_riddle definitions (German Rätsel)
+- 5 counting SVGs: count_1..count_7
+- LibraryTask model extended with optional question/options_json fields
+
+### easter-a9a.4 - Content Library Browser (Creator UI)
+- LibraryBrowser modal component: category tabs, case-insensitive search, task grid, preview panel (answer options with images and correct-answer highlight), confirm/cancel
+- Integrated into PictureRiddleConfigForm.tsx via "Aus Bibliothek wählen" button
+- LibraryItem/LibraryTask TypeScript types added to types/index.ts
+- listLibraryCategories/listLibraryItems/listLibraryTasks API functions added
+- 9 Vitest tests all pass
+
+### Final Test Status
+- Backend: 218 tests passing
+- Frontend: 74 tests passing (12 test files)
+
