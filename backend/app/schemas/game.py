@@ -136,3 +136,27 @@ class GameProgressRead(BaseModel):
     stations_completed: list
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# Content Library schemas
+
+
+class LibraryItemRead(BaseModel):
+    id: str
+    name: str
+    category: str
+    image_url: str | None
+    metadata_json: dict
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class LibraryTaskRead(BaseModel):
+    id: str
+    mini_game_type: MiniGameType
+    category: str
+    reference_items: list["LibraryItemRead"]
+    correct_answer: "LibraryItemRead | None"
+    answer_options: list["LibraryItemRead"]
+
+    model_config = ConfigDict(from_attributes=True)

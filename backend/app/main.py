@@ -15,7 +15,7 @@ from app.exceptions import (
     StationLimitExceededError,
 )
 from app.models import Base
-from app.routers import games, images, progress, stations
+from app.routers import games, images, library, progress, stations
 
 logging.basicConfig(
     level=logging.INFO,
@@ -44,6 +44,7 @@ app.include_router(games.router)
 app.include_router(stations.router)
 app.include_router(progress.router)
 app.include_router(images.router)
+app.include_router(library.router)
 
 
 @app.exception_handler(GameNotFoundError)
