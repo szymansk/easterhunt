@@ -4,6 +4,83 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-28] Claude Session - Epic easter-hfs COMPLETED
+
+**All 8 tasks completed in commits 9fb0abb + e57ae65**
+
+### easter-hfs.1 - SQLAlchemy Models
+- Game, Station, GameProgress, RiddleItem, RiddleTask with full relationships
+- GameStatus and MiniGameType enums
+
+### easter-hfs.2 - Pydantic Schemas
+- GameCreate/Read/Update/ListItem, StationCreate/Read/Update/Reorder
+- MiniGameConfig as discriminated union (PuzzleConfig, NumberRiddleConfig, etc.)
+- GameProgressCreate/Read, GameReadWithStations
+
+### easter-hfs.3 - Database Session
+- SQLite engine with WAL mode (engine.py)
+- get_db session factory (session.py)
+- Lifespan handler in main.py creates all tables on startup
+
+### easter-hfs.4 - Game CRUD API
+- POST/GET/PUT/DELETE /api/games
+- POST /api/games/{id}/start with validation (no stations → 422, incomplete → 422)
+- 11 pytest tests
+
+### easter-hfs.5 - Station CRUD API
+- POST/GET/PUT/DELETE /api/games/{id}/stations
+- Max-20 limit enforcement
+- PUT /api/games/{id}/stations/reorder
+- 9 pytest tests
+
+### easter-hfs.6 - GameProgress API
+- POST/GET /api/games/{id}/progress
+- PUT .../progress/complete-station (auto-advances, finishes game on last station)
+- PUT .../progress/finish
+
+### easter-hfs.7 - Error Handling
+- Exception handlers for GameNotFoundError (404), StationLimitExceededError (422), InvalidConfigurationError (422), unhandled (500)
+
+### easter-hfs.8 - Backend Unit Tests
+- test_models.py: 4 model-level tests (CRUD, enums, cascade delete)
+- test_games.py: 11 tests for game endpoints
+- test_stations.py: 9 tests for station endpoints
+
+## [2026-03-28] Claude Session - Epic easter-cpy COMPLETED
+
+**All 5 tasks completed in commit 7925f71**
+
+### easter-cpy.4 - TypeScript Types und Enums
+- `frontend/src/types/index.ts`: MiniGameType enum (puzzle, number_riddle, maze, text_riddle, picture_riddle), GameStatus enum (draft, started, finished), MiniGameConfig discriminated union, Game, GameListItem, Station, GameProgress interfaces
+- Fixed tsconfig.json to add `"types": ["vitest/globals"]` for tsc --noEmit to pass with test files
+
+### easter-cpy.1 - App Shell und Routing
+- Updated App.tsx with React Router Routes: / → HomePage, /creator → CreatorLayout+GameListPage, /creator/game/:id → GameEditorPage, /play/:id → PlayerPage, * → /404
+- CreatorLayout.tsx with NavLink navigation, PlayerLayout.tsx minimal wrapper
+- All 7 acceptance criteria met (SPA navigation, layouts, 404 redirect)
+
+### easter-cpy.2 - API Client Service
+- `frontend/src/services/api.ts`: typed fetch wrapper, ApiError class with status+message, all CRUD endpoints for Games, Stations, GameProgress
+- No `any` types, all return types explicit
+
+### easter-cpy.3 - Shared UI Components
+- `frontend/src/components/ui/`: BigButton (60px min-height, disabled state), Card, Modal (body scroll lock), LoadingSpinner, SuccessOverlay (celebration animation), ErrorMessage, IconButton (44px touch target)
+- Barrel export in index.ts
+
+### easter-cpy.5 - Vitest Setup und Sample Tests
+- Added `exclude: ['e2e/**']` to vite.config.ts to prevent Playwright tests being run by vitest
+- Added coverage config (v8 provider)
+- Added `test:unit` script to package.json
+- 4 tests for BigButton, 3 tests for ErrorMessage, 3 tests for api.ts = 11 total (all green)
+
+### Results
+- 11/11 unit tests passing
+- `pnpm exec tsc --noEmit` clean
+- `pnpm run build` successful (169 kB JS bundle)
+- Epic easter-cpy auto-closed by beads
+
+---
+
 ## [2026-03-28 22:14:48] Headless Ralph
 Started headless loop. Target: EPIC_COMPLETE, Max iterations: 5
 
@@ -53,4 +130,13 @@ Started headless loop. Target: EPIC_COMPLETE, Max iterations: 5
 
 ## [2026-03-28 22:25:48] Headless Ralph
 Max iterations reached without completion.
+
+## [2026-03-28 22:43:57] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 10
+
+## [2026-03-28 22:44:00] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 10
+
+## [2026-03-28 22:51:16] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 

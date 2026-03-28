@@ -13558,3 +13558,4060 @@
   "user": "szymanski",
   "seq": "2026-03-28T21:41:03.033161000-23235-17616"
 }
+{
+  "timestamp": "2026-03-28T21:41:03.546050000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 719,
+  "response_size": 5774,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:41:03.546050000-23285-24402"
+}
+{
+  "timestamp": "2026-03-28T21:41:49.625633000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 98,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:41:49.625633000-23811-22121"
+}
+{
+  "timestamp": "2026-03-28T21:41:49.785871000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 98,
+  "response_size": 1446,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:41:49.785871000-23838-18003"
+}
+{
+  "timestamp": "2026-03-28T21:43:29.774200000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 61,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:43:29.774200000-24969-3814"
+}
+{
+  "timestamp": "2026-03-28T21:43:30.186802000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 61,
+  "response_size": 989,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:43:30.186802000-25002-19261"
+}
+{
+  "timestamp": "2026-03-28T21:43:56.700044000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 185,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:43:56.700044000-25247-27690"
+}
+{
+  "timestamp": "2026-03-28T21:43:56.919550000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 185,
+  "response_size": 103,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:43:56.919550000-25280-26298"
+}
+{
+  "timestamp": "2026-03-28T21:44:00.606236000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 186,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:00.606236000-25512-2442"
+}
+{
+  "timestamp": "2026-03-28T21:44:00.815721000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 186,
+  "response_size": 103,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:00.815721000-25545-1050"
+}
+{
+  "timestamp": "2026-03-28T21:44:07.930883000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 130,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:07.930883000-25899-17599"
+}
+{
+  "timestamp": "2026-03-28T21:44:09.113296000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 130,
+  "response_size": 2070,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:09.113296000-26091-7430"
+}
+{
+  "timestamp": "2026-03-28T21:44:09.245606000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:09.245606000-26121-21060"
+}
+{
+  "timestamp": "2026-03-28T21:44:09.496782000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 11520,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:09.496782000-26153-2829"
+}
+{
+  "timestamp": "2026-03-28T21:44:10.005513000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 97,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:10.005513000-26227-3680"
+}
+{
+  "timestamp": "2026-03-28T21:44:10.650864000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 97,
+  "response_size": 2070,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:10.650864000-26414-23554"
+}
+{
+  "timestamp": "2026-03-28T21:44:10.753475000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:10.753475000-26444-4415"
+}
+{
+  "timestamp": "2026-03-28T21:44:11.000821000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 7234,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:11.000821000-26476-18953"
+}
+{
+  "timestamp": "2026-03-28T21:44:15.160707000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 87,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:15.160707000-26582-3390"
+}
+{
+  "timestamp": "2026-03-28T21:44:15.262422000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 86,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:15.262422000-26597-10659"
+}
+{
+  "timestamp": "2026-03-28T21:44:15.599687000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 87,
+  "response_size": 5071,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:15.599687000-26648-17445"
+}
+{
+  "timestamp": "2026-03-28T21:44:15.650055000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 86,
+  "response_size": 5071,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:15.650055000-26663-7875"
+}
+{
+  "timestamp": "2026-03-28T21:44:15.762809000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 220,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:15.762809000-26710-12844"
+}
+{
+  "timestamp": "2026-03-28T21:44:15.921301000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 220,
+  "response_size": 175,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:15.921301000-26746-29199"
+}
+{
+  "timestamp": "2026-03-28T21:44:16.088775000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 394,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:16.088775000-26776-26898"
+}
+{
+  "timestamp": "2026-03-28T21:44:16.298169000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 394,
+  "response_size": 218,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:16.298169000-26814-11394"
+}
+{
+  "timestamp": "2026-03-28T21:44:19.428717000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 225,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:19.428717000-26873-6793"
+}
+{
+  "timestamp": "2026-03-28T21:44:19.601439000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 225,
+  "response_size": 4447,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:19.601439000-26914-9036"
+}
+{
+  "timestamp": "2026-03-28T21:44:20.215069000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 163,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:20.215069000-26984-24907"
+}
+{
+  "timestamp": "2026-03-28T21:44:20.364915000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 163,
+  "response_size": 316,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:20.364915000-27032-13946"
+}
+{
+  "timestamp": "2026-03-28T21:44:20.782826000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 116,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:20.782826000-27082-3893"
+}
+{
+  "timestamp": "2026-03-28T21:44:20.917890000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 116,
+  "response_size": 1414,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:20.917890000-27109-32544"
+}
+{
+  "timestamp": "2026-03-28T21:44:23.185235000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 193,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:23.185235000-27210-14255"
+}
+{
+  "timestamp": "2026-03-28T21:44:23.324604000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 193,
+  "response_size": 1389,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:23.324604000-27238-26976"
+}
+{
+  "timestamp": "2026-03-28T21:44:24.540767000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 108,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:24.540767000-27284-31944"
+}
+{
+  "timestamp": "2026-03-28T21:44:24.677110000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 108,
+  "response_size": 468,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:24.677110000-27311-27827"
+}
+{
+  "timestamp": "2026-03-28T21:44:36.795817000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 92,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:36.795817000-27602-18026"
+}
+{
+  "timestamp": "2026-03-28T21:44:37.581040000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 92,
+  "response_size": 148,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:37.581040000-27652-24811"
+}
+{
+  "timestamp": "2026-03-28T21:44:43.555158000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 227,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:43.555158000-27798-28330"
+}
+{
+  "timestamp": "2026-03-28T21:44:44.925937000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 227,
+  "response_size": 281,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:44.925937000-27959-3623"
+}
+{
+  "timestamp": "2026-03-28T21:44:50.662506000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 122,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:44:50.662506000-28064-4899"
+}
+{
+  "timestamp": "2026-03-28T21:45:05.648510000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 132,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:05.648510000-28266-21564"
+}
+{
+  "timestamp": "2026-03-28T21:45:21.877140000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 107,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:21.877140000-28493-17272"
+}
+{
+  "timestamp": "2026-03-28T21:45:22.026399000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 107,
+  "response_size": 162,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:22.026399000-28520-13155"
+}
+{
+  "timestamp": "2026-03-28T21:45:22.571266000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 118,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:22.571266000-28551-27692"
+}
+{
+  "timestamp": "2026-03-28T21:45:22.789720000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 118,
+  "response_size": 1521,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:22.789720000-28583-9462"
+}
+{
+  "timestamp": "2026-03-28T21:45:31.400386000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 169,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:31.400386000-28749-7046"
+}
+{
+  "timestamp": "2026-03-28T21:45:31.539141000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 169,
+  "response_size": 152,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:31.539141000-28777-19766"
+}
+{
+  "timestamp": "2026-03-28T21:45:32.066419000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 126,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:32.066419000-28823-24735"
+}
+{
+  "timestamp": "2026-03-28T21:45:32.200097000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 126,
+  "response_size": 843,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:45:32.200097000-28850-20617"
+}
+{
+  "timestamp": "2026-03-28T21:46:38.843811000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 127,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:46:38.843811000-29884-28834"
+}
+{
+  "timestamp": "2026-03-28T21:46:41.827560000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "dangerouslyDisableSandbox",
+    "description"
+  ],
+  "input_size": 172,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:46:41.827560000-29970-20115"
+}
+{
+  "timestamp": "2026-03-28T21:46:44.874344000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 74,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:46:44.874344000-30065-31869"
+}
+{
+  "timestamp": "2026-03-28T21:47:11.519466000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 177,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:11.519466000-30497-27404"
+}
+{
+  "timestamp": "2026-03-28T21:47:15.304853000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 151,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:15.304853000-30553-21894"
+}
+{
+  "timestamp": "2026-03-28T21:47:19.185552000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 189,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:19.185552000-30777-27172"
+}
+{
+  "timestamp": "2026-03-28T21:47:23.227405000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 177,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:23.227405000-30840-8459"
+}
+{
+  "timestamp": "2026-03-28T21:47:23.359489000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 177,
+  "response_size": 105,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:23.359489000-30868-21179"
+}
+{
+  "timestamp": "2026-03-28T21:47:32.810482000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 156,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:32.810482000-30994-591"
+}
+{
+  "timestamp": "2026-03-28T21:47:35.582459000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 164,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:35.582459000-31041-23306"
+}
+{
+  "timestamp": "2026-03-28T21:47:35.710215000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 164,
+  "response_size": 182,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:47:35.710215000-31068-19188"
+}
+{
+  "timestamp": "2026-03-28T21:48:08.476474000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 148,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:08.476474000-31483-26109"
+}
+{
+  "timestamp": "2026-03-28T21:48:08.618617000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 148,
+  "response_size": 456,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:08.618617000-31510-21992"
+}
+{
+  "timestamp": "2026-03-28T21:48:28.664337000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 222,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:28.664337000-31732-862"
+}
+{
+  "timestamp": "2026-03-28T21:48:31.328672000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 179,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:31.328672000-31818-24911"
+}
+{
+  "timestamp": "2026-03-28T21:48:34.596146000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 218,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:34.596146000-31858-28062"
+}
+{
+  "timestamp": "2026-03-28T21:48:39.464369000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 191,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:39.464369000-31942-19344"
+}
+{
+  "timestamp": "2026-03-28T21:48:56.920086000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 306,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:56.920086000-32200-29590"
+}
+{
+  "timestamp": "2026-03-28T21:48:59.454884000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 110,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:59.454884000-32243-17720"
+}
+{
+  "timestamp": "2026-03-28T21:48:59.581690000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 110,
+  "response_size": 132,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:48:59.581690000-32271-30440"
+}
+{
+  "timestamp": "2026-03-28T21:49:02.637297000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 116,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:02.637297000-32360-6701"
+}
+{
+  "timestamp": "2026-03-28T21:49:02.837753000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 116,
+  "response_size": 191,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:02.837753000-32389-3492"
+}
+{
+  "timestamp": "2026-03-28T21:49:06.417557000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 97,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:06.417557000-32488-1133"
+}
+{
+  "timestamp": "2026-03-28T21:49:08.766798000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 135,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:08.766798000-32552-31117"
+}
+{
+  "timestamp": "2026-03-28T21:49:12.697505000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 148,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:12.697505000-32644-9195"
+}
+{
+  "timestamp": "2026-03-28T21:49:54.979005000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 228,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:54.979005000-33200-18726"
+}
+{
+  "timestamp": "2026-03-28T21:49:55.129383000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 228,
+  "response_size": 226,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:49:55.129383000-33240-20968"
+}
+{
+  "timestamp": "2026-03-28T21:50:05.961906000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 209,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:05.961906000-33506-15285"
+}
+{
+  "timestamp": "2026-03-28T21:50:06.098263000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 209,
+  "response_size": 157,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:06.098263000-33533-28006"
+}
+{
+  "timestamp": "2026-03-28T21:50:34.782439000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 136,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:34.782439000-33971-10336"
+}
+{
+  "timestamp": "2026-03-28T21:50:34.933226000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 136,
+  "response_size": 3941,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:34.933226000-33998-6219"
+}
+{
+  "timestamp": "2026-03-28T21:50:42.222612000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 138,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:42.222612000-34086-17064"
+}
+{
+  "timestamp": "2026-03-28T21:50:43.077212000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 138,
+  "response_size": 4270,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:43.077212000-34265-16465"
+}
+{
+  "timestamp": "2026-03-28T21:50:43.208738000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:43.208738000-34295-14164"
+}
+{
+  "timestamp": "2026-03-28T21:50:43.529012000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 8389,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:43.529012000-34327-28702"
+}
+{
+  "timestamp": "2026-03-28T21:50:47.633311000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 178,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:47.633311000-34460-9022"
+}
+{
+  "timestamp": "2026-03-28T21:50:49.807361000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 133,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:49.807361000-34500-28103"
+}
+{
+  "timestamp": "2026-03-28T21:50:50.456383000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 115,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:50.456383000-34532-26711"
+}
+{
+  "timestamp": "2026-03-28T21:50:50.751907000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 115,
+  "response_size": 615,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:50.751907000-34574-13024"
+}
+{
+  "timestamp": "2026-03-28T21:50:50.856278000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 72,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:50.856278000-34604-26653"
+}
+{
+  "timestamp": "2026-03-28T21:50:51.158121000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 72,
+  "response_size": 962,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:51.158121000-34638-26170"
+}
+{
+  "timestamp": "2026-03-28T21:50:53.985245000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 101,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:53.985245000-34684-15209"
+}
+{
+  "timestamp": "2026-03-28T21:50:54.144634000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 101,
+  "response_size": 97,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:54.144634000-34711-27929"
+}
+{
+  "timestamp": "2026-03-28T21:50:57.504699000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 111,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:57.504699000-34773-8307"
+}
+{
+  "timestamp": "2026-03-28T21:50:57.643325000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 111,
+  "response_size": 97,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:50:57.643325000-34804-6007"
+}
+{
+  "timestamp": "2026-03-28T21:51:07.971220000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 444,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:07.971220000-35084-6683"
+}
+{
+  "timestamp": "2026-03-28T21:51:10.175912000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 130,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:10.175912000-35159-9351"
+}
+{
+  "timestamp": "2026-03-28T21:51:10.989443000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 130,
+  "response_size": 2070,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:10.989443000-35346-12387"
+}
+{
+  "timestamp": "2026-03-28T21:51:11.103949000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:11.103949000-35376-10086"
+}
+{
+  "timestamp": "2026-03-28T21:51:11.476980000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 8389,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:11.476980000-35408-24624"
+}
+{
+  "timestamp": "2026-03-28T21:51:12.354509000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 325,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:12.354509000-35493-30926"
+}
+{
+  "timestamp": "2026-03-28T21:51:12.630259000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 325,
+  "response_size": 252,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:12.630259000-35544-4944"
+}
+{
+  "timestamp": "2026-03-28T21:51:15.506543000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 185,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:15.506543000-35608-18998"
+}
+{
+  "timestamp": "2026-03-28T21:51:15.799969000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 185,
+  "response_size": 116,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:15.799969000-35635-14881"
+}
+{
+  "timestamp": "2026-03-28T21:51:19.676419000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 104,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:19.676419000-35957-31913"
+}
+{
+  "timestamp": "2026-03-28T21:51:20.026409000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 104,
+  "response_size": 5275,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:20.026409000-36018-10473"
+}
+{
+  "timestamp": "2026-03-28T21:51:20.981830000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 74,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:20.981830000-36064-15442"
+}
+{
+  "timestamp": "2026-03-28T21:51:21.222394000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 74,
+  "response_size": 416,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:21.222394000-36099-31797"
+}
+{
+  "timestamp": "2026-03-28T21:51:24.459177000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 104,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:24.459177000-36150-23561"
+}
+{
+  "timestamp": "2026-03-28T21:51:25.206182000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 104,
+  "response_size": 2390,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:25.206182000-36329-7032"
+}
+{
+  "timestamp": "2026-03-28T21:51:25.299511000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:25.299511000-36367-24296"
+}
+{
+  "timestamp": "2026-03-28T21:51:25.535565000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 11541,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:25.535565000-36399-6066"
+}
+{
+  "timestamp": "2026-03-28T21:51:27.177653000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 239,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:27.177653000-36492-73"
+}
+{
+  "timestamp": "2026-03-28T21:51:29.427813000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 237,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:29.427813000-36540-22788"
+}
+{
+  "timestamp": "2026-03-28T21:51:33.224113000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 67,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:33.224113000-36588-13644"
+}
+{
+  "timestamp": "2026-03-28T21:51:33.547126000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 67,
+  "response_size": 962,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:33.547126000-36631-16795"
+}
+{
+  "timestamp": "2026-03-28T21:51:33.635973000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 123,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:33.635973000-36653-26790"
+}
+{
+  "timestamp": "2026-03-28T21:51:33.689056000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 95,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:33.689056000-36674-19947"
+}
+{
+  "timestamp": "2026-03-28T21:51:33.790125000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 123,
+  "response_size": 231,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:33.790125000-36705-17646"
+}
+{
+  "timestamp": "2026-03-28T21:51:33.969752000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 95,
+  "response_size": 786,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:33.969752000-36751-5776"
+}
+{
+  "timestamp": "2026-03-28T21:51:34.037678000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 67,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:34.037678000-36774-32609"
+}
+{
+  "timestamp": "2026-03-28T21:51:34.297061000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 67,
+  "response_size": 962,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:34.297061000-36816-2992"
+}
+{
+  "timestamp": "2026-03-28T21:51:37.909165000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 134,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:37.909165000-36879-209"
+}
+{
+  "timestamp": "2026-03-28T21:51:38.062871000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 134,
+  "response_size": 1012,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:38.062871000-36906-28859"
+}
+{
+  "timestamp": "2026-03-28T21:51:38.287432000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 112,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:38.287432000-36936-26558"
+}
+{
+  "timestamp": "2026-03-28T21:51:38.476382000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 112,
+  "response_size": 4440,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:38.476382000-36963-22441"
+}
+{
+  "timestamp": "2026-03-28T21:51:38.638784000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 115,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:38.638784000-36982-14688"
+}
+{
+  "timestamp": "2026-03-28T21:51:38.819107000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 115,
+  "response_size": 3835,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:38.819107000-37020-31952"
+}
+{
+  "timestamp": "2026-03-28T21:51:43.028740000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 115,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:43.028740000-37082-29168"
+}
+{
+  "timestamp": "2026-03-28T21:51:43.180629000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 115,
+  "response_size": 527,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:43.180629000-37109-9121"
+}
+{
+  "timestamp": "2026-03-28T21:51:43.449331000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:43.449331000-37139-22750"
+}
+{
+  "timestamp": "2026-03-28T21:51:43.629726000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "response_size": 430,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:43.629726000-37166-18632"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.099293000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 66,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.099293000-37212-23601"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.245059000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.245059000-37229-14940"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.369500000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 66,
+  "response_size": 1060,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.369500000-37252-9005"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.402807000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.402807000-37287-8522"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.433449000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 82,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.433449000-37304-32629"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.451625000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "response_size": 4106,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.451625000-37291-10339"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.595423000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 3008,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.595423000-37379-17550"
+}
+{
+  "timestamp": "2026-03-28T21:51:44.612371000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 82,
+  "response_size": 699,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:44.612371000-37396-8889"
+}
+{
+  "timestamp": "2026-03-28T21:51:48.488747000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 73,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:48.488747000-37481-170"
+}
+{
+  "timestamp": "2026-03-28T21:51:48.697665000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 73,
+  "response_size": 139,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:48.697665000-37508-28821"
+}
+{
+  "timestamp": "2026-03-28T21:51:48.817844000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:48.817844000-37538-9682"
+}
+{
+  "timestamp": "2026-03-28T21:51:51.816079000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 97,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:51.816079000-37580-13742"
+}
+{
+  "timestamp": "2026-03-28T21:51:54.023009000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 81,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:54.023009000-37620-54"
+}
+{
+  "timestamp": "2026-03-28T21:51:56.587042000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 81,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:56.587042000-37676-10475"
+}
+{
+  "timestamp": "2026-03-28T21:51:58.853757000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 128,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:58.853757000-37717-13626"
+}
+{
+  "timestamp": "2026-03-28T21:51:59.578569000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 97,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:59.578569000-37741-8599"
+}
+{
+  "timestamp": "2026-03-28T21:51:59.720969000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 97,
+  "response_size": 114,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:51:59.720969000-37768-4482"
+}
+{
+  "timestamp": "2026-03-28T21:52:01.322240000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "dangerouslyDisableSandbox",
+    "description"
+  ],
+  "input_size": 163,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:01.322240000-37814-26288"
+}
+{
+  "timestamp": "2026-03-28T21:52:02.089922000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 177,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:02.089922000-37839-5332"
+}
+{
+  "timestamp": "2026-03-28T21:52:03.683726000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 113,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:03.683726000-37886-27139"
+}
+{
+  "timestamp": "2026-03-28T21:52:06.066023000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 64,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:06.066023000-37936-2065"
+}
+{
+  "timestamp": "2026-03-28T21:52:07.223511000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "dangerouslyDisableSandbox",
+    "description"
+  ],
+  "input_size": 200,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:07.223511000-37983-23872"
+}
+{
+  "timestamp": "2026-03-28T21:52:13.705369000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 96,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:13.705369000-38058-11519"
+}
+{
+  "timestamp": "2026-03-28T21:52:13.874914000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 96,
+  "response_size": 114,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:13.874914000-38085-7401"
+}
+{
+  "timestamp": "2026-03-28T21:52:16.091929000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 52,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:16.091929000-38131-13278"
+}
+{
+  "timestamp": "2026-03-28T21:52:16.244418000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 52,
+  "response_size": 106,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:16.244418000-38157-25090"
+}
+{
+  "timestamp": "2026-03-28T21:52:19.691289000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 154,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:19.691289000-38220-22306"
+}
+{
+  "timestamp": "2026-03-28T21:52:22.292869000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 191,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:22.292869000-38262-26366"
+}
+{
+  "timestamp": "2026-03-28T21:52:22.454713000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 191,
+  "response_size": 363,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:22.454713000-38290-6319"
+}
+{
+  "timestamp": "2026-03-28T21:52:24.971038000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:24.971038000-38340-29943"
+}
+{
+  "timestamp": "2026-03-28T21:52:25.119085000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "response_size": 139,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:25.119085000-38367-9895"
+}
+{
+  "timestamp": "2026-03-28T21:52:25.764172000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 222,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:25.764172000-38413-30793"
+}
+{
+  "timestamp": "2026-03-28T21:52:26.177589000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 140,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:26.177589000-38437-25767"
+}
+{
+  "timestamp": "2026-03-28T21:52:27.348188000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 140,
+  "response_size": 208,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:27.348188000-38523-16140"
+}
+{
+  "timestamp": "2026-03-28T21:52:28.447345000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 160,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:28.447345000-38614-25168"
+}
+{
+  "timestamp": "2026-03-28T21:52:28.610536000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 160,
+  "response_size": 132,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:28.610536000-38643-21959"
+}
+{
+  "timestamp": "2026-03-28T21:52:30.688204000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 89,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:30.688204000-38689-10997"
+}
+{
+  "timestamp": "2026-03-28T21:52:30.866093000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 89,
+  "response_size": 1446,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:30.866093000-38716-6880"
+}
+{
+  "timestamp": "2026-03-28T21:52:40.658956000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:40.658956000-38826-28628"
+}
+{
+  "timestamp": "2026-03-28T21:52:40.867325000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "response_size": 139,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:52:40.867325000-38853-24511"
+}
+{
+  "timestamp": "2026-03-28T21:53:00.583645000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 104,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:00.583645000-39074-19310"
+}
+{
+  "timestamp": "2026-03-28T21:53:05.769737000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 51,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:05.769737000-39141-19252"
+}
+{
+  "timestamp": "2026-03-28T21:53:05.917557000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 51,
+  "response_size": 837,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:05.917557000-39168-15135"
+}
+{
+  "timestamp": "2026-03-28T21:53:08.820718000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 303,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:08.820718000-39257-24163"
+}
+{
+  "timestamp": "2026-03-28T21:53:08.976513000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 303,
+  "response_size": 86,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:08.976513000-39284-20045"
+}
+{
+  "timestamp": "2026-03-28T21:53:16.700537000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 131,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:16.700537000-39413-365"
+}
+{
+  "timestamp": "2026-03-28T21:53:16.836596000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 131,
+  "response_size": 2926,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:16.836596000-39440-29015"
+}
+{
+  "timestamp": "2026-03-28T21:53:18.370988000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 622,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:18.370988000-39478-14420"
+}
+{
+  "timestamp": "2026-03-28T21:53:18.745122000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 622,
+  "response_size": 424,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:18.745122000-39528-4367"
+}
+{
+  "timestamp": "2026-03-28T21:53:23.448631000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 355,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:23.448631000-39623-17030"
+}
+{
+  "timestamp": "2026-03-28T21:53:24.368912000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 355,
+  "response_size": 965,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:24.368912000-39714-26058"
+}
+{
+  "timestamp": "2026-03-28T21:53:28.071322000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 74,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:28.071322000-39832-15947"
+}
+{
+  "timestamp": "2026-03-28T21:53:28.323407000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 74,
+  "response_size": 1614,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:28.323407000-39864-30485"
+}
+{
+  "timestamp": "2026-03-28T21:53:28.420973000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 105,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:28.420973000-39894-11346"
+}
+{
+  "timestamp": "2026-03-28T21:53:28.589203000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 105,
+  "response_size": 186,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:28.589203000-39921-7228"
+}
+{
+  "timestamp": "2026-03-28T21:53:32.276176000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 231,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:32.276176000-40040-13956"
+}
+{
+  "timestamp": "2026-03-28T21:53:32.409378000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 231,
+  "response_size": 302,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:32.409378000-40067-9838"
+}
+{
+  "timestamp": "2026-03-28T21:53:32.549131000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:32.549131000-40095-22559"
+}
+{
+  "timestamp": "2026-03-28T21:53:32.703168000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "response_size": 651,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:32.703168000-40124-19350"
+}
+{
+  "timestamp": "2026-03-28T21:53:35.010130000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 122,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:35.010130000-40179-28861"
+}
+{
+  "timestamp": "2026-03-28T21:53:35.132330000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 122,
+  "response_size": 3430,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:35.132330000-40206-8814"
+}
+{
+  "timestamp": "2026-03-28T21:53:35.540803000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 241,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:35.540803000-40236-22443"
+}
+{
+  "timestamp": "2026-03-28T21:53:35.681264000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 241,
+  "response_size": 86,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:35.681264000-40263-18325"
+}
+{
+  "timestamp": "2026-03-28T21:53:40.721247000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:40.721247000-40333-3246"
+}
+{
+  "timestamp": "2026-03-28T21:53:40.871342000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "response_size": 139,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:40.871342000-40360-31897"
+}
+{
+  "timestamp": "2026-03-28T21:53:44.135334000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 73,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:44.135334000-40423-13183"
+}
+{
+  "timestamp": "2026-03-28T21:53:45.052326000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 73,
+  "response_size": 145,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:53:45.052326000-40507-18577"
+}
+{
+  "timestamp": "2026-03-28T21:54:00.114449000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 285,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:00.114449000-40797-26523"
+}
+{
+  "timestamp": "2026-03-28T21:54:00.785508000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 285,
+  "response_size": 150,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:00.785508000-40858-5083"
+}
+{
+  "timestamp": "2026-03-28T21:54:05.431107000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 357,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:05.431107000-41005-8602"
+}
+{
+  "timestamp": "2026-03-28T21:54:05.958134000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 357,
+  "response_size": 149,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:05.958134000-41063-2184"
+}
+{
+  "timestamp": "2026-03-28T21:54:09.551939000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 403,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:09.551939000-41215-7519"
+}
+{
+  "timestamp": "2026-03-28T21:54:10.130326000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 403,
+  "response_size": 150,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:10.130326000-41274-2010"
+}
+{
+  "timestamp": "2026-03-28T21:54:14.972819000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 138,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:14.972819000-41444-15523"
+}
+{
+  "timestamp": "2026-03-28T21:54:15.103456000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 138,
+  "response_size": 702,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:15.103456000-41472-12314"
+}
+{
+  "timestamp": "2026-03-28T21:54:18.340892000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 125,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:18.340892000-41529-6804"
+}
+{
+  "timestamp": "2026-03-28T21:54:18.519751000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 125,
+  "response_size": 843,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:18.519751000-41556-2687"
+}
+{
+  "timestamp": "2026-03-28T21:54:30.459369000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 141,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:30.459369000-41703-25769"
+}
+{
+  "timestamp": "2026-03-28T21:54:33.610898000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 117,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:33.610898000-41757-2513"
+}
+{
+  "timestamp": "2026-03-28T21:54:36.527742000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 131,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:36.527742000-41847-28379"
+}
+{
+  "timestamp": "2026-03-28T21:54:38.077557000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 98,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:38.077557000-41883-12875"
+}
+{
+  "timestamp": "2026-03-28T21:54:38.776932000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 98,
+  "response_size": 148,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:38.776932000-41941-6457"
+}
+{
+  "timestamp": "2026-03-28T21:54:39.012015000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "dangerouslyDisableSandbox",
+    "description"
+  ],
+  "input_size": 164,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:39.012015000-41972-4156"
+}
+{
+  "timestamp": "2026-03-28T21:54:41.463690000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 109,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:41.463690000-42078-4524"
+}
+{
+  "timestamp": "2026-03-28T21:54:41.613206000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 109,
+  "response_size": 107,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:41.613206000-42105-406"
+}
+{
+  "timestamp": "2026-03-28T21:54:41.664863000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 108,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:41.664863000-42124-25422"
+}
+{
+  "timestamp": "2026-03-28T21:54:41.803708000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 108,
+  "response_size": 106,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:41.803708000-42162-9917"
+}
+{
+  "timestamp": "2026-03-28T21:54:44.634179000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 70,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:44.634179000-42220-21246"
+}
+{
+  "timestamp": "2026-03-28T21:54:44.865353000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 70,
+  "response_size": 1684,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:44.865353000-42254-3924"
+}
+{
+  "timestamp": "2026-03-28T21:54:52.721508000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 283,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:52.721508000-42451-15137"
+}
+{
+  "timestamp": "2026-03-28T21:54:54.726513000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 283,
+  "response_size": 392,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:54:54.726513000-42671-17689"
+}
+{
+  "timestamp": "2026-03-28T21:55:02.281789000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 163,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:02.281789000-42856-23450"
+}
+{
+  "timestamp": "2026-03-28T21:55:02.431622000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 163,
+  "response_size": 150,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:02.431622000-42883-19333"
+}
+{
+  "timestamp": "2026-03-28T21:55:02.569353000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 179,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:02.569353000-42913-194"
+}
+{
+  "timestamp": "2026-03-28T21:55:02.717912000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 179,
+  "response_size": 1408,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:02.717912000-42948-32479"
+}
+{
+  "timestamp": "2026-03-28T21:55:21.170532000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 163,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:21.170532000-43231-5839"
+}
+{
+  "timestamp": "2026-03-28T21:55:21.319861000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 163,
+  "response_size": 95,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:21.319861000-43258-1721"
+}
+{
+  "timestamp": "2026-03-28T21:55:36.693074000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:36.693074000-43493-16994"
+}
+{
+  "timestamp": "2026-03-28T21:55:36.849479000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 119,
+  "response_size": 2362,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:36.849479000-43521-29715"
+}
+{
+  "timestamp": "2026-03-28T21:55:45.811672000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 2923,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:45.811672000-43738-1316"
+}
+{
+  "timestamp": "2026-03-28T21:55:46.588599000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 123,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:46.588599000-43764-29966"
+}
+{
+  "timestamp": "2026-03-28T21:55:46.753538000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 123,
+  "response_size": 133,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:46.753538000-43799-29483"
+}
+{
+  "timestamp": "2026-03-28T21:55:49.152567000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 123,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:49.152567000-43850-21247"
+}
+{
+  "timestamp": "2026-03-28T21:55:49.290771000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 123,
+  "response_size": 3618,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:49.290771000-43878-1200"
+}
+{
+  "timestamp": "2026-03-28T21:55:53.852574000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 318,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:53.852574000-43957-22523"
+}
+{
+  "timestamp": "2026-03-28T21:55:55.723538000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 116,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:55.723538000-43992-22949"
+}
+{
+  "timestamp": "2026-03-28T21:55:55.860895000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 116,
+  "response_size": 2608,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:55.860895000-44019-18831"
+}
+{
+  "timestamp": "2026-03-28T21:55:56.987153000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 277,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:56.987153000-44070-9687"
+}
+{
+  "timestamp": "2026-03-28T21:55:57.141050000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 277,
+  "response_size": 86,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:55:57.141050000-44097-22407"
+}
+{
+  "timestamp": "2026-03-28T21:56:00.434978000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 67,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:00.434978000-44156-17806"
+}
+{
+  "timestamp": "2026-03-28T21:56:00.625286000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 67,
+  "response_size": 478,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:00.625286000-44183-13689"
+}
+{
+  "timestamp": "2026-03-28T21:56:04.114864000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 168,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:04.114864000-44249-12722"
+}
+{
+  "timestamp": "2026-03-28T21:56:04.257014000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 168,
+  "response_size": 86,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:04.257014000-44276-8604"
+}
+{
+  "timestamp": "2026-03-28T21:56:07.498318000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 130,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:07.498318000-44375-22176"
+}
+{
+  "timestamp": "2026-03-28T21:56:07.646628000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 130,
+  "response_size": 3792,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:07.646628000-44402-18058"
+}
+{
+  "timestamp": "2026-03-28T21:56:08.883478000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:08.883478000-44442-20300"
+}
+{
+  "timestamp": "2026-03-28T21:56:09.030887000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "response_size": 188,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:09.030887000-44469-16183"
+}
+{
+  "timestamp": "2026-03-28T21:56:09.839622000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 91,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:09.839622000-44543-1104"
+}
+{
+  "timestamp": "2026-03-28T21:56:10.056546000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 91,
+  "response_size": 86,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:10.056546000-44571-13824"
+}
+{
+  "timestamp": "2026-03-28T21:56:19.488450000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 875,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:19.488450000-44756-20494"
+}
+{
+  "timestamp": "2026-03-28T21:56:19.905626000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 875,
+  "response_size": 659,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:19.905626000-44800-7716"
+}
+{
+  "timestamp": "2026-03-28T21:56:20.179949000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:20.179949000-44832-6324"
+}
+{
+  "timestamp": "2026-03-28T21:56:20.360255000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 100,
+  "response_size": 188,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:20.360255000-44859-2206"
+}
+{
+  "timestamp": "2026-03-28T21:56:23.284578000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 263,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:23.284578000-44920-31282"
+}
+{
+  "timestamp": "2026-03-28T21:56:24.283622000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 263,
+  "response_size": 527,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:24.283622000-44980-9842"
+}
+{
+  "timestamp": "2026-03-28T21:56:25.266692000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 249,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:25.266692000-45075-20688"
+}
+{
+  "timestamp": "2026-03-28T21:56:27.241731000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 90,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:27.241731000-45283-17788"
+}
+{
+  "timestamp": "2026-03-28T21:56:27.488479000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 90,
+  "response_size": 811,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:27.488479000-45316-16396"
+}
+{
+  "timestamp": "2026-03-28T21:56:27.947187000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 229,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:27.947187000-45354-892"
+}
+{
+  "timestamp": "2026-03-28T21:56:30.334999000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 185,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:30.334999000-45397-21790"
+}
+{
+  "timestamp": "2026-03-28T21:56:33.165467000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 271,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:33.165467000-45451-31301"
+}
+{
+  "timestamp": "2026-03-28T21:56:35.488015000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 356,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:35.488015000-45498-4410"
+}
+{
+  "timestamp": "2026-03-28T21:56:36.301242000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 165,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:36.301242000-45558-15739"
+}
+{
+  "timestamp": "2026-03-28T21:56:36.340521000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 356,
+  "response_size": 1075,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:36.340521000-45559-32577"
+}
+{
+  "timestamp": "2026-03-28T21:56:36.840358000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 5045,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:36.840358000-45649-7929"
+}
+{
+  "timestamp": "2026-03-28T21:56:38.936314000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 183,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:38.936314000-45722-25618"
+}
+{
+  "timestamp": "2026-03-28T21:56:40.342803000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 58,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:40.342803000-45756-9205"
+}
+{
+  "timestamp": "2026-03-28T21:56:40.937229000",
+  "event": "post_tool_use",
+  "tool": "Bash",
+  "response_type": "object",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 58,
+  "response_size": 361,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:40.937229000-45814-2787"
+}
+{
+  "timestamp": "2026-03-28T21:56:41.042507000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 159,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:41.042507000-45844-16416"
+}
+{
+  "timestamp": "2026-03-28T21:56:45.386717000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 260,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:45.386717000-45909-15449"
+}
+{
+  "timestamp": "2026-03-28T21:56:48.360457000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description",
+    "timeout"
+  ],
+  "input_size": 152,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:56:48.360457000-45964-9031"
+}
+{
+  "timestamp": "2026-03-28T21:57:00.710195000",
+  "event": "pre_tool_use",
+  "tool": "Bash",
+  "input_keys": [
+    "command",
+    "description"
+  ],
+  "input_size": 105,
+  "include_payloads": false,
+  "session_id": "unknown",
+  "user": "szymanski",
+  "seq": "2026-03-28T21:57:00.710195000-46157-20244"
+}
