@@ -4,6 +4,61 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-28] Claude Session - Epic easter-l3q COMPLETE
+
+**All 6 tasks completed: Creator Mode frontend fully implemented**
+
+### Summary
+Epic 4: Spielverwaltung (Creator Mode) - all 6 tasks closed.
+
+### Implemented
+
+#### easter-l3q.1 - GameListPage
+- Full game list with Card components: name, station count, status badges (Entwurf/Gestartet/Beendet)
+- Create new game → POST /api/games → navigate to editor
+- Delete with confirmation Modal
+- Loading spinner and error message states
+
+#### easter-l3q.2 - GameEditorPage with StationList
+- Inline name editing (click to edit, save on Enter/button)
+- Station list showing position, thumbnail placeholder, mini game type
+- + Station button (disabled at 20, shows "Maximale Anzahl erreicht")
+- Start Game button with validation error list per station
+
+#### easter-l3q.3 - Stations Drag-Reorder
+- @dnd-kit/sortable with PointerSensor, TouchSensor (iPhone compatible)
+- Drag handle visible, optimistic update on drop
+- PUT reorder API call, revert on error
+
+#### easter-l3q.4 - StationEditorPage
+- Image upload area showing current image or placeholder
+- 5 mini game type cards with emoji icons
+- Type-switch confirmation modal (warns about config reset)
+- Dynamic config panel per type
+- Save button with success feedback
+
+#### easter-l3q.5 - Mini Game Config Forms
+- PuzzleConfigForm: 4 grid options (1x3/2x2/2x3/3x3) with visual grid preview
+- NumberRiddleConfigForm: question text field + answer button picker 1-10
+- MazeConfigForm: Einfach/Mittel/Schwer with grid size labels
+- TextRiddleConfigForm: question, answer mode, 2-6 answer options
+- PictureRiddleConfigForm: question field + library picker button
+
+#### easter-l3q.6 - Spielstart-Validierung
+- API error 422 parsed: incomplete_stations positions shown as list
+- "Station N: Kein Stationsbild" per incomplete station
+
+### Backend Change
+- GameListItem.station_count added; list_games endpoint populates it
+
+### Quality
+- `pnpm exec tsc --noEmit` ✅
+- `pnpm run build` ✅
+- `pnpm run test:unit` ✅ (11 tests)
+- Types aligned with backend (string UUIDs throughout)
+
+---
+
 ## [2026-03-28] Claude Session - Epic easter-hfs FULLY VERIFIED
 
 **All 8 tasks completed and verified: 110 backend + 11 frontend tests passing, ruff clean**
