@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import type { MazeData } from '../types'
+import { useAudio } from '../hooks/useAudio'
 
 interface MazeGameProps {
   mazeData: MazeData
@@ -38,6 +39,7 @@ function canMove(
 
 export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
   const { walls, start, goal } = mazeData
+  const audio = useAudio()
 
   const [avatarRow, setAvatarRow] = useState(start.row)
   const [avatarCol, setAvatarCol] = useState(start.col)
@@ -89,16 +91,18 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
 
         if (targetRow === goal.row && targetCol === goal.col) {
           setCompleted(true)
+          audio.play('celebration')
           onComplete?.()
         }
       } else {
         // Show wall-hit feedback briefly
         if (wallHitTimer.current) clearTimeout(wallHitTimer.current)
         setWallHit(true)
+        audio.play('error')
         wallHitTimer.current = setTimeout(() => setWallHit(false), 150)
       }
     },
-    [completed, walls, goal, onComplete],
+    [completed, walls, goal, onComplete, audio],
   )
 
   function onTouchMove(e: React.TouchEvent<SVGSVGElement>) {

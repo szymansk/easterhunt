@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { TextRiddleOption } from '../types'
+import { useAudio } from '../hooks/useAudio'
 
 interface TextRiddleGameProps {
   questionText: string
@@ -26,16 +27,19 @@ export default function TextRiddleGame({
   onComplete,
 }: TextRiddleGameProps) {
   const [answerStates, setAnswerStates] = useState<Record<number, AnswerState>>({})
+  const audio = useAudio()
 
   function handleTap(index: number, isCorrect: boolean) {
     if (answerStates[index] === 'wrong') return
 
     if (isCorrect) {
+      audio.play('success')
       setAnswerStates((prev) => ({ ...prev, [index]: 'correct' }))
       setTimeout(() => {
         onComplete?.()
       }, 1000)
     } else {
+      audio.play('error')
       setAnswerStates((prev) => ({ ...prev, [index]: 'wrong' }))
       setTimeout(() => {
         setAnswerStates((prev) => ({ ...prev, [index]: 'idle' }))

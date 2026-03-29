@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { PictureRiddleAnswerOption, PictureRiddleReferenceItem } from '../types'
+import { useAudio } from '../hooks/useAudio'
 
 interface PictureRiddleGameProps {
   referenceItems: PictureRiddleReferenceItem[]
@@ -15,16 +16,19 @@ export default function PictureRiddleGame({
   onComplete,
 }: PictureRiddleGameProps) {
   const [answerStates, setAnswerStates] = useState<Record<number, AnswerState>>({})
+  const audio = useAudio()
 
   function handleTap(index: number, isCorrect: boolean) {
     if (answerStates[index] === 'wrong') return
 
     if (isCorrect) {
+      audio.play('success')
       setAnswerStates((prev) => ({ ...prev, [index]: 'correct' }))
       setTimeout(() => {
         onComplete?.()
       }, 600)
     } else {
+      audio.play('error')
       setAnswerStates((prev) => ({ ...prev, [index]: 'wrong' }))
       setTimeout(() => {
         setAnswerStates((prev) => ({ ...prev, [index]: 'idle' }))

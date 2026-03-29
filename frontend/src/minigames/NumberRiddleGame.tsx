@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useAudio } from '../hooks/useAudio'
 
 interface NumberRiddleGameProps {
   taskType: 'count' | 'assign' | 'plus_minus'
@@ -36,16 +37,19 @@ export default function NumberRiddleGame({
 }: NumberRiddleGameProps) {
   const [options] = useState(() => shuffleArray([correctAnswer, ...distractorAnswers]))
   const [buttonStates, setButtonStates] = useState<Record<number, ButtonState>>({})
+  const audio = useAudio()
 
   function handleTap(value: number) {
     const isCorrect = value === correctAnswer
 
     if (isCorrect) {
+      audio.play('success')
       setButtonStates((prev) => ({ ...prev, [value]: 'correct' }))
       setTimeout(() => {
         onComplete?.()
       }, 600)
     } else {
+      audio.play('error')
       setButtonStates((prev) => ({ ...prev, [value]: 'wrong' }))
       setTimeout(() => {
         setButtonStates((prev) => ({ ...prev, [value]: 'idle' }))

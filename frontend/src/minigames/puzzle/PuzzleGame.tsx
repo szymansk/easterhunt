@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { useAudio } from '../../hooks/useAudio'
 import {
   DndContext,
   DragEndEvent,
@@ -30,10 +31,12 @@ export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null)
   const [bouncingTiles, setBouncingTiles] = useState<Set<string>>(new Set())
   const [showSuccess, setShowSuccess] = useState(false)
+  const audio = useAudio()
 
   // Completion detection via useEffect - triggers when all tiles are placed
   useEffect(() => {
     if (tiles.length > 0 && tiles.every((t) => t.placed)) {
+      audio.play('celebration')
       setShowSuccess(true)
       const timer = setTimeout(() => {
         setShowSuccess(false)
@@ -41,7 +44,7 @@ export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }
       }, 2500)
       return () => clearTimeout(timer)
     }
-  }, [tiles, onComplete])
+  }, [tiles, onComplete, audio])
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: { distance: 5 },
@@ -102,6 +105,7 @@ export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }
 
       if (tile.index === slotIndex) {
         // Correct: snap into slot. State update will trigger useEffect for completion check.
+        audio.play('snap')
         setTiles((prev) => prev.map((t) => (t.id === tileId ? { ...t, placed: true } : t)))
         setSlots((prev) =>
           prev.map((s) => (s.index === slotIndex ? { ...s, occupiedBy: tileId } : s))
@@ -111,7 +115,7 @@ export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }
         triggerBounceBack(tileId)
       }
     },
-    [tiles, slots, triggerBounceBack]
+    [tiles, slots, triggerBounceBack, audio]
   )
 
   const activeTile = tiles.find((t) => t.id === activeTileId)
