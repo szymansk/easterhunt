@@ -6,6 +6,8 @@ import { MiniGameType } from '../../types'
 import LoadingSpinner from '../../components/ui/LoadingSpinner'
 import ErrorMessage from '../../components/ui/ErrorMessage'
 import SuccessOverlay from '../../components/ui/SuccessOverlay'
+import ErrorBoundary from '../../components/ui/ErrorBoundary'
+import { useToast } from '../../components/ui/Toast'
 import PuzzleGameContainer from './PuzzleGameContainer'
 import NumberRiddleGame from '../../minigames/NumberRiddleGame'
 import MazeGame from '../../minigames/MazeGame'
@@ -91,6 +93,7 @@ function MiniGameRouter({
 export default function StationMiniGamePage() {
   const { id, sid } = useParams<{ id: string; sid: string }>()
   const navigate = useNavigate()
+  const { showError } = useToast()
   const [station, setStation] = useState<Station | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -104,8 +107,8 @@ export default function StationMiniGamePage() {
     try {
       const stationData = await getStation(id, sid)
       setStation(stationData)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Station konnte nicht geladen werden')
+    } catch {
+      setError('Station konnte nicht geladen werden. Bitte versuche es erneut.')
     } finally {
       setLoading(false)
     }
@@ -122,16 +125,16 @@ export default function StationMiniGamePage() {
 
     try {
       await completeStation(id)
-    } catch (err) {
-      console.error('Failed to complete station:', err)
-      // Don't block the user — show error but still allow flow
+    } catch {
+      // Don't block the user — station progress failure is non-critical
+      showError()
     }
 
     setTimeout(() => {
       setShowSuccess(false)
       navigate(`/play/${id}`, { replace: true })
     }, 2500)
-  }, [completing, id, navigate])
+  }, [completing, id, navigate, showError])
 
   if (loading) {
     return (
@@ -153,7 +156,9 @@ export default function StationMiniGamePage() {
         />
       )}
       {!showSuccess && (
-        <MiniGameRouter station={station} onComplete={handleComplete} />
+        <ErrorBoundary>
+          <MiniGameRouter station={station} onComplete={handleComplete} />
+        </ErrorBoundary>
       )}
     </>
   )

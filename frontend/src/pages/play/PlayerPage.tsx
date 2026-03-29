@@ -30,8 +30,8 @@ export default function PlayerPage() {
       ])
       setGame(gameData)
       setProgress(progressData)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Fehler beim Laden')
+    } catch {
+      setError('Spiel konnte nicht geladen werden. Bitte versuche es erneut.')
     } finally {
       setLoading(false)
     }
