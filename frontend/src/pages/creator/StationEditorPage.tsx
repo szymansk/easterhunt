@@ -165,7 +165,7 @@ export default function StationEditorPage() {
       <div className="flex items-center gap-3 mb-6">
         <button
           onClick={() => navigate(`/creator/game/${gameId}`)}
-          className="text-blue-600 hover:text-blue-700 font-medium text-sm"
+          className="text-blue-600 hover:text-blue-700 active:text-blue-800 font-medium text-sm min-h-[44px] px-1"
         >
           ← Zurück
         </button>
@@ -193,7 +193,7 @@ export default function StationEditorPage() {
             ) : (
               <p className="text-sm text-amber-600 mb-2">Kein Bild ausgewählt</p>
             )}
-            <button className="text-sm font-medium text-blue-600 hover:text-blue-700">
+            <button className="text-sm font-medium text-blue-600 hover:text-blue-700 active:text-blue-800 min-h-[44px] px-1">
               Bild hochladen
             </button>
           </div>

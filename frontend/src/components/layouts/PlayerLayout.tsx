@@ -39,12 +39,13 @@ export default function PlayerLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-yellow-50 select-none">
-      {/* Music toggle button — fixed top-right */}
+    <div className="min-h-screen bg-yellow-50 select-none" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      {/* Music toggle button — fixed top-right, respects safe area */}
       <button
         onClick={handleMusicToggle}
         aria-label={musicEnabled ? 'Musik ausschalten' : 'Musik einschalten'}
-        className="fixed top-3 right-3 z-50 w-11 h-11 flex items-center justify-center rounded-full bg-white bg-opacity-80 shadow text-xl active:scale-95 transition-transform"
+        className="fixed z-50 w-11 h-11 flex items-center justify-center rounded-full bg-white bg-opacity-80 shadow text-xl active:scale-95 transition-transform"
+        style={{ top: 'calc(0.75rem + env(safe-area-inset-top))', right: 'calc(0.75rem + env(safe-area-inset-right))' }}
         data-testid="music-toggle"
       >
         {musicEnabled ? '🎵' : '🔇'}

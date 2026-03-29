@@ -75,7 +75,7 @@ export default function GameListPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Meine Spiele</h1>
         <BigButton onClick={handleCreate} disabled={creating}>
           {creating ? 'Erstelle…' : '+ Neues Spiel'}
@@ -106,13 +106,13 @@ export default function GameListPage() {
               <div className="flex gap-2 shrink-0">
                 <button
                   onClick={() => navigate(`/creator/game/${game.id}`)}
-                  className="px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="px-4 py-2 min-h-[44px] text-sm font-medium text-blue-600 hover:bg-blue-50 active:bg-blue-100 rounded-lg transition-colors"
                 >
                   Bearbeiten
                 </button>
                 <button
                   onClick={() => setDeleteTarget(game)}
-                  className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  className="px-4 py-2 min-h-[44px] text-sm font-medium text-red-600 hover:bg-red-50 active:bg-red-100 rounded-lg transition-colors"
                 >
                   Löschen
                 </button>
