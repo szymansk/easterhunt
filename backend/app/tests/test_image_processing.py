@@ -484,9 +484,11 @@ class TestPuzzleGenerateWithSourceStation:
         assert get_resp.status_code == 200
         assert len(get_resp.json()["tiles"]) == 4
 
-        # GET tiles for the source station (S2) should NOT have tiles
+        # GET tiles for S2: auto-generation triggers (S2 is also puzzle with image).
+        # Key invariant: S1's tiles were generated from S2's image (asserted above).
         get_src_resp = await client.get(f"/api/games/{game_id}/stations/{image_sid}/puzzle")
-        assert get_src_resp.status_code == 404
+        assert get_src_resp.status_code == 200
+        assert len(get_src_resp.json()["tiles"]) == 4
 
     async def test_without_source_station_id_uses_own_image(self, client):
         """Without source_station_id, uses the station's own image (existing behavior)."""

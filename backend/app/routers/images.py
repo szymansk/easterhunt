@@ -218,6 +218,35 @@ def get_puzzle_tiles(
     station = _get_station_or_404(game_id, station_id, db)
 
     config = station.mini_game_config or {}
+
+    # Auto-generate tiles if not yet created but station is a puzzle with an image
+    if ("tiles" not in config or "grid" not in config) and station.image_path and station.mini_game_type == "puzzle":
+        grid_size = config.get("grid_size", 4)
+        if grid_size not in GRID_CONFIGS:
+            grid_size = 4
+
+        image_rel = station.image_path.removeprefix("/media/")
+        image_fs_path = DATA_DIR / image_rel
+
+        if image_fs_path.exists():
+            tiles_dir = image_fs_path.parent / "puzzle_tiles"
+            if tiles_dir.exists():
+                shutil.rmtree(tiles_dir)
+
+            tiles = _puzzle_service.generate_tiles(image_fs_path, grid_size)
+            cols, rows = GRID_CONFIGS[grid_size]
+            tile_infos = [
+                TileInfo(url=_path_to_media_url(t["path"]), index=t["index"], row=t["row"], col=t["col"])
+                for t in tiles
+            ]
+            station.mini_game_config = {
+                **config,
+                "tiles": [t.model_dump() for t in tile_infos],
+                "grid": {"rows": rows, "cols": cols},
+            }
+            db.commit()
+            return PuzzleResponse(tiles=tile_infos, grid=GridInfo(rows=rows, cols=cols))
+
     if "tiles" not in config or "grid" not in config:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
