@@ -6,6 +6,7 @@ Eine digitale Osterschnitzeljagd für Kinder. Erwachsene erstellen Stationen mit
 ![Frontend Tests](https://img.shields.io/badge/frontend_tests-187_passed-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.11+-blue)
 ![Node](https://img.shields.io/badge/node-20+-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 ---
 
@@ -137,3 +138,9 @@ easter/
 
 - [USAGE.md](USAGE.md) — Anleitung für Ersteller und Spieler
 - [DEVELOPMENT.md](DEVELOPMENT.md) — Entwickler-Dokumentation, Architektur, ADRs
+
+---
+
+## Lizenz
+
+[MIT](LICENSE)
