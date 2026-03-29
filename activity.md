@@ -4,6 +4,38 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Epic easter-e94 Complete — Audio & Feedback
+
+### easter-e94.1 - Audio Manager Service
+- `useAudio` hook (singleton): unlock-before-play (browser autoplay policy TR-010), sound preloading, play/stop, volume control
+- Silent error handling for all audio failures
+- 12 Vitest tests, tsc clean. Committed 4947878.
+
+### easter-e94.2 - Sound Effects Integration
+- WAV audio assets (named .mp3): success, error, snap, celebration, button_tap (<40KB each)
+- All 5 minigames integrated: PictureRiddle/NumberRiddle/TextRiddle get success/error, PuzzleGame gets snap+celebration, MazeGame gets error+celebration
+- PlayerLayout unlocks audio on first click/touchstart event
+- Node.js generation script committed. 120 tests green. Committed cc901ca.
+
+### easter-e94.3 - Hintergrundmusik (Optional)
+- `useBackgroundMusic` hook: loop, pause/resume, settings toggle, localStorage persistence
+- Music toggle button in PlayerLayout (fixed top-right, 🎵/🔇)
+- Auto-pauses on `/station/` routes (station mini-games), resumes on map
+- background_music.mp3: 344KB pentatonic arpegggio (generated, lizenzfrei)
+- 13 Vitest tests. Committed 2a14b32.
+
+### easter-e94.4 - Text-to-Speech Integration (Optional)
+- `useTTS` hook: speak(text) in de-DE, cancels previous utterance before new, graceful degradation
+- TextRiddleGame: refactored from inline `speakText()` to `useTTS` hook
+- Button remains visible when ttsEnabled=true; speak() silently no-ops if unavailable
+- 7 Vitest tests (available + unavailable scenarios). Committed 2a14b32.
+
+### Final Test Status
+- Frontend: 140 tests passing (19 test files)
+- TypeScript: tsc --noEmit clean
+
+---
+
 ## [2026-03-29] Epics easter-mnj + easter-hc6 Closed — Zahlenrätsel & Text-Rätsel
 
 ### Context Recovery
@@ -477,4 +509,7 @@ Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 ### Final Test Status
 - Backend: 218 tests passing
 - Frontend: 74 tests passing (12 test files)
+
+## [2026-03-29 01:27:02] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 
