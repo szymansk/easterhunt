@@ -125,7 +125,7 @@ export default function LibraryBrowser({
                   }`}
                 >
                   {thumb ? (
-                    <img src={thumb} alt="" className="w-12 h-12 object-contain" />
+                    <img src={thumb} alt="" className="w-12 h-12 object-contain" loading="lazy" />
                   ) : (
                     <div className="w-12 h-12 rounded bg-gray-100 flex items-center justify-center text-gray-400 text-lg">
                       ?
@@ -146,7 +146,7 @@ export default function LibraryBrowser({
               {preview.answer_options.map((item) => (
                 <div key={item.id} className="flex flex-col items-center gap-0.5">
                   {item.image_url && (
-                    <img src={item.image_url} alt={item.name} className="w-10 h-10 object-contain" />
+                    <img src={item.image_url} alt={item.name} className="w-10 h-10 object-contain" loading="lazy" />
                   )}
                   <span
                     className={`text-xs ${

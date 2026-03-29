@@ -41,6 +41,29 @@ export default function PlayerPage() {
     load()
   }, [load])
 
+  // Preload images for the current and next station in the background
+  useEffect(() => {
+    if (!game || !progress) return
+    const sorted = [...game.stations].sort((a, b) => a.position - b.position)
+    const toPreload = sorted
+      .filter((s) => {
+        const diff = s.position - progress.current_station
+        return diff >= 0 && diff <= 1
+      })
+      .map((s) => s.image_path)
+      .filter((p): p is string => Boolean(p))
+
+    const imgs = toPreload.map((src) => {
+      const img = new Image()
+      img.src = src
+      return img
+    })
+
+    return () => {
+      imgs.forEach((img) => { img.src = '' })
+    }
+  }, [game, progress])
+
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorMessage message={error} />
   if (!game || !progress) return null

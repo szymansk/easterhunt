@@ -107,7 +107,10 @@ async def serve_media(file_path: str) -> FileResponse:
     if not requested.exists() or not requested.is_file():
         raise HTTPException(status_code=404, detail="File not found")
 
-    return FileResponse(str(requested))
+    return FileResponse(
+        str(requested),
+        headers={"Cache-Control": "public, max-age=3600, stale-while-revalidate=86400"},
+    )
 
 
 # Serve frontend build in production (when dist/ exists)
