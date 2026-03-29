@@ -71,7 +71,9 @@ async def test_get_game(client):
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == game_id
-    assert data["stations"] == []
+    # New game auto-creates a treasure station
+    assert len(data["stations"]) == 1
+    assert data["stations"][0]["mini_game_type"] == "treasure"
 
 
 async def test_get_game_not_found(client):

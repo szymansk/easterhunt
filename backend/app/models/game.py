@@ -22,6 +22,7 @@ class MiniGameType(str, enum.Enum):
     maze = "maze"
     text_riddle = "text_riddle"
     picture_riddle = "picture_riddle"
+    treasure = "treasure"
 
 
 class Game(Base):

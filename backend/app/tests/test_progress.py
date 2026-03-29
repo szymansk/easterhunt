@@ -100,8 +100,9 @@ async def test_complete_station_advances(client):
 
 
 async def test_complete_last_station_finishes_game(client):
+    # n_stations=2 creates 2 puzzle + 1 auto-treasure = 3 total; completing all 3 finishes the game
     async with client as c:
-        game_id = await _setup_game_with_stations(c, n_stations=3)
+        game_id = await _setup_game_with_stations(c, n_stations=2)
         await c.post(f"/api/games/{game_id}/progress")
         await c.put(f"/api/games/{game_id}/progress/complete-station")
         await c.put(f"/api/games/{game_id}/progress/complete-station")
@@ -112,8 +113,9 @@ async def test_complete_last_station_finishes_game(client):
 
 
 async def test_full_playthrough(client):
+    # n_stations=2 creates 2 puzzle + 1 auto-treasure = 3 total
     async with client as c:
-        game_id = await _setup_game_with_stations(c, n_stations=3)
+        game_id = await _setup_game_with_stations(c, n_stations=2)
         await c.post(f"/api/games/{game_id}/progress")
         for _ in range(3):
             resp = await c.put(f"/api/games/{game_id}/progress/complete-station")

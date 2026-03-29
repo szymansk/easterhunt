@@ -21,6 +21,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   ApiError,
   createStation,
+  deleteStation,
   getGame,
   reorderStations,
   startGame,
@@ -28,7 +29,7 @@ import {
 } from '../../services/api'
 import type { Game, StartGameError, Station } from '../../types'
 import { MiniGameType } from '../../types'
-import { BigButton, Card, ErrorMessage, LoadingSpinner } from '../../components/ui'
+import { BigButton, Card, ErrorMessage, LoadingSpinner, Modal } from '../../components/ui'
 
 const MAX_STATIONS = 20
 
@@ -39,18 +40,23 @@ function miniGameLabel(type: MiniGameType): string {
     [MiniGameType.maze]: 'Labyrinth',
     [MiniGameType.text_riddle]: 'Texträtsel',
     [MiniGameType.picture_riddle]: 'Bilderrätsel',
+    [MiniGameType.treasure]: '🎁 Schatz',
   }
   return labels[type]
 }
 
 interface SortableStationRowProps {
   station: Station
+  game: { status: string }
   onEdit: () => void
+  onDelete?: (stationId: string) => void
 }
 
-function SortableStationRow({ station, onEdit }: SortableStationRowProps) {
+function SortableStationRow({ station, game, onEdit, onDelete }: SortableStationRowProps) {
+  const isTreasure = station.mini_game_type === MiniGameType.treasure
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: station.id,
+    disabled: isTreasure,
   })
 
   const style = {
@@ -61,17 +67,22 @@ function SortableStationRow({ station, onEdit }: SortableStationRowProps) {
 
   return (
     <div ref={setNodeRef} style={style} className="flex items-center gap-3 bg-white rounded-xl shadow-sm p-3 border border-gray-100">
-      {/* Drag handle */}
-      <button
-        className="touch-none cursor-grab active:cursor-grabbing p-1 text-gray-400 hover:text-gray-600 min-w-[44px] min-h-[44px] flex items-center justify-center"
-        aria-label="Verschieben"
-        {...attributes}
-        {...listeners}
-      >
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M7 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-        </svg>
-      </button>
+      {/* Drag handle — hidden for treasure */}
+      {isTreasure ? (
+        <div className="min-w-[44px] min-h-[44px]" />
+      ) : (
+        <button
+          className="touch-none cursor-grab active:cursor-grabbing p-1 text-gray-400 hover:text-gray-600 min-w-[44px] min-h-[44px] flex items-center justify-center"
+          aria-label="Verschieben"
+          data-testid={`drag-handle-${station.id}`}
+          {...attributes}
+          {...listeners}
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M7 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+          </svg>
+        </button>
+      )}
 
       {/* Position number */}
       <span className="w-6 text-sm font-semibold text-gray-500 text-center">{station.position}</span>
@@ -102,6 +113,20 @@ function SortableStationRow({ station, onEdit }: SortableStationRowProps) {
       >
         Bearbeiten
       </button>
+
+      {/* Delete button — only for non-treasure stations in draft games */}
+      {!isTreasure && game.status === 'draft' && onDelete && (
+        <button
+          onClick={() => onDelete(station.id)}
+          className="p-2 min-h-[44px] min-w-[44px] text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors shrink-0 flex items-center justify-center"
+          aria-label="Station löschen"
+          data-testid={`delete-btn-${station.id}`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }
@@ -120,6 +145,8 @@ export default function GameEditorPage() {
   const [starting, setStarting] = useState(false)
   const [startErrors, setStartErrors] = useState<string[]>([])
   const [adding, setAdding] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [deleteInProgress, setDeleteInProgress] = useState(false)
   const nameInputRef = useRef<HTMLInputElement>(null)
 
   const sensors = useSensors(
@@ -199,6 +226,24 @@ export default function GameEditorPage() {
       // revert on error
       setStations(stations)
       setError('Reihenfolge konnte nicht gespeichert werden.')
+    }
+  }
+
+  async function handleConfirmDelete() {
+    if (!id || !deletingId) return
+    setDeleteInProgress(true)
+    setError('')
+    try {
+      await deleteStation(id, deletingId)
+      setStations((prev) => {
+        const filtered = prev.filter((s) => s.id !== deletingId)
+        return filtered.map((s, i) => ({ ...s, position: i + 1 }))
+      })
+    } catch {
+      setError('Station konnte nicht gelöscht werden.')
+    } finally {
+      setDeleteInProgress(false)
+      setDeletingId(null)
     }
   }
 
@@ -321,7 +366,9 @@ export default function GameEditorPage() {
                   <SortableStationRow
                     key={station.id}
                     station={station}
+                    game={game}
                     onEdit={() => navigate(`/creator/game/${id}/station/${station.id}`)}
+                    onDelete={(sid) => setDeletingId(sid)}
                   />
                 ))}
               </div>
@@ -355,6 +402,26 @@ export default function GameEditorPage() {
           </p>
         )}
       </div>
+
+      {/* Delete confirmation modal */}
+      <Modal
+        isOpen={deletingId !== null}
+        onClose={() => setDeletingId(null)}
+        title="Station löschen"
+      >
+        <p className="text-gray-600 mb-6">
+          Station „{stations.find((s) => s.id === deletingId)?.position}" wirklich löschen?
+          Alle Daten gehen verloren.
+        </p>
+        <div className="flex gap-3 justify-end">
+          <BigButton variant="secondary" onClick={() => setDeletingId(null)} disabled={deleteInProgress}>
+            Abbrechen
+          </BigButton>
+          <BigButton onClick={handleConfirmDelete} disabled={deleteInProgress}>
+            {deleteInProgress ? 'Löschen…' : 'Löschen'}
+          </BigButton>
+        </div>
+      </Modal>
     </div>
   )
 }

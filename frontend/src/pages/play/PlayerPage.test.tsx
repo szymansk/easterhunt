@@ -80,12 +80,13 @@ test('only current station has cursor-pointer class', async () => {
   expect(station3.className).not.toContain('cursor-pointer')
 })
 
-test('mini game type map covers all 5 types', () => {
+test('mini game type map covers all 6 types', () => {
   const allTypes = Object.values(MiniGameType)
   expect(allTypes).toContain(MiniGameType.puzzle)
   expect(allTypes).toContain(MiniGameType.number_riddle)
   expect(allTypes).toContain(MiniGameType.maze)
   expect(allTypes).toContain(MiniGameType.text_riddle)
   expect(allTypes).toContain(MiniGameType.picture_riddle)
-  expect(allTypes).toHaveLength(5)
+  expect(allTypes).toContain(MiniGameType.treasure)
+  expect(allTypes).toHaveLength(6)
 })

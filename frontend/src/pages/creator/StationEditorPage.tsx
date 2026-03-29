@@ -50,6 +50,8 @@ function defaultConfig(type: MiniGameType): MiniGameConfig {
         reference_items: [],
         answer_options: [],
       }
+    case MiniGameType.treasure:
+      return { type: MiniGameType.treasure }
   }
 }
 
@@ -187,35 +189,37 @@ export default function StationEditorPage() {
         />
       </Card>
 
-      {/* Mini game type selection */}
-      <Card className="mb-6">
-        <h2 className="text-sm font-semibold text-gray-700 mb-3">Minispiel-Typ</h2>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
-          {MINI_GAME_TYPES.map(({ type, label, icon }) => {
-            const selected = miniGameType === type
-            return (
-              <button
-                key={type}
-                type="button"
-                onClick={() => handleTypeSelect(type)}
-                className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-colors ${
-                  selected
-                    ? 'border-blue-500 bg-blue-50'
-                    : 'border-gray-200 hover:border-gray-300'
-                }`}
-              >
-                <span className="text-2xl">{icon}</span>
-                <span className={`text-xs font-medium ${selected ? 'text-blue-700' : 'text-gray-600'}`}>
-                  {label}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-      </Card>
+      {/* Mini game type selection — hidden for treasure stations */}
+      {miniGameType !== MiniGameType.treasure && (
+        <Card className="mb-6">
+          <h2 className="text-sm font-semibold text-gray-700 mb-3">Minispiel-Typ</h2>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+            {MINI_GAME_TYPES.map(({ type, label, icon }) => {
+              const selected = miniGameType === type
+              return (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => handleTypeSelect(type)}
+                  className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-colors ${
+                    selected
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <span className="text-2xl">{icon}</span>
+                  <span className={`text-xs font-medium ${selected ? 'text-blue-700' : 'text-gray-600'}`}>
+                    {label}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        </Card>
+      )}
 
-      {/* Config panel */}
-      <Card className="mb-6">
+      {/* Config panel — hidden for treasure stations */}
+      {miniGameType !== MiniGameType.treasure && <Card className="mb-6">
         <h2 className="text-sm font-semibold text-gray-700 mb-4">Konfiguration</h2>
         {miniGameType === MiniGameType.puzzle && (() => {
           // Puzzle station N uses the image from station N+1 as source.
@@ -265,7 +269,7 @@ export default function StationEditorPage() {
             errors={configErrors}
           />
         )}
-      </Card>
+      </Card>}
 
       <BigButton onClick={handleSave} disabled={saving} className="w-full">
         {saving ? 'Speichern…' : saved ? '✓ Gespeichert' : 'Speichern'}

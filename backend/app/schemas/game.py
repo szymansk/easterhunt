@@ -122,6 +122,10 @@ class PictureRiddleConfig(BaseModel):
         return self
 
 
+class TreasureConfig(BaseModel):
+    type: Literal["treasure"]
+
+
 MiniGameConfig = Annotated[
     Union[
         PuzzleConfig,
@@ -129,6 +133,7 @@ MiniGameConfig = Annotated[
         MazeConfig,
         TextRiddleConfig,
         PictureRiddleConfig,
+        TreasureConfig,
     ],
     Field(discriminator="type"),
 ]

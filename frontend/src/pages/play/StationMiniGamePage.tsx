@@ -13,6 +13,7 @@ import NumberRiddleGame from '../../minigames/NumberRiddleGame'
 import MazeGame from '../../minigames/MazeGame'
 import TextRiddleGame from '../../minigames/TextRiddleGame'
 import PictureRiddleGame from '../../minigames/PictureRiddleGame'
+import TreasureGame from '../../components/minigames/TreasureGame'
 
 function MiniGameRouter({
   station,
@@ -72,6 +73,9 @@ function MiniGameRouter({
           onComplete={onComplete}
         />
       )
+
+    case MiniGameType.treasure:
+      return <TreasureGame imageUrl={station.image_path} onComplete={onComplete} />
 
     default:
       return (

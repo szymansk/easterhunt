@@ -77,7 +77,8 @@ async def test_create_station_game_not_found(client):
 async def test_create_station_max_limit(client):
     async with client as c:
         game_id = await _create_game(c)
-        for i in range(20):
+        # Game starts with 1 treasure station; add 19 more to reach MAX_STATIONS=20
+        for i in range(19):
             await c.post(
                 f"/api/games/{game_id}/stations",
                 json={
@@ -89,7 +90,7 @@ async def test_create_station_max_limit(client):
         resp = await c.post(
             f"/api/games/{game_id}/stations",
             json={
-                "position": 21,
+                "position": 20,
                 "mini_game_type": "number_riddle",
                 "mini_game_config": NUMBER_CONFIG,
             },
@@ -173,8 +174,11 @@ async def test_delete_station_renumbers(client):
         del_resp = await c.delete(f"/api/games/{game_id}/stations/{s1}")
         list_resp = await c.get(f"/api/games/{game_id}/stations")
     assert del_resp.status_code == 204
-    positions = [s["position"] for s in list_resp.json()]
-    assert positions == [1, 2]
+    stations = list_resp.json()
+    positions = [s["position"] for s in stations]
+    # 2 puzzle stations + 1 treasure station; treasure is always last
+    assert positions == [1, 2, 3]
+    assert stations[-1]["mini_game_type"] == "treasure"
 
 
 async def test_reorder_stations(client):

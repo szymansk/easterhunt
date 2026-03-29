@@ -5,6 +5,7 @@ export enum MiniGameType {
   maze = 'maze',
   text_riddle = 'text_riddle',
   picture_riddle = 'picture_riddle',
+  treasure = 'treasure',
 }
 
 export enum GameStatus {
@@ -77,12 +78,17 @@ export interface PictureRiddleConfig {
   question?: string | null
 }
 
+export interface TreasureConfig {
+  type: MiniGameType.treasure
+}
+
 export type MiniGameConfig =
   | PuzzleConfig
   | NumberRiddleConfig
   | MazeConfig
   | TextRiddleConfig
   | PictureRiddleConfig
+  | TreasureConfig
 
 // Domain types (IDs are string UUIDs)
 export interface Station {

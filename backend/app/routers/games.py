@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.exceptions import GameNotFoundError
-from app.models.game import Game, GameStatus
+from app.models.game import Game, GameStatus, MiniGameType, Station
 from app.schemas.game import (
     GameCreate,
     GameListItem,
@@ -33,6 +33,17 @@ def create_game(body: GameCreate, db: Session = Depends(get_db)) -> GameRead:
         status=GameStatus.draft,
     )
     db.add(game)
+    db.flush()  # get game.id before creating station
+
+    treasure = Station(
+        id=str(uuid.uuid4()),
+        game_id=game.id,
+        position=1,
+        image_path=None,
+        mini_game_type=MiniGameType.treasure,
+        mini_game_config={"type": "treasure"},
+    )
+    db.add(treasure)
     db.commit()
     db.refresh(game)
     return GameRead.model_validate(game)
@@ -90,7 +101,10 @@ def start_game(game_id: str, db: Session = Depends(get_db)) -> GameRead:
 
     stations = sorted(game.stations, key=lambda s: s.position)
 
-    if not stations:
+    # Only non-treasure stations need images to start
+    non_treasure = [s for s in stations if s.mini_game_type != MiniGameType.treasure]
+
+    if not non_treasure:
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             content={
@@ -100,7 +114,7 @@ def start_game(game_id: str, db: Session = Depends(get_db)) -> GameRead:
             },
         )
 
-    incomplete_positions = [s.position for s in stations if s.image_path is None]
+    incomplete_positions = [s.position for s in non_treasure if s.image_path is None]
 
     if incomplete_positions:
         return JSONResponse(

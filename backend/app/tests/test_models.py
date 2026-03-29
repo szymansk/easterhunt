@@ -83,13 +83,14 @@ def test_game_status_enum_values(db_session):
 
 
 def test_mini_game_type_enum_values(db_session):
-    """MiniGameType enum has all five expected values."""
+    """MiniGameType enum has all six expected values."""
     expected = {
         MiniGameType.puzzle,
         MiniGameType.number_riddle,
         MiniGameType.maze,
         MiniGameType.text_riddle,
         MiniGameType.picture_riddle,
+        MiniGameType.treasure,
     }
     assert set(MiniGameType) == expected
 

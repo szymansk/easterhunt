@@ -209,7 +209,8 @@ class TestModels:
         assert MiniGameType.maze == "maze"
         assert MiniGameType.text_riddle == "text_riddle"
         assert MiniGameType.picture_riddle == "picture_riddle"
-        assert len(set(MiniGameType)) == 5
+        assert MiniGameType.treasure == "treasure"
+        assert len(set(MiniGameType)) == 6
 
 
 # ---------------------------------------------------------------------------
@@ -453,7 +454,9 @@ class TestGameCRUD:
         assert response.status_code == 200
         data = response.json()
         assert data["id"] == game_id
-        assert data["stations"] == []
+        # New game auto-creates a treasure station
+        assert len(data["stations"]) == 1
+        assert data["stations"][0]["mini_game_type"] == "treasure"
 
     async def test_get_game_not_found(self, client):
         response = await client.get("/api/games/nonexistent-id")
@@ -595,17 +598,18 @@ class TestStationCRUD:
         create_resp = await client.post("/api/games", json={"name": "Full Game"})
         game_id = create_resp.json()["id"]
 
-        for pos in range(1, 21):  # Create exactly 20 stations
+        # Game starts with 1 treasure station; add 19 more to reach MAX_STATIONS=20
+        for pos in range(1, 20):
             resp = await client.post(
                 f"/api/games/{game_id}/stations",
                 json=_station_body(position=pos),
             )
             assert resp.status_code == 201
 
-        # 21st station must be rejected
+        # Now at 20 stations — next must be rejected
         response = await client.post(
             f"/api/games/{game_id}/stations",
-            json=_station_body(position=21),
+            json=_station_body(position=20),
         )
         assert response.status_code == 422
 
@@ -674,7 +678,7 @@ class TestStationCRUD:
         assert response.status_code == 404
 
     async def test_delete_station_renumbers(self, client):
-        """After deleting the middle station, remaining stations are renumbered 1, 2."""
+        """After deleting the middle station, remaining stations are renumbered 1, 2, 3 (with treasure last)."""
         create_resp = await client.post("/api/games", json={"name": "Hunt"})
         game_id = create_resp.json()["id"]
 
@@ -693,8 +697,11 @@ class TestStationCRUD:
         list_resp = await client.get(f"/api/games/{game_id}/stations")
         assert list_resp.status_code == 200
         remaining = list_resp.json()
-        assert len(remaining) == 2
-        assert [s["position"] for s in remaining] == [1, 2]
+        # 2 puzzle stations + 1 treasure station
+        assert len(remaining) == 3
+        assert [s["position"] for s in remaining] == [1, 2, 3]
+        # treasure is always last
+        assert remaining[-1]["mini_game_type"] == "treasure"
 
     async def test_delete_station_not_found(self, client):
         create_resp = await client.post("/api/games", json={"name": "Hunt"})
@@ -717,7 +724,7 @@ class TestStationCRUD:
             )
             station_ids.append(resp.json()["id"])
 
-        # Reverse the order
+        # Reverse the order (only non-treasure stations; treasure stays last)
         reversed_ids = list(reversed(station_ids))
         response = await client.put(
             f"/api/games/{game_id}/stations/reorder",
@@ -725,8 +732,11 @@ class TestStationCRUD:
         )
         assert response.status_code == 200
         result = response.json()
-        assert len(result) == 3
-        # After reorder the station that was last should now be at position 1
+        # 3 puzzle + 1 treasure
+        assert len(result) == 4
+        # treasure is always last
+        assert result[-1]["mini_game_type"] == "treasure"
+        # First non-treasure should be the reversed station
         assert result[0]["id"] == reversed_ids[0]
 
     async def test_game_with_stations_shows_in_get_game(self, client):
@@ -740,7 +750,8 @@ class TestStationCRUD:
 
         response = await client.get(f"/api/games/{game_id}")
         assert response.status_code == 200
-        assert len(response.json()["stations"]) == 1
+        # 1 puzzle + 1 treasure
+        assert len(response.json()["stations"]) == 2
 
 
 # ---------------------------------------------------------------------------
@@ -815,15 +826,16 @@ class TestGameProgress:
 
     async def test_complete_last_station_finishes_game(self, client):
         """Completing the final station should set game status to finished."""
-        game_id = await self._create_started_game_with_stations(client, num_stations=2)
+        # num_stations=1 → 1 puzzle + 1 auto-treasure = 2 total; complete both to finish
+        game_id = await self._create_started_game_with_stations(client, num_stations=1)
         await client.post(f"/api/games/{game_id}/progress")
 
-        # Complete station 1
+        # Complete station 1 (puzzle)
         resp = await client.put(f"/api/games/{game_id}/progress/complete-station")
         assert resp.status_code == 200
         assert resp.json()["current_station"] == 2
 
-        # Complete station 2 (last)
+        # Complete station 2 (treasure, last)
         resp = await client.put(f"/api/games/{game_id}/progress/complete-station")
         assert resp.status_code == 200
         progress_data = resp.json()
