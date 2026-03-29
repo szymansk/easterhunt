@@ -3,7 +3,7 @@
  * Tests for easter-bmx: tileAspectRatio calculation in PuzzleGameContainer.
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, waitFor, act } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import PuzzleGame from '../../minigames/puzzle/PuzzleGame'
 import type { PuzzleTile } from '../../minigames/puzzle/PuzzleBoard'
 

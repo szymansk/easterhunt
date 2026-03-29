@@ -186,9 +186,29 @@ def update_station(
     if body.mini_game_config is not None:
         config_data = body.mini_game_config
         if hasattr(config_data, "model_dump"):
-            station.mini_game_config = config_data.model_dump()
+            new_config_dict = config_data.model_dump()
         else:
-            station.mini_game_config = dict(config_data)
+            new_config_dict = dict(config_data)
+
+        # Preserve generated puzzle tiles when grid_size is unchanged
+        if (
+            body.mini_game_type == MiniGameType.puzzle
+            and station.mini_game_type == MiniGameType.puzzle
+        ):
+            old_cfg = station.mini_game_config or {}
+            if old_cfg.get("grid_size") == new_config_dict.get("grid_size"):
+                # grid_size unchanged: preserve generated tiles and layout metadata
+                if "tiles" in old_cfg:
+                    new_config_dict["tiles"] = old_cfg["tiles"]
+                if "grid" in old_cfg:
+                    new_config_dict["grid"] = old_cfg["grid"]
+                if "tile_width" in old_cfg:
+                    new_config_dict["tile_width"] = old_cfg["tile_width"]
+                if "tile_height" in old_cfg:
+                    new_config_dict["tile_height"] = old_cfg["tile_height"]
+            # else: grid_size changed, generated tiles are invalid — discard them
+
+        station.mini_game_config = new_config_dict
 
     db.commit()
     db.refresh(station)

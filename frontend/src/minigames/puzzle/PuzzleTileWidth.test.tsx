@@ -2,7 +2,7 @@
  * Tests for easter-fgg: tile width uses colCount directly (no Math.max(colCount, 3)).
  */
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import PuzzleTileView from './PuzzleTileView'
 import PuzzleGame from './PuzzleGame'
 import type { PuzzleTile } from './PuzzleBoard'

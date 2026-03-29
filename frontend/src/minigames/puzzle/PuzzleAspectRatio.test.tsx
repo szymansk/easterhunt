@@ -1,8 +1,8 @@
 /**
  * Tests for easter-bmx: dynamic tile aspect ratio (no aspect-square crop).
  */
-import { describe, it, expect, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
+import { render } from '@testing-library/react'
 import PuzzleDropZone from './PuzzleDropZone'
 import PuzzleTileView from './PuzzleTileView'
 import type { PuzzleTile } from './PuzzleBoard'
