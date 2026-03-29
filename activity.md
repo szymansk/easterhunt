@@ -4,6 +4,29 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Epics easter-mnj + easter-hc6 Closed — Zahlenrätsel & Text-Rätsel
+
+### Context Recovery
+Epics already had committed code but beads issues weren't closed. Verified all acceptance criteria met, then closed all open tasks and epics.
+
+### easter-mnj (Epic 7: Zahlenrätsel) — CLOSED
+- **mnj.1** (ALREADY CLOSED): NumberRiddleConfig schema, distractor validation, GET mini-game endpoint
+- **mnj.2** (ALREADY CLOSED): NumberRiddleGame player: shuffled buttons, green/red feedback, onComplete after 600ms, 10 Vitest tests
+- **mnj.3**: NumberRiddleConfigForm: task type (Zählen/Zuordnen/Rechnen), prompt text, correct answer 1-10, distractor toggle, auto-fill, preview. Committed in 3adb198
+- **mnj.4**: Backend tests (out-of-range→422, distractor=correct→422); Frontend 10 Vitest tests. All in test_api.py + test_stations.py + NumberRiddleGame.test.tsx
+
+### easter-hc6 (Epic 9: Text/Audio-Rätsel) — CLOSED
+- **hc6.1** (ALREADY CLOSED): TextRiddleConfig schema, GET mini-game endpoint, 268 pytest tests
+- **hc6.2**: TextRiddleGame player: question text (20px), TTS button (44px, conditional), answer cards (60px min-height), correct→green+onComplete after 1s, wrong→red+shake+retry. Committed in 57e736e
+- **hc6.3**: TextRiddleConfigForm: question+char counter, answer mode radio, 2-6 dynamic options, radio for correct, TTS toggle. Committed in 57e736e
+- **hc6.4**: Backend tests (0/2 correct→422, free_text mode→422); Frontend 9 Vitest tests (TTS conditional, correct→onComplete, wrong→retry). In test_api.py + TextRiddleGame.test.tsx
+
+### Final Test Status
+- Backend: 268 pytest tests passing
+- Frontend: 108 Vitest tests passing (16 test files)
+
+---
+
 ## [2026-03-29] Epic easter-2yq Complete — Labyrinth (Maze Minigame)
 
 ### easter-2yq.1 - Maze-Generation Service (Backend)
