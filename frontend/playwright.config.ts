@@ -28,9 +28,19 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  webServer: {
-    command: 'pnpm dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'uv run uvicorn app.main:app --host 0.0.0.0 --port 8000',
+      cwd: '../backend',
+      url: 'http://localhost:8000/api/health',
+      reuseExistingServer: true,
+      timeout: 30000,
+    },
+    {
+      command: 'pnpm dev',
+      url: 'http://localhost:5173',
+      reuseExistingServer: true,
+      timeout: 30000,
+    },
+  ],
 })
