@@ -94,8 +94,11 @@ export default function GameListPage() {
                 <div className="flex items-center gap-3 flex-wrap">
                   <span className="font-semibold text-gray-800 truncate">{game.name}</span>
                   <span
-                    className={`text-xs font-medium px-2 py-0.5 rounded-full ${statusBadgeClass(game.status)}`}
+                    className={`inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full ${statusBadgeClass(game.status)}`}
                   >
+                    {game.status === GameStatus.started && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shrink-0" />
+                    )}
                     {statusLabel(game.status)}
                   </span>
                 </div>

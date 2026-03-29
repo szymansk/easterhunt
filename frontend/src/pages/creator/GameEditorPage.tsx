@@ -20,15 +20,17 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   ApiError,
+  createGameProgress,
   createStation,
   deleteStation,
   getGame,
+  getGameProgress,
   reorderStations,
   startGame,
   updateGame,
 } from '../../services/api'
-import type { Game, StartGameError, Station } from '../../types'
-import { MiniGameType } from '../../types'
+import type { Game, GameProgress, StartGameError, Station } from '../../types'
+import { GameStatus, MiniGameType } from '../../types'
 import { BigButton, Card, ErrorMessage, LoadingSpinner, Modal } from '../../components/ui'
 
 const MAX_STATIONS = 20
@@ -137,6 +139,7 @@ export default function GameEditorPage() {
 
   const [game, setGame] = useState<Game | null>(null)
   const [stations, setStations] = useState<Station[]>([])
+  const [progress, setProgress] = useState<GameProgress | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [nameEditing, setNameEditing] = useState(false)
@@ -145,6 +148,7 @@ export default function GameEditorPage() {
   const [starting, setStarting] = useState(false)
   const [startErrors, setStartErrors] = useState<string[]>([])
   const [adding, setAdding] = useState(false)
+  const [resetting, setResetting] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [deleteInProgress, setDeleteInProgress] = useState(false)
   const nameInputRef = useRef<HTMLInputElement>(null)
@@ -163,6 +167,9 @@ export default function GameEditorPage() {
         setNameValue(g.name)
         const sorted = [...g.stations].sort((a, b) => a.position - b.position)
         setStations(sorted)
+        if (g.status !== GameStatus.draft) {
+          getGameProgress(id).then(setProgress).catch(() => {})
+        }
       })
       .catch(() => setError('Spiel konnte nicht geladen werden.'))
       .finally(() => setLoading(false))
@@ -244,6 +251,21 @@ export default function GameEditorPage() {
     } finally {
       setDeleteInProgress(false)
       setDeletingId(null)
+    }
+  }
+
+  async function handleReset() {
+    if (!id) return
+    setResetting(true)
+    setError('')
+    try {
+      const newProgress = await createGameProgress(id)
+      setProgress(newProgress)
+      setGame((prev) => prev ? { ...prev, status: GameStatus.started } : prev)
+    } catch {
+      setError('Fortschritt konnte nicht zurückgesetzt werden.')
+    } finally {
+      setResetting(false)
     }
   }
 
@@ -336,6 +358,51 @@ export default function GameEditorPage() {
         )}
       </div>
 
+      {/* Progress banner for running / finished games */}
+      {game.status !== GameStatus.draft && (
+        <div className={`mb-5 rounded-xl p-4 flex items-center justify-between gap-4 ${
+          game.status === GameStatus.started
+            ? 'bg-green-50 border border-green-200'
+            : 'bg-gray-50 border border-gray-200'
+        }`}>
+          <div>
+            {game.status === GameStatus.started ? (
+              <>
+                <p className="font-semibold text-green-800 flex items-center gap-2">
+                  <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  Spiel läuft
+                </p>
+                {progress && (
+                  <p className="text-sm text-green-700 mt-0.5">
+                    Spieler ist bei Station {progress.current_station} von {stations.length}
+                  </p>
+                )}
+              </>
+            ) : (
+              <>
+                <p className="font-semibold text-gray-700">Spiel beendet</p>
+                {progress && (
+                  <p className="text-sm text-gray-500 mt-0.5">
+                    {progress.stations_completed.length} von {stations.length} Stationen abgeschlossen
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+          <button
+            onClick={handleReset}
+            disabled={resetting}
+            className="shrink-0 px-4 py-2 min-h-[44px] text-sm font-medium bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 active:bg-gray-100 rounded-lg transition-colors"
+          >
+            {resetting
+              ? 'Zurücksetzen…'
+              : game.status === GameStatus.started
+                ? 'Zurücksetzen'
+                : 'Neu starten'}
+          </button>
+        </div>
+      )}
+
       {error && <div className="mb-4"><ErrorMessage message={error} /></div>}
 
       {/* Stations list */}
@@ -377,7 +444,7 @@ export default function GameEditorPage() {
         )}
       </div>
 
-      {/* Start game section */}
+      {/* Start / play section */}
       <div className="border-t border-gray-200 pt-6">
         {startErrors.length > 0 && (
           <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-4">
@@ -389,17 +456,25 @@ export default function GameEditorPage() {
             </ul>
           </div>
         )}
-        <BigButton
-          onClick={handleStartGame}
-          disabled={starting || stations.length === 0}
-          className="w-full"
-        >
-          {starting ? 'Starte…' : '▶ Spiel starten'}
-        </BigButton>
-        {stations.length === 0 && (
-          <p className="text-xs text-gray-500 text-center mt-2">
-            Mindestens eine Station erforderlich
-          </p>
+        {game.status === GameStatus.draft ? (
+          <>
+            <BigButton
+              onClick={handleStartGame}
+              disabled={starting || stations.length === 0}
+              className="w-full"
+            >
+              {starting ? 'Starte…' : '▶ Spiel starten'}
+            </BigButton>
+            {stations.length === 0 && (
+              <p className="text-xs text-gray-500 text-center mt-2">
+                Mindestens eine Station erforderlich
+              </p>
+            )}
+          </>
+        ) : (
+          <BigButton onClick={() => navigate(`/play/${id}`)} className="w-full">
+            ▶ Zur Spielansicht
+          </BigButton>
         )}
       </div>
 
