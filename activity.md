@@ -4,6 +4,29 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Bug fixes: EXIF orientation + E2E test infrastructure
+
+### easter-ehw — EXIF Orientation Fix
+- Added `ImageOps.exif_transpose()` in `image_optimization.py` after `Image.open()` so portrait photos shot in landscape are correctly oriented before resize
+- Added `ImageOps.exif_transpose()` in `puzzle_tile.py` so tiles are cut from the correctly-oriented image
+- 2 new test classes: `TestExifOrientation` in both test files (4 new tests)
+- 49/49 backend tests pass
+
+### easter-0kn.13 — waitForLoadState in E2E Navigation
+- Added `await page.waitForLoadState('networkidle')` after every `page.goto()` call in all 12 BDD step files
+- Prevents assertions running before React has rendered
+
+### easter-0kn.14 — API-based E2E Test Data Setup
+- Updated `fixtures.ts`: extended Playwright test with `createdGameIds` fixture that auto-deletes created games after each test
+- All background steps now call `page.request.post('http://localhost:8000/api/...')` instead of UI automation
+- `ich habe ein neues Spiel erstellt` → POST /api/games, navigate to /creator/game/{id}
+- `es existiert ein Spiel {name}` → POST /api/games with correct name
+- `es gibt ein gestartetes Spiel mit N Stationen` → POST game + N text_riddle stations + POST /start
+- All minigame background steps create game + station of correct type + start + navigate to /play/{id}/station/{id}
+- afterEach cleanup: all created game IDs are deleted via fetch DELETE
+
+---
+
 ## [2026-03-29] Epic easter-1gn Complete — Polish & Qualität
 
 ### easter-1gn.1 - Touch-Optimierung
@@ -564,4 +587,28 @@ Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 
 ## [2026-03-29 01:40:06] Headless Ralph
 Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
+
+## [2026-03-29 07:46:25] Headless Ralph
+Started headless loop. Target: in, Max iterations: Station
+
+## [2026-03-29 07:46:25] Headless Ralph
+Max iterations reached without completion.
+
+## [2026-03-29 07:46:49] Headless Ralph
+Started headless loop. Target: BUG_FIXED, Max iterations: 8
+
+## [2026-03-29 08:28:30] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
+
+## [2026-03-29 11:46:42] Headless Ralph
+Started headless loop. Target: ALL_DONE, Max iterations: 15
+
+## [2026-03-29 12:46:52] Headless Ralph
+Started headless loop. Target: ALL_DONE, Max iterations: 12
+
+## [2026-03-29 13:35:05] Headless Ralph
+Started headless loop. Target: ALL_DONE, Max iterations: 10
+
+## [2026-03-29 14:11:02] Headless Ralph
+Started headless loop. Target: ALL_DONE, Max iterations: 20
 
