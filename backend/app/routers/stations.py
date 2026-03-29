@@ -116,6 +116,13 @@ def reorder_stations(
     return [StationRead.model_validate(s) for s in stations]
 
 
+@router.get("/{game_id}/stations/{station_id}/mini-game")
+def get_mini_game(game_id: str, station_id: str, db: Session = Depends(get_db)) -> dict:
+    """Return the mini_game_config for a station."""
+    station = _get_station_or_404(game_id, station_id, db)
+    return station.mini_game_config
+
+
 @router.get("/{game_id}/stations/{station_id}", response_model=StationRead)
 def get_station(game_id: str, station_id: str, db: Session = Depends(get_db)) -> StationRead:
     station = _get_station_or_404(game_id, station_id, db)
