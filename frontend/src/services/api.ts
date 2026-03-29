@@ -133,9 +133,14 @@ export function generatePuzzleTiles(
   gameId: string,
   stationId: string,
   gridSize: number,
+  sourceStationId?: string,
 ): Promise<PuzzleApiResponse> {
+  const params = new URLSearchParams({ grid_size: String(gridSize) })
+  if (sourceStationId && sourceStationId !== stationId) {
+    params.set('source_station_id', sourceStationId)
+  }
   return request<PuzzleApiResponse>(
-    `/api/games/${gameId}/stations/${stationId}/puzzle/generate?grid_size=${gridSize}`,
+    `/api/games/${gameId}/stations/${stationId}/puzzle/generate?${params}`,
     { method: 'POST' },
   )
 }

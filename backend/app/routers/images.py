@@ -2,7 +2,7 @@
 import shutil
 from pathlib import Path
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -132,11 +132,24 @@ def generate_puzzle_tiles(
     game_id: str,
     station_id: str,
     grid_size: int,
+    source_station_id: str | None = Query(None),
     db: Session = Depends(get_db),
 ) -> PuzzleResponse:
+    """Generate puzzle tiles and store them in station_id's config.
+
+    If source_station_id is provided, the image is taken from that station
+    (useful when the puzzle at station N shows the image of station N+1).
+    Tiles are always stored in station_id's mini_game_config.
+    """
     station = _get_station_or_404(game_id, station_id, db)
 
-    if not station.image_path:
+    # Determine which station provides the source image
+    if source_station_id and source_station_id != station_id:
+        image_station = _get_station_or_404(game_id, source_station_id, db)
+    else:
+        image_station = station
+
+    if not image_station.image_path:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail="Kein Stationsbild vorhanden",
@@ -149,7 +162,7 @@ def generate_puzzle_tiles(
         )
 
     # Resolve image path from URL to filesystem path
-    image_rel = station.image_path.removeprefix("/media/")
+    image_rel = image_station.image_path.removeprefix("/media/")
     image_fs_path = DATA_DIR / image_rel
     if not image_fs_path.exists():
         raise HTTPException(
@@ -157,7 +170,7 @@ def generate_puzzle_tiles(
             detail="Bilddatei nicht gefunden",
         )
 
-    # Remove old tiles if they exist
+    # Remove old tiles if they exist (stored alongside the source image)
     tiles_dir = image_fs_path.parent / "puzzle_tiles"
     if tiles_dir.exists():
         shutil.rmtree(tiles_dir)
@@ -182,7 +195,7 @@ def generate_puzzle_tiles(
         for t in tiles
     ]
 
-    # Persist tile metadata in station config
+    # Persist tile metadata in the puzzle station's config (station_id, not source_station_id)
     station.mini_game_config = {
         **station.mini_game_config,
         "tiles": [t.model_dump() for t in tile_infos],

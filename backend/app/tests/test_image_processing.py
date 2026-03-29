@@ -435,3 +435,70 @@ class TestMediaServing:
         image_url = upload_resp.json()["image_path"]  # e.g. /media/uploads/...
         media_resp = await client.get(image_url)
         assert media_resp.status_code == 200
+
+
+# ---------------------------------------------------------------------------
+# Puzzle generate endpoint: source_station_id fixes easter-bl5
+# ---------------------------------------------------------------------------
+
+
+class TestPuzzleGenerateWithSourceStation:
+    """Tiles generated from source_station_id are stored in the puzzle station."""
+
+    async def _create_two_stations(self, client) -> tuple[str, str, str]:
+        """Return (game_id, puzzle_station_id, image_station_id)."""
+        game_resp = await client.post("/api/games", json={"name": "Hunt"})
+        game_id = game_resp.json()["id"]
+
+        s1 = await client.post(
+            f"/api/games/{game_id}/stations",
+            json={"position": 1, "mini_game_type": "puzzle", "mini_game_config": {"type": "puzzle", "grid_size": 4}},
+        )
+        s2 = await client.post(
+            f"/api/games/{game_id}/stations",
+            json={"position": 2, "mini_game_type": "puzzle", "mini_game_config": {"type": "puzzle", "grid_size": 4}},
+        )
+        return game_id, s1.json()["id"], s2.json()["id"]
+
+    async def test_tiles_stored_in_puzzle_station_not_source(self, client):
+        """generate?source_station_id=S2 stores tiles in S1, not S2."""
+        game_id, puzzle_sid, image_sid = await self._create_two_stations(client)
+
+        # Upload image to the source station (S2)
+        await client.post(
+            f"/api/games/{game_id}/stations/{image_sid}/image",
+            files={"file": ("photo.jpg", _make_jpeg_bytes(100, 100), "image/jpeg")},
+        )
+
+        # Generate tiles for puzzle station (S1), using S2's image
+        gen_resp = await client.post(
+            f"/api/games/{game_id}/stations/{puzzle_sid}/puzzle/generate"
+            f"?grid_size=4&source_station_id={image_sid}"
+        )
+        assert gen_resp.status_code == 200
+        data = gen_resp.json()
+        assert len(data["tiles"]) == 4
+
+        # GET tiles for the puzzle station (S1) should now succeed
+        get_resp = await client.get(f"/api/games/{game_id}/stations/{puzzle_sid}/puzzle")
+        assert get_resp.status_code == 200
+        assert len(get_resp.json()["tiles"]) == 4
+
+        # GET tiles for the source station (S2) should NOT have tiles
+        get_src_resp = await client.get(f"/api/games/{game_id}/stations/{image_sid}/puzzle")
+        assert get_src_resp.status_code == 404
+
+    async def test_without_source_station_id_uses_own_image(self, client):
+        """Without source_station_id, uses the station's own image (existing behavior)."""
+        game_id, station_id = await _create_game_and_station(client)
+        await client.post(
+            f"/api/games/{game_id}/stations/{station_id}/image",
+            files={"file": ("photo.jpg", _make_jpeg_bytes(100, 100), "image/jpeg")},
+        )
+        gen_resp = await client.post(
+            f"/api/games/{game_id}/stations/{station_id}/puzzle/generate?grid_size=4"
+        )
+        assert gen_resp.status_code == 200
+        get_resp = await client.get(f"/api/games/{game_id}/stations/{station_id}/puzzle")
+        assert get_resp.status_code == 200
+        assert len(get_resp.json()["tiles"]) == 4

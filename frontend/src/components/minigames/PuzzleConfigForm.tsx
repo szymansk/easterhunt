@@ -10,6 +10,8 @@ interface Props {
   errors?: Partial<Record<keyof PuzzleConfig, string>>
   /** ID of the game this station belongs to */
   gameId?: string
+  /** ID of the current puzzle station (tiles are stored here) */
+  stationId?: string
   /**
    * ID of the station whose image should be used as the puzzle source.
    * For station N, this should be station N+1's ID (the "next station").
@@ -25,18 +27,18 @@ const GRID_OPTIONS: { value: PuzzleConfig['grid_size']; label: string; cols: num
   { value: 9, label: '3×3', cols: 3, rows: 3 },
 ]
 
-export default function PuzzleConfigForm({ value, onChange, errors, gameId, generateStationId }: Props) {
+export default function PuzzleConfigForm({ value, onChange, errors, gameId, stationId, generateStationId }: Props) {
   const [tiles, setTiles] = useState<TileInfo[]>([])
   const [generating, setGenerating] = useState(false)
   const [generateError, setGenerateError] = useState('')
 
   async function handleGenerate() {
-    if (!gameId || !generateStationId) return
+    if (!gameId || !stationId || !generateStationId) return
     setGenerating(true)
     setGenerateError('')
     setTiles([])
     try {
-      const result = await generatePuzzleTiles(gameId, generateStationId, value.grid_size)
+      const result = await generatePuzzleTiles(gameId, stationId, value.grid_size, generateStationId)
       setTiles(result.tiles)
     } catch (err) {
       setGenerateError(err instanceof Error ? err.message : 'Fehler beim Generieren')
@@ -46,9 +48,9 @@ export default function PuzzleConfigForm({ value, onChange, errors, gameId, gene
   }
 
   async function handleLoadExisting() {
-    if (!gameId || !generateStationId) return
+    if (!gameId || !stationId) return
     try {
-      const result = await getPuzzleTiles(gameId, generateStationId)
+      const result = await getPuzzleTiles(gameId, stationId)
       setTiles(result.tiles)
     } catch {
       // No tiles yet, that's fine
@@ -102,7 +104,7 @@ export default function PuzzleConfigForm({ value, onChange, errors, gameId, gene
       )}
 
       {/* Generate button - only shown when game/station context available */}
-      {gameId && generateStationId && (
+      {gameId && stationId && generateStationId && (
         <div className="space-y-3 pt-2">
           <div className="flex gap-2">
             <button

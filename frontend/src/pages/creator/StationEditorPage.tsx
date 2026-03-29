@@ -231,6 +231,7 @@ export default function StationEditorPage() {
               onChange={setConfig}
               errors={configErrors}
               gameId={gameId}
+              stationId={stationId}
               generateStationId={nextStation?.id}
             />
           )
