@@ -4,6 +4,55 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Epic easter-1gn Complete — Polish & Qualität
+
+### easter-1gn.1 - Touch-Optimierung
+- Added `touch-action: manipulation` globally to all buttons/links/checkboxes/selects (prevents double-tap zoom)
+- Updated viewport meta: `viewport-fit=cover` for iPhone safe areas
+- Fixed all sub-44px touch targets: drag handle, delete buttons, text-only action buttons in all config forms
+- Added `active:` states alongside `hover:` for touch feedback
+- Added `select-none` to PlayerLayout to prevent accidental text selection during taps
+
+### easter-1gn.2 - Mobile Responsive Layout
+- PlayerLayout: added `env(safe-area-inset-*)` padding for iPhone notch/home bar
+- GameListPage header: `flex-wrap gap-3` so title+button stack gracefully on 375px
+- StationEditorPage/GameListPage action buttons: 44px min-height
+- Added `e2e/responsive.spec.ts`: no-horizontal-scroll tests at 375px and 430px viewport
+
+### easter-1gn.3 - Error Handling und Resilience
+- Created `ErrorBoundary` class component: catches minigame crashes, shows friendly fallback with retry
+- Created `Toast` system (`ToastProvider` + `useToast`): auto-dismissing error notifications with safe-area positioning
+- Wrapped `MiniGameRouter` in `ErrorBoundary` in `StationMiniGamePage`
+- Player pages now show friendly error messages (no stacktraces)
+- Audio errors already swallowed silently in `useAudio` — no change needed
+- `ErrorBoundary.test.tsx`: 4 Vitest tests (catch, default fallback, custom fallback, retry)
+
+### easter-1gn.4 - Performance-Optimierung
+- Backend: added `Cache-Control: public, max-age=3600, stale-while-revalidate=86400` to `/media/` responses
+- Frontend: background image preloading for current+next station in PlayerPage
+- Vite: manual chunk splitting (vendor 164KB + app 121KB, both <500KB)
+- Vite: added `/media` proxy in dev server config
+- Added `loading="lazy"` to non-critical creator-page images
+
+### easter-1gn.5 - E2E Test Suite
+- Playwright config: added Chromium project (WebKit + Chromium, both headless-ready)
+- `e2e/creator-flow.spec.ts`: creator editor renders, add station enables start button, station editor type selector + back navigation
+- `e2e/player-mode.spec.ts`: added Test 4 — 3-station game with text_riddle + number_riddle minigames
+- `e2e/edge-cases.spec.ts`: wrong answer keeps station uncompleted, retry correct answer succeeds, invalid game ID shows error
+- `e2e/responsive.spec.ts`: no-horizontal-scroll at 375px and 430px
+
+### easter-1gn.6 - Dokumentation
+- `README.md`: project overview, tech stack, 10-minute setup, make commands, test commands
+- `USAGE.md`: step-by-step creator flow (create game → stations → start), player flow on iPhone (LAN setup, QR sharing)
+- `DEVELOPMENT.md`: architecture diagram, data flow, add-new-minigame checklist with code example, content library format, API docs URL, QA commands
+
+### Final Test Status
+- Backend: 218 tests passing (uv run pytest)
+- Frontend: 144 unit tests passing (pnpm test)
+- E2E: 11 Playwright tests (require running server)
+
+---
+
 ## [2026-03-29] Epic easter-e94 Complete — Audio & Feedback
 
 ### easter-e94.1 - Audio Manager Service
@@ -511,5 +560,8 @@ Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 - Frontend: 74 tests passing (12 test files)
 
 ## [2026-03-29 01:27:02] Headless Ralph
+Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
+
+## [2026-03-29 01:40:06] Headless Ralph
 Started headless loop. Target: EPIC_COMPLETE, Max iterations: 20
 
