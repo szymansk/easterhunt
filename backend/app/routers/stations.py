@@ -1,12 +1,14 @@
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.exceptions import GameNotFoundError, StationLimitExceededError
-from app.models.game import Game, Station
+from app.models.game import Game, MiniGameType, Station
 from app.schemas.game import StationCreate, StationRead, StationReorder, StationUpdate
+from app.services.maze import DIFFICULTY_SIZES, MazeGenerationService
 
 router = APIRouter(prefix="/api/games", tags=["stations"])
 
@@ -155,3 +157,36 @@ def delete_station(
     _renumber_stations(game_id, db)
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+class MazeGenerateRequest(BaseModel):
+    difficulty: str
+
+
+@router.post("/{game_id}/stations/{station_id}/maze/generate")
+def generate_maze(
+    game_id: str,
+    station_id: str,
+    body: MazeGenerateRequest,
+    db: Session = Depends(get_db),
+) -> dict:
+    """Generate a maze for a station and persist it in mini_game_config.
+
+    Returns the generated maze JSON (walls, start, goal, rows, cols, difficulty).
+    Raises 422 if difficulty is invalid.
+    """
+    if body.difficulty not in DIFFICULTY_SIZES:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Invalid difficulty {body.difficulty!r}. Must be one of {sorted(DIFFICULTY_SIZES)}.",
+        )
+
+    station = _get_station_or_404(game_id, station_id, db)
+
+    maze_data = MazeGenerationService().generate(body.difficulty)
+    station.mini_game_config = {"type": "maze", "maze_data": maze_data}
+    station.mini_game_type = MiniGameType.maze
+    db.commit()
+    db.refresh(station)
+
+    return maze_data

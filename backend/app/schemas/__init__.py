@@ -16,6 +16,7 @@ from app.schemas.game import (
     StationReorder,
     StationUpdate,
     TextRiddleConfig,
+    TextRiddleOption,
 )
 
 __all__ = [
@@ -36,4 +37,5 @@ __all__ = [
     "StationReorder",
     "StationUpdate",
     "TextRiddleConfig",
+    "TextRiddleOption",
 ]

@@ -50,7 +50,8 @@ function MiniGameRouter({
     case MiniGameType.picture_riddle:
       return (
         <PictureRiddleGame
-          question={String(config.question ?? 'Was siehst du?')}
+          referenceItems={(config.reference_items as import('../../types').PictureRiddleReferenceItem[]) ?? []}
+          answerOptions={(config.answer_options as import('../../types').PictureRiddleAnswerOption[]) ?? []}
           onComplete={onComplete}
         />
       )

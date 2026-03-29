@@ -51,8 +51,20 @@ class PuzzleConfig(BaseModel):
 
 class NumberRiddleConfig(BaseModel):
     type: Literal["number_riddle"]
+    task_type: Literal["count", "assign", "plus_minus"]
+    prompt_text: str
+    prompt_image: str | None = None
     correct_answer: int = Field(..., ge=1, le=10)
-    question: str
+    distractor_answers: list[int] = Field(..., min_length=2, max_length=4)
+
+    @model_validator(mode="after")
+    def validate_distractors(self) -> "NumberRiddleConfig":
+        for d in self.distractor_answers:
+            if d < 1 or d > 10:
+                raise ValueError(f"distractor {d} must be in [1, 10]")
+            if d == self.correct_answer:
+                raise ValueError(f"distractor {d} must not equal correct_answer")
+        return self
 
 
 class MazeConfig(BaseModel):
@@ -60,11 +72,26 @@ class MazeConfig(BaseModel):
     maze_data: dict
 
 
+class TextRiddleOption(BaseModel):
+    text: str
+    is_correct: bool
+
+
 class TextRiddleConfig(BaseModel):
     type: Literal["text_riddle"]
-    question: str
+    question_text: str = Field(..., min_length=1)
     answer_mode: Literal["multiple_choice", "single_tap"]
-    options: list[str]
+    answer_options: list[TextRiddleOption] = Field(..., min_length=2, max_length=6)
+    tts_enabled: bool = False
+
+    @model_validator(mode="after")
+    def validate_exactly_one_correct(self) -> "TextRiddleConfig":
+        correct_count = sum(1 for opt in self.answer_options if opt.is_correct)
+        if correct_count != 1:
+            raise ValueError(
+                f"TextRiddleConfig must have exactly 1 correct answer, got {correct_count}"
+            )
+        return self
 
 
 class PictureRiddleReferenceItem(BaseModel):

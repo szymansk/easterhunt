@@ -9,7 +9,13 @@ from app.main import app
 from app.models import Base
 
 PUZZLE_CONFIG = {"type": "puzzle", "grid_size": 4}
-NUMBER_CONFIG = {"type": "number_riddle", "correct_answer": 5, "question": "2+3?"}
+NUMBER_CONFIG = {
+    "type": "number_riddle",
+    "task_type": "plus_minus",
+    "prompt_text": "2 + 3 = ?",
+    "correct_answer": 5,
+    "distractor_answers": [3, 7],
+}
 
 
 @pytest.fixture
@@ -196,3 +202,165 @@ async def test_reorder_stations(client):
     assert data[0]["position"] == 1
     assert data[1]["id"] == s1
     assert data[1]["position"] == 2
+
+
+# NumberRiddleConfig validation tests
+
+
+async def test_number_riddle_correct_answer_out_of_range(client):
+    """correct_answer outside [1,10] → 422"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": {
+                    "type": "number_riddle",
+                    "task_type": "count",
+                    "prompt_text": "How many?",
+                    "correct_answer": 11,
+                    "distractor_answers": [3, 7],
+                },
+            },
+        )
+    assert resp.status_code == 422
+
+
+async def test_number_riddle_distractor_equals_correct(client):
+    """distractor equal to correct_answer → 422"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": {
+                    "type": "number_riddle",
+                    "task_type": "count",
+                    "prompt_text": "How many?",
+                    "correct_answer": 5,
+                    "distractor_answers": [5, 7],
+                },
+            },
+        )
+    assert resp.status_code == 422
+
+
+async def test_number_riddle_distractor_out_of_range(client):
+    """distractor outside [1,10] → 422"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": {
+                    "type": "number_riddle",
+                    "task_type": "count",
+                    "prompt_text": "How many?",
+                    "correct_answer": 5,
+                    "distractor_answers": [3, 11],
+                },
+            },
+        )
+    assert resp.status_code == 422
+
+
+async def test_number_riddle_too_few_distractors(client):
+    """fewer than 2 distractors → 422"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": {
+                    "type": "number_riddle",
+                    "task_type": "count",
+                    "prompt_text": "How many?",
+                    "correct_answer": 5,
+                    "distractor_answers": [3],
+                },
+            },
+        )
+    assert resp.status_code == 422
+
+
+async def test_number_riddle_too_many_distractors(client):
+    """more than 4 distractors → 422"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": {
+                    "type": "number_riddle",
+                    "task_type": "count",
+                    "prompt_text": "How many?",
+                    "correct_answer": 5,
+                    "distractor_answers": [1, 2, 3, 4, 6],
+                },
+            },
+        )
+    assert resp.status_code == 422
+
+
+async def test_number_riddle_valid_config(client):
+    """valid number_riddle config → 201"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": {
+                    "type": "number_riddle",
+                    "task_type": "assign",
+                    "prompt_text": "Match the number",
+                    "correct_answer": 5,
+                    "distractor_answers": [3, 7, 9],
+                },
+            },
+        )
+    assert resp.status_code == 201
+    config = resp.json()["mini_game_config"]
+    assert config["task_type"] == "assign"
+    assert config["correct_answer"] == 5
+
+
+async def test_get_mini_game_endpoint(client):
+    """GET mini-game returns NumberRiddleConfig for number_riddle station"""
+    async with client as c:
+        game_id = await _create_game(c)
+        create_resp = await c.post(
+            f"/api/games/{game_id}/stations",
+            json={
+                "position": 1,
+                "mini_game_type": "number_riddle",
+                "mini_game_config": NUMBER_CONFIG,
+            },
+        )
+        station_id = create_resp.json()["id"]
+        resp = await c.get(f"/api/games/{game_id}/stations/{station_id}/mini-game")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["type"] == "number_riddle"
+    assert data["task_type"] == "plus_minus"
+    assert data["correct_answer"] == 5
+    assert data["distractor_answers"] == [3, 7]
+
+
+async def test_get_mini_game_not_found(client):
+    """GET mini-game for nonexistent station → 404"""
+    async with client as c:
+        game_id = await _create_game(c)
+        resp = await c.get(f"/api/games/{game_id}/stations/nonexistent/mini-game")
+    assert resp.status_code == 404

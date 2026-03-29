@@ -25,6 +25,7 @@ from app.schemas.game import (
     PictureRiddleConfig,
     PuzzleConfig,
     TextRiddleConfig,
+    TextRiddleOption,
 )
 
 # ---------------------------------------------------------------------------
@@ -32,13 +33,23 @@ from app.schemas.game import (
 # ---------------------------------------------------------------------------
 
 PUZZLE_CONFIG = {"type": "puzzle", "grid_size": 4}
-NUMBER_RIDDLE_CONFIG = {"type": "number_riddle", "correct_answer": 5, "question": "Pick a number"}
+NUMBER_RIDDLE_CONFIG = {
+    "type": "number_riddle",
+    "task_type": "plus_minus",
+    "prompt_text": "2 + 3 = ?",
+    "correct_answer": 5,
+    "distractor_answers": [3, 7],
+}
 MAZE_CONFIG = {"type": "maze", "maze_data": {"rows": 5, "cols": 5}}
 TEXT_RIDDLE_CONFIG = {
     "type": "text_riddle",
-    "question": "Colour of grass?",
+    "question_text": "Welche Farbe hat Gras?",
     "answer_mode": "multiple_choice",
-    "options": ["red", "green", "blue"],
+    "answer_options": [
+        {"text": "Rot", "is_correct": False},
+        {"text": "Grün", "is_correct": True},
+        {"text": "Blau", "is_correct": False},
+    ],
 }
 PICTURE_RIDDLE_CONFIG = {
     "type": "picture_riddle",
@@ -224,33 +235,52 @@ class TestSchemas:
 
     @pytest.mark.parametrize("answer", [1, 5, 10])
     def test_number_riddle_config_valid_answer(self, answer):
+        distractors = [d for d in [1, 3, 7, 9] if d != answer][:2]
         cfg = NumberRiddleConfig(
-            type="number_riddle", correct_answer=answer, question="Pick one"
+            type="number_riddle",
+            task_type="count",
+            prompt_text="Wie viele?",
+            correct_answer=answer,
+            distractor_answers=distractors,
         )
         assert cfg.correct_answer == answer
 
     @pytest.mark.parametrize("answer", [0, 11, -1, 100])
     def test_number_riddle_config_out_of_range_raises(self, answer):
         with pytest.raises(ValidationError):
-            NumberRiddleConfig(type="number_riddle", correct_answer=answer, question="Pick one")
+            NumberRiddleConfig(
+                type="number_riddle",
+                task_type="count",
+                prompt_text="Wie viele?",
+                correct_answer=answer,
+                distractor_answers=[3, 7],
+            )
 
     # TextRiddleConfig -------------------------------------------------------
 
     def test_text_riddle_config_multiple_choice(self):
+        opts = [
+            TextRiddleOption(text="Rot", is_correct=False),
+            TextRiddleOption(text="Grün", is_correct=True),
+        ]
         cfg = TextRiddleConfig(
             type="text_riddle",
-            question="What colour?",
+            question_text="Welche Farbe?",
             answer_mode="multiple_choice",
-            options=["red", "green"],
+            answer_options=opts,
         )
         assert cfg.answer_mode == "multiple_choice"
 
     def test_text_riddle_config_single_tap(self):
+        opts = [
+            TextRiddleOption(text="Ja", is_correct=True),
+            TextRiddleOption(text="Nein", is_correct=False),
+        ]
         cfg = TextRiddleConfig(
             type="text_riddle",
-            question="What colour?",
+            question_text="Stimmt das?",
             answer_mode="single_tap",
-            options=["red"],
+            answer_options=opts,
         )
         assert cfg.answer_mode == "single_tap"
 
@@ -258,10 +288,61 @@ class TestSchemas:
         with pytest.raises(ValidationError):
             TextRiddleConfig(
                 type="text_riddle",
-                question="Q",
+                question_text="Q",
                 answer_mode="free_text",  # invalid
-                options=["a"],
+                answer_options=[
+                    {"text": "a", "is_correct": True},
+                    {"text": "b", "is_correct": False},
+                ],
             )
+
+    def test_text_riddle_config_zero_correct_raises(self):
+        with pytest.raises(ValidationError):
+            TextRiddleConfig(
+                type="text_riddle",
+                question_text="Welche Farbe?",
+                answer_mode="multiple_choice",
+                answer_options=[
+                    {"text": "Rot", "is_correct": False},
+                    {"text": "Grün", "is_correct": False},
+                ],
+            )
+
+    def test_text_riddle_config_two_correct_raises(self):
+        with pytest.raises(ValidationError):
+            TextRiddleConfig(
+                type="text_riddle",
+                question_text="Welche Farbe?",
+                answer_mode="multiple_choice",
+                answer_options=[
+                    {"text": "Rot", "is_correct": True},
+                    {"text": "Grün", "is_correct": True},
+                ],
+            )
+
+    def test_text_riddle_config_too_few_options_raises(self):
+        with pytest.raises(ValidationError):
+            TextRiddleConfig(
+                type="text_riddle",
+                question_text="Welche Farbe?",
+                answer_mode="multiple_choice",
+                answer_options=[
+                    {"text": "Rot", "is_correct": True},
+                ],
+            )
+
+    def test_text_riddle_config_tts_enabled(self):
+        cfg = TextRiddleConfig(
+            type="text_riddle",
+            question_text="Stimmt das?",
+            answer_mode="multiple_choice",
+            answer_options=[
+                {"text": "Ja", "is_correct": True},
+                {"text": "Nein", "is_correct": False},
+            ],
+            tts_enabled=True,
+        )
+        assert cfg.tts_enabled is True
 
     # MiniGameConfig discriminated union -------------------------------------
 
@@ -275,7 +356,13 @@ class TestSchemas:
         from pydantic import TypeAdapter
         ta = TypeAdapter(MiniGameConfig)
         cfg = ta.validate_python(
-            {"type": "number_riddle", "correct_answer": 3, "question": "Q"}
+            {
+                "type": "number_riddle",
+                "task_type": "count",
+                "prompt_text": "Wie viele?",
+                "correct_answer": 3,
+                "distractor_answers": [1, 5],
+            }
         )
         assert isinstance(cfg, NumberRiddleConfig)
 
@@ -291,9 +378,12 @@ class TestSchemas:
         cfg = ta.validate_python(
             {
                 "type": "text_riddle",
-                "question": "Q",
+                "question_text": "Stimmt das?",
                 "answer_mode": "single_tap",
-                "options": ["yes"],
+                "answer_options": [
+                    {"text": "Ja", "is_correct": True},
+                    {"text": "Nein", "is_correct": False},
+                ],
             }
         )
         assert isinstance(cfg, TextRiddleConfig)
