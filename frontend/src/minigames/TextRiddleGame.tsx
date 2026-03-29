@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { TextRiddleOption } from '../types'
 import { useAudio } from '../hooks/useAudio'
+import { useTTS } from '../hooks/useTTS'
 
 interface TextRiddleGameProps {
   questionText: string
@@ -12,14 +13,6 @@ interface TextRiddleGameProps {
 
 type AnswerState = 'idle' | 'correct' | 'wrong'
 
-function speakText(text: string) {
-  if (typeof window !== 'undefined' && window.speechSynthesis) {
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = 'de-DE'
-    window.speechSynthesis.speak(utterance)
-  }
-}
-
 export default function TextRiddleGame({
   questionText,
   answerOptions,
@@ -28,6 +21,7 @@ export default function TextRiddleGame({
 }: TextRiddleGameProps) {
   const [answerStates, setAnswerStates] = useState<Record<number, AnswerState>>({})
   const audio = useAudio()
+  const tts = useTTS()
 
   function handleTap(index: number, isCorrect: boolean) {
     if (answerStates[index] === 'wrong') return
@@ -60,7 +54,7 @@ export default function TextRiddleGame({
           </p>
           {ttsEnabled && (
             <button
-              onClick={() => speakText(questionText)}
+              onClick={() => tts.speak(questionText)}
               aria-label="Frage vorlesen"
               data-testid="tts-button"
               className="flex-shrink-0 flex items-center justify-center rounded-full bg-purple-200 hover:bg-purple-300 active:scale-95 transition-transform"
