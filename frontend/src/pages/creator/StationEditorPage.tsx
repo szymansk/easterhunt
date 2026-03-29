@@ -59,6 +59,8 @@ function validateConfig(type: MiniGameType, config: MiniGameConfig): Record<stri
     case MiniGameType.number_riddle: {
       const c = config as import('../../types').NumberRiddleConfig
       if (!c.prompt_text.trim()) errs.prompt_text = 'Frage ist erforderlich'
+      if (!c.distractor_answers || c.distractor_answers.length < 2 || c.distractor_answers.length > 4)
+        errs.distractor_answers = '2–4 falsche Antworten erforderlich'
       break
     }
     case MiniGameType.text_riddle: {
