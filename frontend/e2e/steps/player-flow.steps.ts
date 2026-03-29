@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('es gibt ein gestartetes Spiel mit {int} Stationen', async ({ page }, _count: number) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 When('ich das Spiel öffne', async ({ page }) => {
@@ -38,6 +39,7 @@ Then('bin ich im Minispiel von Station {int}', async ({ page }, _index: number) 
 
 Given('ich habe Station {int} abgeschlossen', async ({ page }, _index: number) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Then('ist Station {int} als abgeschlossen markiert', async ({ page }, index: number) => {
@@ -68,6 +70,7 @@ Then('ändert sich das Musik-Icon', async ({ page }) => {
 
 Given('ich habe alle {int} Stationen abgeschlossen', async ({ page }, _count: number) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Then('sehe ich die Glückwunsch-Seite', async ({ page }) => {

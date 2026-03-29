@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('ich bin im Bilderrätsel-Minispiel', async ({ page }) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Given('es werden {int} Referenzbilder angezeigt', async ({ page }, _count: number) => {

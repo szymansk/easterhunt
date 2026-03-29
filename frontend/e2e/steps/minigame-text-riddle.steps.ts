@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('ich bin im Texträtsel-Minispiel mit der Frage {string}', async ({ page }, _question: string) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Given('die Antwortoptionen sind {string}, {string}, {string}', async ({ page }, _a: string, _b: string, _c: string) => {

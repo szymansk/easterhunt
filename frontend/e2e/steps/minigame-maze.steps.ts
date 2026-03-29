@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('ich bin im Labyrinth-Minispiel', async ({ page }) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Then('sehe ich einen SVG-Spielbereich', async ({ page }) => {

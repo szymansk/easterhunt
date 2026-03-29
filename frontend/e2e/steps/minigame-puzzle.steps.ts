@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('ich bin im Puzzle-Minispiel mit {int} Teilen \\(2x2\\)', async ({ page }, _count: number) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Then('sehe ich ein Zielraster mit {int} leeren Feldern', async ({ page }, count: number) => {

@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('ich habe ein neues Spiel erstellt', async ({ page }) => {
   await page.goto('/creator')
+  await page.waitForLoadState('networkidle')
   const newGameBtn = page.getByRole('button', { name: /Neues Spiel/i })
   if (await newGameBtn.isVisible()) {
     await newGameBtn.click()

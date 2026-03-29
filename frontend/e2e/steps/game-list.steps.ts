@@ -2,6 +2,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('ich bin auf der Creator-Startseite {string}', async ({ page }, path: string) => {
   await page.goto(path)
+  await page.waitForLoadState('networkidle')
 })
 
 Then('werde ich zum Spiel-Editor weitergeleitet', async ({ page }) => {
@@ -14,6 +15,7 @@ Then('das neue Spiel erscheint in der Liste', async ({ page }) => {
 
 Given('es existiert ein Spiel {string}', async ({ page }, name: string) => {
   await page.goto('/creator')
+  await page.waitForLoadState('networkidle')
   const btn = page.getByRole('button', { name: /Neues Spiel/i })
   if (await btn.isVisible()) {
     await btn.click()
@@ -25,6 +27,7 @@ Given('es existiert ein Spiel {string}', async ({ page }, name: string) => {
       if (await saveBtn.isVisible()) await saveBtn.click()
     }
     await page.goto('/creator')
+    await page.waitForLoadState('networkidle')
   }
 })
 
@@ -42,10 +45,12 @@ Then('ist {string} noch in der Liste', async ({ page }, name: string) => {
 
 Given('es existiert ein Spiel im Status {string}', async ({ page }, _status: string) => {
   await page.goto('/creator')
+  await page.waitForLoadState('networkidle')
   const btn = page.getByRole('button', { name: /Neues Spiel/i })
   if (await btn.isVisible()) {
     await btn.click()
     await page.goto('/creator')
+    await page.waitForLoadState('networkidle')
   }
 })
 

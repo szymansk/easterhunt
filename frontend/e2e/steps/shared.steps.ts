@@ -7,6 +7,7 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('die App ist geöffnet', async ({ page }) => {
   await page.goto('/')
+  await page.waitForLoadState('networkidle')
 })
 
 When('ich auf {string} klicke', async ({ page }, label: string) => {
@@ -15,6 +16,7 @@ When('ich auf {string} klicke', async ({ page }, label: string) => {
 
 When('ich die URL {string} aufrufe', async ({ page }, path: string) => {
   await page.goto(path)
+  await page.waitForLoadState('networkidle')
 })
 
 Then('bin ich auf der Seite {string}', async ({ page }, path: string) => {

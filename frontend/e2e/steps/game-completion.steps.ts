@@ -2,10 +2,12 @@ import { Given, When, Then, expect } from './fixtures'
 
 Given('alle Stationen sind abgeschlossen', async ({ page }) => {
   await page.goto('/play')
+  await page.waitForLoadState('networkidle')
 })
 
 Given('ich bin auf der Glückwunsch-Seite', async ({ page }) => {
   await page.goto('/play/complete')
+  await page.waitForLoadState('networkidle')
 })
 
 Then('bin ich auf der Player-Übersicht', async ({ page }) => {
