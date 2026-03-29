@@ -89,11 +89,6 @@ async def health():
     return {"status": "ok"}
 
 
-@app.get("/")
-async def root():
-    return {"status": "ok"}
-
-
 @app.get("/media/{file_path:path}")
 async def serve_media(file_path: str) -> FileResponse:
     """Serve files from the data/ directory with path traversal protection."""
