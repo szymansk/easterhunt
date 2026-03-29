@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
+import type { Mock } from 'vitest'
 import LibraryBrowser from './LibraryBrowser'
 import * as api from '../../services/api'
 import type { LibraryTask } from '../../types'

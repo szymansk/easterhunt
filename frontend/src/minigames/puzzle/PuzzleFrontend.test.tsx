@@ -106,7 +106,7 @@ describe('Test 2: correct placement logic', () => {
       { id: 'tile-0', index: 0, imageSrc: '/img/0.png', placed: true },
     ]
     const slots: PuzzleSlot[] = [{ index: 0, occupiedBy: 'tile-0' }]
-    render(<PuzzleBoard gridSize={4} tiles={[...tiles, ...makeTiles(3).map((t, i) => ({ ...t, index: i + 1, id: `tile-${i + 1}` }))]} slots={[...slots, ...makeSlots(3).map((s, i) => ({ index: i + 1, occupiedBy: null }))]} />)
+    render(<PuzzleBoard gridSize={4} tiles={[...tiles, ...makeTiles(3).map((t, i) => ({ ...t, index: i + 1, id: `tile-${i + 1}` }))]} slots={[...slots, ...makeSlots(3).map((_, i) => ({ index: i + 1, occupiedBy: null }))]} />)
 
     // Slot 0 should contain an img
     const slot0 = screen.getByTestId('slot-0')

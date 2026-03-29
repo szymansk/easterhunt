@@ -61,8 +61,8 @@ describe('ImageUpload', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     // Reset URL.createObjectURL mock
-    global.URL.createObjectURL = vi.fn(() => 'blob:fake-url')
-    global.URL.revokeObjectURL = vi.fn()
+    ;(globalThis as typeof globalThis & { URL: typeof URL }).URL.createObjectURL = vi.fn(() => 'blob:fake-url')
+    ;(globalThis as typeof globalThis & { URL: typeof URL }).URL.revokeObjectURL = vi.fn()
   })
 
   it('shows placeholder when no image provided', () => {
