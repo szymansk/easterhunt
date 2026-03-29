@@ -4,6 +4,41 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Epic easter-ngj Complete — Bilderrätsel Was fehlt?
+
+### easter-ngj.1 - Bilderrätsel Datenmodell und API
+- Extended `PictureRiddleConfig` schema: category, reference_items (exactly 2), answer_options (exactly 4)
+- Each item: image_url, label, optional library_item_id; each answer_option: + is_correct
+- model_validator enforces exactly 1 correct answer → 422 otherwise
+- Updated PICTURE_RIDDLE_CONFIG fixture in test_api.py; added test_picture_riddle.py (17 tests)
+- Updated frontend `PictureRiddleConfig` type + sub-types in types/index.ts
+- Updated StationEditorPage default init and validation; updated PictureRiddleConfigForm
+
+### easter-ngj.2 - Bilderrätsel Player-Komponente
+- PictureRiddleGame: top area "Was gehört dazu?" + 2 reference images (100x100px + labels)
+- Bottom: 2x2 answer grid (min 80x80px). Correct tap → green + onComplete after 600ms
+- Wrong tap → red border + shake animation + auto-reset after 500ms
+- Added `animate-shake` keyframe to index.css
+- StationMiniGamePage: passes referenceItems/answerOptions from mini_game_config
+- 7 Vitest tests covering all interaction behaviors
+
+### easter-ngj.3 - Bilderrätsel Creator Config
+- PictureRiddleConfigForm: library task selection populates reference_items + answer_options
+- Added preview section showing final riddle layout (refs + 2x2 answers, correct highlighted)
+- Preview only shown when config has valid 2+4 structure
+
+### easter-ngj.4 - Bilderrätsel Tests
+- Tests implemented in PictureRiddleGame.test.tsx (task ngj.2)
+- NFR-001 (no runtime generation) satisfied by design via image_url from library
+
+### Hook-applied changes (from other epics, committed alongside ngj work)
+- NumberRiddleConfig: task_type, prompt_text, distractor_answers validation
+- TextRiddleConfig: TextRiddleOption objects, question_text, answer_options, tts_enabled
+- GET /stations/{id}/mini-game endpoint added
+- Updated test_api.py, test_stations.py, schemas/__init__.py
+
+---
+
 ## [2026-03-28] Epic easter-2xj Complete
 
 ### easter-2xj.1 - Puzzle Board Komponente
