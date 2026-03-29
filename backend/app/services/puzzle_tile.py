@@ -1,7 +1,7 @@
 """Puzzle tile generation service."""
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 # Maps grid_size (total number of tiles) to (cols, rows)
 GRID_CONFIGS: dict[int, tuple[int, int]] = {
@@ -40,7 +40,8 @@ class PuzzleTileService:
         output_dir = source_path.parent / "puzzle_tiles"
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        with Image.open(source_path) as img:
+        with Image.open(source_path) as raw_img:
+            img = ImageOps.exif_transpose(raw_img)
             img_width, img_height = img.size
 
             tile_width = img_width // cols

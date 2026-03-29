@@ -1,7 +1,7 @@
 """Image optimization service using Pillow."""
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 MAX_DIMENSION = 1200
 THUMBNAIL_SIZE = 300
@@ -49,7 +49,8 @@ class ImageOptimizationService:
                     f"HEIC/HEIF support requires pillow-heif to be installed: {exc}"
                 ) from exc
 
-        return Image.open(source_path)
+        img = Image.open(source_path)
+        return ImageOps.exif_transpose(img)
 
     def _to_rgb(self, img: Image.Image) -> Image.Image:
         """Convert image to RGB, compositing transparency onto a white background."""

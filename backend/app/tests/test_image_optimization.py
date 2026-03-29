@@ -6,6 +6,16 @@ from PIL import Image
 from app.services.image_optimization import ImageOptimizationService, MAX_DIMENSION, THUMBNAIL_SIZE
 
 
+def _make_jpeg_with_exif_orientation(tmp_path: Path, width: int, height: int, orientation: int) -> Path:
+    """Create a JPEG with the given EXIF orientation tag."""
+    img = Image.new("RGB", (width, height), color=(100, 149, 237))
+    exif = img.getexif()
+    exif[274] = orientation  # 274 = Orientation tag
+    path = tmp_path / "oriented.jpg"
+    img.save(path, format="JPEG", exif=exif.tobytes())
+    return path
+
+
 @pytest.fixture
 def service():
     return ImageOptimizationService()
@@ -172,6 +182,28 @@ class TestOptimize:
 # ---------------------------------------------------------------------------
 # HEIC fallback test
 # ---------------------------------------------------------------------------
+
+class TestExifOrientation:
+    def test_portrait_jpeg_with_exif_rotation6_is_transposed(self, service, tmp_path):
+        """A landscape JPEG tagged as orientation=6 (rotate 90° CW) must be opened
+        as portrait after _open_image applies exif_transpose."""
+        # Stored as landscape (200×100) but EXIF says display as portrait (100×200)
+        source = _make_jpeg_with_exif_orientation(tmp_path, width=200, height=100, orientation=6)
+        img = service._open_image(source)
+        # After transpose the width should be the short side
+        assert img.width < img.height, (
+            f"Expected portrait orientation after exif_transpose, got {img.size}"
+        )
+
+    def test_optimize_respects_exif_orientation(self, service, tmp_path):
+        """optimize() must apply EXIF transpose so the output image has correct proportions."""
+        source = _make_jpeg_with_exif_orientation(tmp_path, width=200, height=100, orientation=6)
+        optimized, _ = service.optimize(source)
+        result = Image.open(optimized)
+        assert result.width < result.height, (
+            f"Optimized image should be portrait after EXIF correction, got {result.size}"
+        )
+
 
 class TestHeicFallback:
     def test_heic_raises_valueerror_without_pillow_heif(self, service, tmp_path, monkeypatch):

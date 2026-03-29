@@ -6,6 +6,16 @@ from PIL import Image
 from app.services.puzzle_tile import GRID_CONFIGS, PuzzleTileService
 
 
+def _make_oriented_jpeg(tmp_path: Path, width: int, height: int, orientation: int) -> Path:
+    """Create a JPEG with the given EXIF orientation tag."""
+    img = Image.new("RGB", (width, height), color=(100, 149, 237))
+    exif = img.getexif()
+    exif[274] = orientation  # 274 = Orientation tag
+    path = tmp_path / "oriented.jpg"
+    img.save(path, format="JPEG", exif=exif.tobytes())
+    return path
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -166,6 +176,36 @@ class TestPuzzleTileServiceFilenames:
 
         for tile in tiles:
             assert tile["path"].exists(), f"{tile['path']} was not created"
+
+
+class TestExifOrientation:
+    def test_tiles_use_exif_corrected_dimensions(self, tmp_path: Path):
+        """Puzzle tiles must be generated from the EXIF-transposed image.
+
+        A 300×200 image tagged orientation=6 (rotate 90° CW) should be treated
+        as 200×300 (portrait) so tiles are cut from the corrected portrait orientation.
+        """
+        # Stored: 300 wide × 200 tall; EXIF says display as 200 wide × 300 tall
+        source = _make_oriented_jpeg(tmp_path, width=300, height=200, orientation=6)
+        service = PuzzleTileService()
+
+        # grid_size=4 → 2 cols × 2 rows; after transpose: 200×300
+        # Each tile should be 100×150
+        tiles = service.generate_tiles(source, grid_size=4)
+
+        for tile in tiles:
+            with Image.open(tile["path"]) as img:
+                # width=100, height=150 (portrait tiles from portrait source)
+                assert img.width < img.height, (
+                    f"Tile {tile['index']} should come from portrait image, got {img.size}"
+                )
+
+    def test_orientation1_tiles_unchanged(self, tmp_path: Path):
+        """Orientation=1 (no rotation) should produce tiles same as without EXIF."""
+        source = _make_oriented_jpeg(tmp_path, width=300, height=300, orientation=1)
+        service = PuzzleTileService()
+        tiles = service.generate_tiles(source, grid_size=4)
+        assert len(tiles) == 4
 
 
 class TestPuzzleTileServiceInvalidInput:
