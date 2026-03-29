@@ -23,15 +23,25 @@ function defaultConfig(type: MiniGameType): MiniGameConfig {
     case MiniGameType.puzzle:
       return { type: MiniGameType.puzzle, grid_size: 4 }
     case MiniGameType.number_riddle:
-      return { type: MiniGameType.number_riddle, question: '', correct_answer: 1 }
+      return {
+        type: MiniGameType.number_riddle,
+        task_type: 'count',
+        prompt_text: '',
+        correct_answer: 1,
+        distractor_answers: [2, 3],
+      }
     case MiniGameType.maze:
       return { type: MiniGameType.maze, maze_data: { difficulty: 'easy', rows: 5, cols: 5 } }
     case MiniGameType.text_riddle:
       return {
         type: MiniGameType.text_riddle,
-        question: '',
+        question_text: '',
         answer_mode: 'multiple_choice',
-        options: ['', ''],
+        answer_options: [
+          { text: '', is_correct: true },
+          { text: '', is_correct: false },
+        ],
+        tts_enabled: false,
       }
     case MiniGameType.picture_riddle:
       return {
@@ -48,14 +58,14 @@ function validateConfig(type: MiniGameType, config: MiniGameConfig): Record<stri
   switch (type) {
     case MiniGameType.number_riddle: {
       const c = config as import('../../types').NumberRiddleConfig
-      if (!c.question.trim()) errs.question = 'Frage ist erforderlich'
+      if (!c.prompt_text.trim()) errs.prompt_text = 'Frage ist erforderlich'
       break
     }
     case MiniGameType.text_riddle: {
       const c = config as import('../../types').TextRiddleConfig
-      if (!c.question.trim()) errs.question = 'Frage ist erforderlich'
-      const filled = c.options.filter((o) => o.trim())
-      if (filled.length < 2) errs.options = 'Mindestens 2 Antwortoptionen erforderlich'
+      if (!c.question_text.trim()) errs.question_text = 'Frage ist erforderlich'
+      const filled = c.answer_options.filter((o) => o.text.trim())
+      if (filled.length < 2) errs.answer_options = 'Mindestens 2 Antwortoptionen erforderlich'
       break
     }
     case MiniGameType.picture_riddle: {
@@ -247,6 +257,8 @@ export default function StationEditorPage() {
           <MazeConfigForm
             value={config as import('../../types').MazeConfig}
             onChange={setConfig}
+            gameId={gameId}
+            stationId={stationId}
           />
         )}
         {miniGameType === MiniGameType.text_riddle && (

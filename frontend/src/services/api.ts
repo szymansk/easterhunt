@@ -116,6 +116,18 @@ export function deleteStation(gameId: string, stationId: string): Promise<void> 
   return request<void>(`/api/games/${gameId}/stations/${stationId}`, { method: 'DELETE' })
 }
 
+// Maze generation
+export function generateMaze(
+  gameId: string,
+  stationId: string,
+  difficulty: 'easy' | 'medium' | 'hard',
+): Promise<import('../types').MazeData> {
+  return request<import('../types').MazeData>(
+    `/api/games/${gameId}/stations/${stationId}/maze/generate`,
+    { method: 'POST', body: JSON.stringify({ difficulty }) },
+  )
+}
+
 // Puzzle tile generation
 export function generatePuzzleTiles(
   gameId: string,
