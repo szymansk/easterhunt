@@ -1,7 +1,29 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('ich bin im Zahlenrätsel-Minispiel', async ({ page }) => {
-  await page.goto('/play')
+Given('ich bin im Zahlenrätsel-Minispiel', async ({ page, createdGameIds }) => {
+  const gameRes = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Zahlenrätsel' },
+  })
+  const game = await gameRes.json()
+  createdGameIds.push(game.id)
+
+  const stationRes = await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
+    data: {
+      position: 1,
+      image_path: 'test-placeholder.jpg',
+      mini_game_type: 'number_riddle',
+      mini_game_config: {
+        type: 'number_riddle',
+        task_type: 'plus_minus',
+        prompt_text: '3 + 2',
+        correct_answer: 5,
+        distractor_answers: [3, 7],
+      },
+    },
+  })
+  const station = await stationRes.json()
+  await page.request.post(`${API_BASE}/api/games/${game.id}/start`)
+  await page.goto(`/play/${game.id}/station/${station.id}`)
   await page.waitForLoadState('networkidle')
 })
 

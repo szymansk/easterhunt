@@ -1,12 +1,34 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('alle Stationen sind abgeschlossen', async ({ page }) => {
-  await page.goto('/play')
+Given('alle Stationen sind abgeschlossen', async ({ page, createdGameIds }) => {
+  const gameRes = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Abschlusstest' },
+  })
+  const game = await gameRes.json()
+  createdGameIds.push(game.id)
+
+  await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
+    data: {
+      position: 1,
+      image_path: 'test-placeholder.jpg',
+      mini_game_type: 'text_riddle',
+      mini_game_config: {
+        type: 'text_riddle',
+        question_text: 'Testfrage',
+        answer_mode: 'multiple_choice',
+        answer_options: [
+          { text: 'Richtig', is_correct: true },
+          { text: 'Falsch', is_correct: false },
+        ],
+      },
+    },
+  })
+  await page.request.post(`${API_BASE}/api/games/${game.id}/start`)
+  await page.goto(`/play/${game.id}/complete`)
   await page.waitForLoadState('networkidle')
 })
 
 Given('ich bin auf der Glückwunsch-Seite', async ({ page }) => {
-  await page.goto('/play/complete')
   await page.waitForLoadState('networkidle')
 })
 

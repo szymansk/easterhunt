@@ -1,12 +1,13 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('ich habe ein neues Spiel erstellt', async ({ page }) => {
-  await page.goto('/creator')
+Given('ich habe ein neues Spiel erstellt', async ({ page, createdGameIds }) => {
+  const res = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Testspiel' },
+  })
+  const game = await res.json()
+  createdGameIds.push(game.id)
+  await page.goto(`/creator/game/${game.id}`)
   await page.waitForLoadState('networkidle')
-  const newGameBtn = page.getByRole('button', { name: /Neues Spiel/i })
-  if (await newGameBtn.isVisible()) {
-    await newGameBtn.click()
-  }
 })
 
 Given('ich bin im Spiel-Editor', async ({ page }) => {

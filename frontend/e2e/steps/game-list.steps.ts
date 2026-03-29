@@ -1,4 +1,4 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
 Given('ich bin auf der Creator-Startseite {string}', async ({ page }, path: string) => {
   await page.goto(path)
@@ -13,22 +13,12 @@ Then('das neue Spiel erscheint in der Liste', async ({ page }) => {
   await expect(page.locator('[data-testid="game-list-item"]').first()).toBeVisible()
 })
 
-Given('es existiert ein Spiel {string}', async ({ page }, name: string) => {
+Given('es existiert ein Spiel {string}', async ({ page, createdGameIds }, name: string) => {
+  const res = await page.request.post(`${API_BASE}/api/games`, { data: { name } })
+  const game = await res.json()
+  createdGameIds.push(game.id)
   await page.goto('/creator')
   await page.waitForLoadState('networkidle')
-  const btn = page.getByRole('button', { name: /Neues Spiel/i })
-  if (await btn.isVisible()) {
-    await btn.click()
-    const titleEl = page.getByTestId('game-title')
-    if (await titleEl.isVisible()) {
-      await titleEl.click()
-      await page.getByRole('textbox').fill(name)
-      const saveBtn = page.getByRole('button', { name: /Speichern/i })
-      if (await saveBtn.isVisible()) await saveBtn.click()
-    }
-    await page.goto('/creator')
-    await page.waitForLoadState('networkidle')
-  }
 })
 
 Then('bin ich im Spiel-Editor für {string}', async ({ page }, _name: string) => {
@@ -43,15 +33,14 @@ Then('ist {string} noch in der Liste', async ({ page }, name: string) => {
   await expect(page.getByText(name)).toBeVisible()
 })
 
-Given('es existiert ein Spiel im Status {string}', async ({ page }, _status: string) => {
+Given('es existiert ein Spiel im Status {string}', async ({ page, createdGameIds }, _status: string) => {
+  const res = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Statustest' },
+  })
+  const game = await res.json()
+  createdGameIds.push(game.id)
   await page.goto('/creator')
   await page.waitForLoadState('networkidle')
-  const btn = page.getByRole('button', { name: /Neues Spiel/i })
-  if (await btn.isVisible()) {
-    await btn.click()
-    await page.goto('/creator')
-    await page.waitForLoadState('networkidle')
-  }
 })
 
 Then('sehe ich ein Status-Badge mit {string}', async ({ page }, status: string) => {

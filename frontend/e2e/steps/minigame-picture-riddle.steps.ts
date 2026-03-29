@@ -1,7 +1,36 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('ich bin im Bilderrätsel-Minispiel', async ({ page }) => {
-  await page.goto('/play')
+Given('ich bin im Bilderrätsel-Minispiel', async ({ page, createdGameIds }) => {
+  const gameRes = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Bilderrätsel' },
+  })
+  const game = await gameRes.json()
+  createdGameIds.push(game.id)
+
+  const stationRes = await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
+    data: {
+      position: 1,
+      image_path: 'test-placeholder.jpg',
+      mini_game_type: 'picture_riddle',
+      mini_game_config: {
+        type: 'picture_riddle',
+        category: 'test',
+        reference_items: [
+          { image_url: 'img1.jpg', label: 'Ref 1' },
+          { image_url: 'img2.jpg', label: 'Ref 2' },
+        ],
+        answer_options: [
+          { image_url: 'ans1.jpg', label: 'Antwort 1', is_correct: true },
+          { image_url: 'ans2.jpg', label: 'Antwort 2', is_correct: false },
+          { image_url: 'ans3.jpg', label: 'Antwort 3', is_correct: false },
+          { image_url: 'ans4.jpg', label: 'Antwort 4', is_correct: false },
+        ],
+      },
+    },
+  })
+  const station = await stationRes.json()
+  await page.request.post(`${API_BASE}/api/games/${game.id}/start`)
+  await page.goto(`/play/${game.id}/station/${station.id}`)
   await page.waitForLoadState('networkidle')
 })
 

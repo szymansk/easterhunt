@@ -1,14 +1,23 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('ich bin im Stations-Editor für Station {int}', async ({ page }, _index: number) => {
-  await page.goto('/creator')
+Given('ich bin im Stations-Editor für Station {int}', async ({ page, createdGameIds }, _index: number) => {
+  const gameRes = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Stationseditor' },
+  })
+  const game = await gameRes.json()
+  createdGameIds.push(game.id)
+
+  const stationRes = await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
+    data: {
+      position: 1,
+      image_path: null,
+      mini_game_type: 'puzzle',
+      mini_game_config: { type: 'puzzle', grid_size: 4 },
+    },
+  })
+  const station = await stationRes.json()
+  await page.goto(`/creator/game/${game.id}/station/${station.id}`)
   await page.waitForLoadState('networkidle')
-  const newGameBtn = page.getByRole('button', { name: /Neues Spiel/i })
-  if (await newGameBtn.isVisible()) {
-    await newGameBtn.click()
-    await page.getByRole('button', { name: /\+ Station/i }).click()
-    await page.getByRole('button', { name: /Bearbeiten/i }).first().click()
-  }
 })
 
 Then("ist {string} als aktiver Typ markiert", async ({ page }, type: string) => {

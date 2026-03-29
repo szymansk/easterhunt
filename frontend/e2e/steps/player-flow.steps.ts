@@ -1,7 +1,38 @@
-import { Given, When, Then, expect } from './fixtures'
+import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('es gibt ein gestartetes Spiel mit {int} Stationen', async ({ page }, _count: number) => {
-  await page.goto('/play')
+async function createStartedGame(page: import('@playwright/test').Page, stationCount: number, createdGameIds: string[]): Promise<string> {
+  const gameRes = await page.request.post(`${API_BASE}/api/games`, {
+    data: { name: 'E2E-Spielertest' },
+  })
+  const game = await gameRes.json()
+  createdGameIds.push(game.id)
+
+  for (let i = 1; i <= stationCount; i++) {
+    await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
+      data: {
+        position: i,
+        image_path: 'test-placeholder.jpg',
+        mini_game_type: 'text_riddle',
+        mini_game_config: {
+          type: 'text_riddle',
+          question_text: `Frage ${i}`,
+          answer_mode: 'multiple_choice',
+          answer_options: [
+            { text: 'Richtig', is_correct: true },
+            { text: 'Falsch', is_correct: false },
+          ],
+        },
+      },
+    })
+  }
+
+  await page.request.post(`${API_BASE}/api/games/${game.id}/start`)
+  return game.id
+}
+
+Given('es gibt ein gestartetes Spiel mit {int} Stationen', async ({ page, createdGameIds }, count: number) => {
+  const gameId = await createStartedGame(page, count, createdGameIds)
+  await page.goto(`/play/${gameId}`)
   await page.waitForLoadState('networkidle')
 })
 
@@ -37,8 +68,9 @@ Then('bin ich im Minispiel von Station {int}', async ({ page }, _index: number) 
   await expect(page).toHaveURL(/\/play\//)
 })
 
-Given('ich habe Station {int} abgeschlossen', async ({ page }, _index: number) => {
-  await page.goto('/play')
+Given('ich habe Station {int} abgeschlossen', async ({ page, createdGameIds }, _index: number) => {
+  const gameId = await createStartedGame(page, 3, createdGameIds)
+  await page.goto(`/play/${gameId}`)
   await page.waitForLoadState('networkidle')
 })
 
@@ -68,8 +100,9 @@ Then('ändert sich das Musik-Icon', async ({ page }) => {
   await expect(page.getByRole('button', { name: /Musik/i })).toBeVisible()
 })
 
-Given('ich habe alle {int} Stationen abgeschlossen', async ({ page }, _count: number) => {
-  await page.goto('/play')
+Given('ich habe alle {int} Stationen abgeschlossen', async ({ page, createdGameIds }, count: number) => {
+  const gameId = await createStartedGame(page, count, createdGameIds)
+  await page.goto(`/play/${gameId}`)
   await page.waitForLoadState('networkidle')
 })
 
