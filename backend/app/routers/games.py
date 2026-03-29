@@ -39,8 +39,13 @@ def create_game(body: GameCreate, db: Session = Depends(get_db)) -> GameRead:
 
 
 @router.get("", response_model=list[GameListItem])
-def list_games(db: Session = Depends(get_db)) -> list[GameListItem]:
-    games = db.query(Game).order_by(Game.created_at.desc()).all()
+def list_games(
+    status: GameStatus | None = None, db: Session = Depends(get_db)
+) -> list[GameListItem]:
+    query = db.query(Game).order_by(Game.created_at.desc())
+    if status is not None:
+        query = query.filter(Game.status == status)
+    games = query.all()
     return [
         GameListItem(
             id=g.id,

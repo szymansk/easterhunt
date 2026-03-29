@@ -45,8 +45,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 // Games
-export function listGames(): Promise<GameListItem[]> {
-  return request<GameListItem[]>('/api/games')
+export function listGames(status?: string): Promise<GameListItem[]> {
+  const qs = status ? `?status=${encodeURIComponent(status)}` : ''
+  return request<GameListItem[]>(`/api/games${qs}`)
 }
 
 export function createGame(name: string): Promise<Game> {

@@ -123,3 +123,31 @@ async def test_start_game_not_found(client):
     async with client as c:
         response = await c.post("/api/games/nonexistent-id/start")
     assert response.status_code == 404
+
+
+async def test_get_games_filters_by_status_started(client):
+    async with client as c:
+        await c.post("/api/games", json={"name": "Draft Game"})
+        started_resp = await c.post("/api/games", json={"name": "Started Game"})
+        started_id = started_resp.json()["id"]
+        finished_resp = await c.post("/api/games", json={"name": "Finished Game"})
+        finished_id = finished_resp.json()["id"]
+        await c.put(f"/api/games/{started_id}", json={"status": "started"})
+        await c.put(f"/api/games/{finished_id}", json={"status": "finished"})
+        response = await c.get("/api/games?status=started")
+    assert response.status_code == 200
+    games = response.json()
+    assert len(games) == 1
+    assert games[0]["id"] == started_id
+    assert games[0]["status"] == "started"
+
+
+async def test_get_games_no_filter_returns_all(client):
+    async with client as c:
+        g1 = await c.post("/api/games", json={"name": "Game 1"})
+        g2 = await c.post("/api/games", json={"name": "Game 2"})
+        await c.put(f"/api/games/{g1.json()['id']}", json={"status": "started"})
+        await c.put(f"/api/games/{g2.json()['id']}", json={"status": "finished"})
+        response = await c.get("/api/games")
+    assert response.status_code == 200
+    assert len(response.json()) == 2

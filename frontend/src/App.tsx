@@ -4,6 +4,7 @@ import GameListPage from './pages/creator/GameListPage'
 import GameEditorPage from './pages/creator/GameEditorPage'
 import StationEditorPage from './pages/creator/StationEditorPage'
 import PlayerPage from './pages/play/PlayerPage'
+import PlayerGameListPage from './pages/play/PlayerGameListPage'
 import StationMiniGamePage from './pages/play/StationMiniGamePage'
 import GameCompletionScreen from './pages/play/GameCompletionScreen'
 import NotFoundPage from './pages/NotFoundPage'
@@ -20,6 +21,7 @@ function App() {
         <Route path="game/:id/station/:sid" element={<StationEditorPage />} />
       </Route>
       <Route path="/play" element={<PlayerLayout />}>
+        <Route index element={<PlayerGameListPage />} />
         <Route path=":id" element={<PlayerPage />} />
         <Route path=":id/station/:sid" element={<StationMiniGamePage />} />
         <Route path=":id/complete" element={<GameCompletionScreen />} />
