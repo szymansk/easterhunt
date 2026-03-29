@@ -4,6 +4,50 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Epic easter-2yq Complete — Labyrinth (Maze Minigame)
+
+### easter-2yq.1 - Maze-Generation Service (Backend)
+- `MazeGenerationService` using iterative Recursive Backtracker (DFS) algorithm
+- `easy` (5×5), `medium` (6×6), `hard` (8×8) cell grids → (11×11, 13×13, 17×17) wall grids
+- Output: 2D boolean wall grid + start/goal coordinates + metadata
+- 11 pytest tests including 100-maze solvability stress test (BFS verification)
+
+### easter-2yq.2 - Maze Generation API
+- `POST /api/games/{id}/stations/{sid}/maze/generate` endpoint
+- Validates difficulty, generates maze, persists in `station.mini_game_config`
+- 9 pytest tests covering all difficulty levels, 422 validation, persistence
+
+### easter-2yq.3 - Labyrinth Player-Komponente
+- Full SVG maze rendering: wall cells (brown), passage floor (amber), bunny avatar, egg goal
+- Touch (onTouchMove) and mouse (onMouseMove) navigation
+- Wall collision detection: avatar can't move into wall cells
+- `touch-action: none` prevents page scroll during play
+- `MazeData` type added to `types/index.ts`; `StationMiniGamePage` wired up
+
+### easter-2yq.4 - Labyrinth Completion Detection
+- Avatar on goal cell → `onComplete()` called immediately
+- Wall-hit visual feedback: avatar turns red for 150ms
+- Unlimited attempts (no error state)
+- 8 Vitest tests: render checks, wall collision, completion trigger
+
+### easter-2yq.5 - Labyrinth Creator Config
+- `MazeConfigForm` with difficulty selector + API-triggered generation
+- SVG preview (6px cells) shows generated maze with start/goal markers
+- "Neu generieren" button regenerates with same difficulty
+- `generateMaze()` API function in `api.ts`
+- `StationEditorPage` passes `gameId`/`stationId` to form
+
+### easter-2yq.6 - Labyrinth Tests
+- All acceptance criteria covered by existing tests across tasks 1-5
+- Backend: 268 pytest tests passing (5x5/6x6/8x8 solvability, 100-maze stress test)
+- Frontend: 108 Vitest tests passing
+
+### Final Test Status
+- Backend: 268 tests passing
+- Frontend: 108 tests passing (16 test files)
+
+---
+
 ## [2026-03-29] Epic easter-ngj Complete — Bilderrätsel Was fehlt?
 
 ### easter-ngj.1 - Bilderrätsel Datenmodell und API
