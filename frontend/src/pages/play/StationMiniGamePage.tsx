@@ -28,21 +28,36 @@ function MiniGameRouter({
     case MiniGameType.number_riddle:
       return (
         <NumberRiddleGame
-          question={String(config.question ?? 'Was ist die richtige Antwort?')}
+          taskType={(config.task_type as 'count' | 'assign' | 'plus_minus') ?? 'count'}
+          promptText={String(config.prompt_text ?? 'Was ist die richtige Antwort?')}
+          promptImage={config.prompt_image as string | null | undefined}
           correctAnswer={Number(config.correct_answer ?? 1)}
+          distractorAnswers={(config.distractor_answers as number[]) ?? []}
           onComplete={onComplete}
         />
       )
 
-    case MiniGameType.maze:
-      return <MazeGame onComplete={onComplete} />
+    case MiniGameType.maze: {
+      const mazeData = config.maze_data as import('../../types').MazeData | undefined
+      if (!mazeData || !mazeData.walls) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4">
+            <div className="text-center bg-white rounded-2xl p-8 shadow">
+              <p className="text-gray-500 mb-4">Labyrinth wird geladen…</p>
+            </div>
+          </div>
+        )
+      }
+      return <MazeGame mazeData={mazeData} onComplete={onComplete} />
+    }
 
     case MiniGameType.text_riddle:
       return (
         <TextRiddleGame
-          question={String(config.question ?? 'Was ist die Antwort?')}
-          options={(config.options as string[]) ?? []}
+          questionText={String(config.question_text ?? 'Was ist die Antwort?')}
+          answerOptions={(config.answer_options as import('../../types').TextRiddleOption[]) ?? []}
           answerMode={(config.answer_mode as 'multiple_choice' | 'single_tap') ?? 'multiple_choice'}
+          ttsEnabled={Boolean(config.tts_enabled ?? false)}
           onComplete={onComplete}
         />
       )

@@ -22,25 +22,38 @@ export interface PuzzleConfig {
 
 export interface NumberRiddleConfig {
   type: MiniGameType.number_riddle
-  question: string
+  task_type: 'count' | 'assign' | 'plus_minus'
+  prompt_text: string
+  prompt_image?: string | null
   correct_answer: number // 1-10
+  distractor_answers: number[] // 2-4 values in [1-10], all != correct_answer
+}
+
+export interface MazeData {
+  walls: boolean[][]
+  start: { row: number; col: number }
+  goal: { row: number; col: number }
+  rows: number
+  cols: number
+  difficulty: 'easy' | 'medium' | 'hard'
 }
 
 export interface MazeConfig {
   type: MiniGameType.maze
-  maze_data: {
-    difficulty?: 'easy' | 'medium' | 'hard'
-    rows?: number
-    cols?: number
-    [key: string]: unknown
-  }
+  maze_data: MazeData | Record<string, unknown>
+}
+
+export interface TextRiddleOption {
+  text: string
+  is_correct: boolean
 }
 
 export interface TextRiddleConfig {
   type: MiniGameType.text_riddle
-  question: string
+  question_text: string
   answer_mode: 'multiple_choice' | 'single_tap'
-  options: string[]
+  answer_options: TextRiddleOption[]
+  tts_enabled: boolean
 }
 
 export interface PictureRiddleReferenceItem {
