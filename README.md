@@ -1,113 +1,91 @@
-# Claude Code Best Practices Templates
+# Easter Hunt — Osterschnitzeljagd
 
-This directory contains templates for setting up Claude Code with best practices.
-These files are copied by `streb init` to set up a new project.
+Eine digitale Osterschnitzeljagd für Kinder. Ersteller konfigurieren Stationen mit verschiedenen Minispielen; Kinder spielen die Jagd auf dem iPhone.
 
-## Structure
+## Überblick
 
-```
-templates/
-├── CLAUDE.md                      # Main project instructions
-├── CLAUDE.local.md.template       # Template for personal preferences
-├── .mcp.json                      # MCP server configuration
-└── .claude/
-    ├── .gitignore                 # Excludes local files from git
-    ├── settings.json              # Permissions, hooks, safety rules
-    ├── rules/
-    │   ├── git-safety.md          # Git workflow rules
-    │   └── security.md            # Security best practices
-    ├── commands/
-    │   ├── commit.md              # /commit - Create conventional commits
-    │   ├── pr.md                  # /pr - Create pull requests
-    │   ├── review.md              # /review - Code review
-    │   ├── next.md                # /next - Find next task (beads)
-    │   └── done.md                # /done - Complete work
-    └── agents/
-        ├── code-reviewer.md       # Code review specialist
-        ├── test-writer.md         # Test writing specialist
-        └── refactorer.md          # Refactoring specialist
-```
+- **Creator Mode** (Desktop/Tablet): Spiele erstellen, Stationen konfigurieren, Starten
+- **Player Mode** (iPhone, Portrait): Stationen abarbeiten, Minispiele lösen, Ostereier finden
 
-## What's Included
+### Minispieltypen
 
-### CLAUDE.md
-Concise project instructions covering:
-- Beads workflow integration
-- Code quality expectations
-- Git discipline
-- Session close protocol
+| Typ | Beschreibung |
+|---|---|
+| Puzzle | Bild in NxN Teile zerlegt, muss gelegt werden |
+| Zahlenrätsel | Zählen, Zuordnen oder Rechnen mit Zahlen |
+| Labyrinth | Hasen zum Ei navigieren |
+| Texträtsel | Multiple-Choice-Fragen mit Text |
+| Bilderrätsel | Bild-Multiple-Choice aus der Content-Bibliothek |
 
-### Settings (settings.json)
-- **Permissions**: Safe defaults for common dev commands
-- **Deny rules**: Protect secrets and prevent destructive operations
-- **Hooks**:
-  - SessionStart: Initialize beads
-  - PreToolUse: Block writes to sensitive files
-  - Stop: Sync beads state
+## Tech-Stack
 
-### Rules (.claude/rules/)
-Modular instruction files:
-- **git-safety.md**: Commit protocols, amend rules, branch workflow
-- **security.md**: OWASP prevention, input validation, secret handling
+| Schicht | Technologie |
+|---|---|
+| Backend | FastAPI + SQLAlchemy 2.0 + SQLite (Python 3.11) |
+| Frontend | React 18 + TypeScript (strict) + Vite + Tailwind CSS |
+| Testing | pytest + httpx (Backend), Vitest + Playwright (Frontend) |
 
-### Slash Commands (.claude/commands/)
-- **/commit**: Create well-formatted conventional commits
-- **/pr**: Create pull requests with proper descriptions
-- **/review**: Comprehensive code review
-- **/next**: Find and claim next available task from beads
-- **/done**: Complete work, commit, close task, sync
+## Voraussetzungen
 
-### Agents (.claude/agents/)
-- **code-reviewer**: Quality, security, performance review
-- **test-writer**: Comprehensive test creation
-- **refactorer**: Safe code improvement
+- Python 3.11+ mit [uv](https://github.com/astral-sh/uv)
+- Node.js 20+ mit [pnpm](https://pnpm.io)
+- macOS / Linux
 
-### MCP Servers (.mcp.json)
-- Filesystem server for extended file operations
-
-## Usage by streb
-
-When `streb init` runs:
-1. Copies all templates to the target project
-2. Initializes beads if not present (`bd init`)
-3. Installs official Claude Code plugins (ralph-loop, etc.)
-4. Runs `bd prime` to load context
-
-## Customization
-
-After setup, teams can:
-- Add project-specific rules to `.claude/rules/`
-- Create custom commands in `.claude/commands/`
-- Add domain-specific agents in `.claude/agents/`
-- Extend CLAUDE.md with project overview and conventions
-
----
-
-# Easter Hunt - Osterschnitzeljagd (Development)
-
-## Quick Start
+## Setup (< 10 Minuten)
 
 ```bash
-make install   # Install all dependencies
-make dev       # Start backend (8000) + frontend (5173)
-make test      # Run all tests
-make build     # Build frontend, backend serves dist/
-make serve     # Backend serves production build
+# 1. Repository klonen
+git clone <repo-url> easter
+cd easter
+
+# 2. Abhängigkeiten installieren
+make install
+
+# 3. Entwicklungsserver starten
+make dev
 ```
 
-## Development URLs
-- Frontend Dev: http://localhost:5173
-- Backend API: http://localhost:8000
-- API Docs: http://localhost:8000/docs
+Nach `make dev`:
+- **Frontend Dev**: http://localhost:5173
+- **Backend API**: http://localhost:8000
+- **API-Dokumentation**: http://localhost:8000/docs
 
-## LAN Access (iPhone/iPad)
-Backend binds to `0.0.0.0:8000`. Find your LAN IP with:
+## Auf dem iPhone spielen (LAN)
+
 ```bash
+# LAN-IP ermitteln
 ipconfig getifaddr en0
-```
-Then open `http://<LAN-IP>:8000` on any device in the network.
 
-## Stack
-- **Backend**: FastAPI + SQLAlchemy 2.0 + Pydantic v2 (Python 3.11)
-- **Frontend**: React 18 + TypeScript (strict) + Vite + Tailwind CSS
-- **Testing**: pytest + httpx + Vitest + Playwright (WebKit)
+# Production Build erstellen und starten
+make build
+make serve
+```
+
+Dann auf dem iPhone: `http://<LAN-IP>:8000` aufrufen.
+
+## Alle Befehle
+
+```bash
+make install   # Abhängigkeiten installieren
+make dev       # Backend (8000) + Frontend (5173) parallel starten
+make test      # Alle Tests ausführen (pytest + vitest)
+make build     # Frontend bauen, in backend/dist/ kopieren
+make serve     # Backend mit eingebautem Frontend starten
+make lint      # Linter ausführen (ruff + eslint)
+make clean     # Build-Artefakte löschen
+```
+
+## Tests
+
+```bash
+# Backend-Tests
+cd backend && uv run pytest
+
+# Frontend Unit-Tests
+cd frontend && pnpm test
+
+# E2E-Tests (Playwright, benötigt laufenden Server)
+cd frontend && pnpm exec playwright test
+```
+
+Weitere Informationen: [USAGE.md](USAGE.md) · [DEVELOPMENT.md](DEVELOPMENT.md)
