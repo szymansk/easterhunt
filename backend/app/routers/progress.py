@@ -32,7 +32,20 @@ def _get_progress_or_404(game_id: str, db: Session) -> GameProgress:
 
 @router.post("/{game_id}/progress", status_code=status.HTTP_201_CREATED, response_model=GameProgressRead)
 def create_progress(game_id: str, db: Session = Depends(get_db)) -> GameProgressRead:
-    _get_game_or_404(game_id, db)
+    game = _get_game_or_404(game_id, db)
+
+    # Reset game status to started if the game was finished (enables restart)
+    if game.status == GameStatus.finished:
+        game.status = GameStatus.started
+
+    # Upsert: reset existing progress rather than creating duplicates
+    existing = db.query(GameProgress).filter(GameProgress.game_id == game_id).first()
+    if existing:
+        existing.stations_completed = []
+        existing.current_station = 1
+        db.commit()
+        db.refresh(existing)
+        return GameProgressRead.model_validate(existing)
 
     progress = GameProgress(
         id=str(uuid.uuid4()),

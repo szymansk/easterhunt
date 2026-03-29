@@ -42,7 +42,7 @@ class Game(Base):
         "Station", back_populates="game", cascade="all, delete-orphan"
     )
     progress: Mapped[list["GameProgress"]] = relationship(
-        "GameProgress", back_populates="game"
+        "GameProgress", back_populates="game", cascade="all, delete-orphan"
     )
 
 
