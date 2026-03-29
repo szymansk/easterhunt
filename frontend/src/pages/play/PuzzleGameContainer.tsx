@@ -11,9 +11,19 @@ interface PuzzleGameContainerProps {
   onComplete: () => void
 }
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
 export default function PuzzleGameContainer({ station, onComplete }: PuzzleGameContainerProps) {
   const [tiles, setTiles] = useState<PuzzleTile[]>([])
   const [gridSize, setGridSize] = useState<GridSize>(4)
+  const [tileAspectRatio, setTileAspectRatio] = useState<number>(1)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -23,14 +33,15 @@ export default function PuzzleGameContainer({ station, onComplete }: PuzzleGameC
         const totalTiles = data.grid.rows * data.grid.cols
         const size = totalTiles as GridSize
         setGridSize(size)
-        setTiles(
-          data.tiles.map((t) => ({
-            id: String(t.index),
-            index: t.index,
-            imageSrc: t.url,
-            placed: false,
-          })),
-        )
+        const ratio = data.tile_width && data.tile_height ? data.tile_width / data.tile_height : 1
+        setTileAspectRatio(ratio)
+        const mappedTiles = data.tiles.map((t) => ({
+          id: String(t.index),
+          index: t.index,
+          imageSrc: t.url,
+          placed: false,
+        }))
+        setTiles(shuffleArray(mappedTiles))
       })
       .catch((err) => setError(err instanceof Error ? err.message : 'Fehler beim Laden'))
       .finally(() => setLoading(false))
@@ -46,5 +57,5 @@ export default function PuzzleGameContainer({ station, onComplete }: PuzzleGameC
 
   if (error) return <ErrorMessage message={error} />
 
-  return <PuzzleGame gridSize={gridSize} tiles={tiles} onComplete={onComplete} />
+  return <PuzzleGame gridSize={gridSize} tiles={tiles} tileAspectRatio={tileAspectRatio} onComplete={onComplete} />
 }

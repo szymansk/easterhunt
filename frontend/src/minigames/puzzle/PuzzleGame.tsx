@@ -19,10 +19,11 @@ import type { PuzzleTile, PuzzleSlot, GridSize } from './PuzzleBoard'
 interface PuzzleGameProps {
   gridSize: GridSize
   tiles: PuzzleTile[]
+  tileAspectRatio?: number
   onComplete?: () => void
 }
 
-export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }: PuzzleGameProps) {
+export default function PuzzleGame({ gridSize, tiles: initialTiles, tileAspectRatio = 1, onComplete }: PuzzleGameProps) {
   const [tiles, setTiles] = useState<PuzzleTile[]>(initialTiles)
   const [slots, setSlots] = useState<PuzzleSlot[]>(
     Array.from({ length: initialTiles.length }, (_, i) => ({ index: i, occupiedBy: null }))
@@ -145,6 +146,7 @@ export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }
                 key={slot.index}
                 slotIndex={slot.index}
                 isOver={dragOverSlot === slot.index}
+                tileAspectRatio={tileAspectRatio}
               >
                 {slot.occupiedBy ? (
                   (() => {
@@ -182,6 +184,7 @@ export default function PuzzleGame({ gridSize, tiles: initialTiles, onComplete }
                     colCount={cols}
                     isActive={tile.id === activeTileId}
                     isBouncing={bouncingTiles.has(tile.id)}
+                    tileAspectRatio={tileAspectRatio}
                   />
                 ))
             )}

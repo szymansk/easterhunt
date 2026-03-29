@@ -10,6 +10,8 @@ export interface TileInfo {
 export interface PuzzleApiResponse {
   tiles: TileInfo[]
   grid: { rows: number; cols: number }
+  tile_width: number
+  tile_height: number
 }
 
 export class ApiError extends Error {

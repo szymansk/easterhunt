@@ -29,6 +29,7 @@ const GRID_OPTIONS: { value: PuzzleConfig['grid_size']; label: string; cols: num
 
 export default function PuzzleConfigForm({ value, onChange, errors, gameId, stationId, generateStationId }: Props) {
   const [tiles, setTiles] = useState<TileInfo[]>([])
+  const [tileAspectRatio, setTileAspectRatio] = useState<number>(1)
   const [generating, setGenerating] = useState(false)
   const [generateError, setGenerateError] = useState('')
 
@@ -40,6 +41,9 @@ export default function PuzzleConfigForm({ value, onChange, errors, gameId, stat
     try {
       const result = await generatePuzzleTiles(gameId, stationId, value.grid_size, generateStationId)
       setTiles(result.tiles)
+      if (result.tile_width && result.tile_height) {
+        setTileAspectRatio(result.tile_width / result.tile_height)
+      }
     } catch (err) {
       setGenerateError(err instanceof Error ? err.message : 'Fehler beim Generieren')
     } finally {
@@ -52,6 +56,9 @@ export default function PuzzleConfigForm({ value, onChange, errors, gameId, stat
     try {
       const result = await getPuzzleTiles(gameId, stationId)
       setTiles(result.tiles)
+      if (result.tile_width && result.tile_height) {
+        setTileAspectRatio(result.tile_width / result.tile_height)
+      }
     } catch {
       // No tiles yet, that's fine
     }
@@ -151,7 +158,8 @@ export default function PuzzleConfigForm({ value, onChange, errors, gameId, stat
                       key={tile.index}
                       src={tile.url}
                       alt={`Kachel ${tile.index}`}
-                      className="w-full aspect-square object-cover"
+                      className="w-full object-cover"
+                      style={{ aspectRatio: tileAspectRatio }}
                     />
                   ))}
               </div>

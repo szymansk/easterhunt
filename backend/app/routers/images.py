@@ -42,6 +42,8 @@ class GridInfo(BaseModel):
 class PuzzleResponse(BaseModel):
     tiles: list[TileInfo]
     grid: GridInfo
+    tile_width: int
+    tile_height: int
 
 
 def _get_station_or_404(game_id: str, station_id: str, db: Session) -> Station:
@@ -195,15 +197,31 @@ def generate_puzzle_tiles(
         for t in tiles
     ]
 
+    # Compute tile pixel dimensions from the (EXIF-corrected) image size
+    from PIL import Image as _Image
+    from PIL import ImageOps as _ImageOps
+    with _Image.open(image_fs_path) as _img:
+        _img = _ImageOps.exif_transpose(_img)
+        img_width, img_height = _img.size
+    tile_w = img_width // cols
+    tile_h = img_height // rows
+
     # Persist tile metadata in the puzzle station's config (station_id, not source_station_id)
     station.mini_game_config = {
         **station.mini_game_config,
         "tiles": [t.model_dump() for t in tile_infos],
         "grid": {"rows": rows, "cols": cols},
+        "tile_width": tile_w,
+        "tile_height": tile_h,
     }
     db.commit()
 
-    return PuzzleResponse(tiles=tile_infos, grid=GridInfo(rows=rows, cols=cols))
+    return PuzzleResponse(
+        tiles=tile_infos,
+        grid=GridInfo(rows=rows, cols=cols),
+        tile_width=tile_w,
+        tile_height=tile_h,
+    )
 
 
 @router.get(
@@ -239,13 +257,27 @@ def get_puzzle_tiles(
                 TileInfo(url=_path_to_media_url(t["path"]), index=t["index"], row=t["row"], col=t["col"])
                 for t in tiles
             ]
+            from PIL import Image as _Image
+            from PIL import ImageOps as _ImageOps
+            with _Image.open(image_fs_path) as _img:
+                _img = _ImageOps.exif_transpose(_img)
+                img_width, img_height = _img.size
+            tile_w = img_width // cols
+            tile_h = img_height // rows
             station.mini_game_config = {
                 **config,
                 "tiles": [t.model_dump() for t in tile_infos],
                 "grid": {"rows": rows, "cols": cols},
+                "tile_width": tile_w,
+                "tile_height": tile_h,
             }
             db.commit()
-            return PuzzleResponse(tiles=tile_infos, grid=GridInfo(rows=rows, cols=cols))
+            return PuzzleResponse(
+                tiles=tile_infos,
+                grid=GridInfo(rows=rows, cols=cols),
+                tile_width=tile_w,
+                tile_height=tile_h,
+            )
 
     if "tiles" not in config or "grid" not in config:
         raise HTTPException(
@@ -255,7 +287,11 @@ def get_puzzle_tiles(
 
     grid_data = config["grid"]
     tile_infos = [TileInfo(**t) for t in config["tiles"]]
+    tile_w = config.get("tile_width", grid_data.get("tile_width", 1))
+    tile_h = config.get("tile_height", grid_data.get("tile_height", 1))
     return PuzzleResponse(
         tiles=tile_infos,
         grid=GridInfo(rows=grid_data["rows"], cols=grid_data["cols"]),
+        tile_width=tile_w,
+        tile_height=tile_h,
     )

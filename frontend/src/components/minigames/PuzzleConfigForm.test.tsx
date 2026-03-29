@@ -40,6 +40,8 @@ describe('PuzzleConfigForm', () => {
         { url: '/media/t3.jpg', index: 3, row: 1, col: 1 },
       ],
       grid: { rows: 2, cols: 2 },
+      tile_width: 300,
+      tile_height: 300,
     })
 
     renderForm()

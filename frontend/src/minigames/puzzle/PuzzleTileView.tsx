@@ -6,6 +6,7 @@ interface PuzzleTileViewProps {
   colCount: number
   isActive: boolean
   isBouncing: boolean
+  tileAspectRatio?: number
 }
 
 export default function PuzzleTileView({
@@ -13,6 +14,7 @@ export default function PuzzleTileView({
   colCount,
   isActive,
   isBouncing,
+  tileAspectRatio,
 }: PuzzleTileViewProps) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: tile.id,
@@ -33,8 +35,8 @@ export default function PuzzleTileView({
         ${isActive ? 'border-blue-400' : ''}
       `}
       style={{
-        width: `calc(${100 / Math.max(colCount, 3)}% - 8px)`,
-        aspectRatio: '1',
+        width: `calc(${100 / colCount}% - 8px)`,
+        aspectRatio: tileAspectRatio ?? 1,
       }}
       {...listeners}
       {...attributes}
