@@ -1,91 +1,139 @@
 # Easter Hunt — Osterschnitzeljagd
 
-Eine digitale Osterschnitzeljagd für Kinder. Ersteller konfigurieren Stationen mit verschiedenen Minispielen; Kinder spielen die Jagd auf dem iPhone.
+Eine digitale Osterschnitzeljagd für Kinder. Erwachsene erstellen Stationen mit verschiedenen Minispielen; Kinder spielen die Jagd auf dem iPhone durch.
 
-## Überblick
+![Backend Tests](https://img.shields.io/badge/backend_tests-308_passed-brightgreen)
+![Frontend Tests](https://img.shields.io/badge/frontend_tests-187_passed-brightgreen)
+![Python](https://img.shields.io/badge/python-3.11+-blue)
+![Node](https://img.shields.io/badge/node-20+-green)
 
-- **Creator Mode** (Desktop/Tablet): Spiele erstellen, Stationen konfigurieren, Starten
-- **Player Mode** (iPhone, Portrait): Stationen abarbeiten, Minispiele lösen, Ostereier finden
+---
 
-### Minispieltypen
+## Features
+
+- **Creator Mode** — Spiele anlegen, Stationen konfigurieren, Fortschritt überwachen, zurücksetzen
+- **Player Mode** — Stationen linear durchspielen, Minispiele lösen, Schatz finden
+- **Installierbar als PWA** — Vollbild auf dem iPhone, kein Browser-Chrome
+
+### Minispiele
 
 | Typ | Beschreibung |
 |---|---|
-| Puzzle | Bild in NxN Teile zerlegt, muss gelegt werden |
-| Zahlenrätsel | Zählen, Zuordnen oder Rechnen mit Zahlen |
-| Labyrinth | Hasen zum Ei navigieren |
+| Puzzle | Bild in Kacheln zerlegt, per Drag & Drop zusammensetzen |
+| Zahlenrätsel | Zählen, Zuordnen oder Rechnen mit Zahlen 1–10 |
+| Labyrinth | Hasen durch ein Labyrinth zum Ei navigieren |
 | Texträtsel | Multiple-Choice-Fragen mit Text |
 | Bilderrätsel | Bild-Multiple-Choice aus der Content-Bibliothek |
 
-## Tech-Stack
+---
+
+## Tech Stack
 
 | Schicht | Technologie |
 |---|---|
-| Backend | FastAPI + SQLAlchemy 2.0 + SQLite (Python 3.11) |
-| Frontend | React 18 + TypeScript (strict) + Vite + Tailwind CSS |
-| Testing | pytest + httpx (Backend), Vitest + Playwright (Frontend) |
+| Backend | Python 3.11 · FastAPI · SQLAlchemy 2.0 · SQLite |
+| Frontend | React 18 · TypeScript · Vite · Tailwind CSS · dnd-kit |
+| Tests | pytest · httpx (Backend) · Vitest · Playwright (Frontend) |
+| PWA | vite-plugin-pwa · Workbox |
+
+---
 
 ## Voraussetzungen
 
-- Python 3.11+ mit [uv](https://github.com/astral-sh/uv)
-- Node.js 20+ mit [pnpm](https://pnpm.io)
-- macOS / Linux
+- **Python 3.11+** mit [uv](https://github.com/astral-sh/uv)
+- **Node.js 20+** mit [pnpm](https://pnpm.io)
+- macOS oder Linux
 
-## Setup (< 10 Minuten)
+---
+
+## Quickstart
 
 ```bash
-# 1. Repository klonen
-git clone <repo-url> easter
-cd easter
-
-# 2. Abhängigkeiten installieren
+git clone <repo-url> easter && cd easter
 make install
-
-# 3. Entwicklungsserver starten
 make dev
 ```
 
-Nach `make dev`:
-- **Frontend Dev**: http://localhost:5173
-- **Backend API**: http://localhost:8000
-- **API-Dokumentation**: http://localhost:8000/docs
+| URL | Beschreibung |
+|---|---|
+| http://localhost:5173 | Frontend (Vite Dev Server) |
+| http://localhost:8000 | Backend API |
+| http://localhost:8000/docs | OpenAPI Dokumentation |
 
-## Auf dem iPhone spielen (LAN)
+---
+
+## Auf dem iPhone installieren (PWA)
 
 ```bash
-# LAN-IP ermitteln
-ipconfig getifaddr en0
+# 1. Production Build erstellen und starten
+make build && make serve
 
-# Production Build erstellen und starten
-make build
-make serve
+# 2. LAN-IP herausfinden
+ipconfig getifaddr en0
 ```
 
-Dann auf dem iPhone: `http://<LAN-IP>:8000` aufrufen.
+Auf dem iPhone in Safari `http://<LAN-IP>:8000` öffnen →
+**Teilen** → **Zum Home-Bildschirm** → als App installieren.
 
-## Alle Befehle
+> iPhone und Mac müssen im gleichen WLAN sein.
+
+---
+
+## Alle Make-Befehle
 
 ```bash
-make install   # Abhängigkeiten installieren
+make install   # Abhängigkeiten installieren (uv + pnpm)
 make dev       # Backend (8000) + Frontend (5173) parallel starten
+make build     # Frontend bauen → backend/dist/ kopieren
+make serve     # Produktionsserver starten (Frontend + API auf Port 8000)
 make test      # Alle Tests ausführen (pytest + vitest)
-make build     # Frontend bauen, in backend/dist/ kopieren
-make serve     # Backend mit eingebautem Frontend starten
-make lint      # Linter ausführen (ruff + eslint)
+make lint      # Linter (ruff + eslint)
 make clean     # Build-Artefakte löschen
 ```
+
+---
 
 ## Tests
 
 ```bash
-# Backend-Tests
+# Backend
 cd backend && uv run pytest
 
 # Frontend Unit-Tests
 cd frontend && pnpm test
 
-# E2E-Tests (Playwright, benötigt laufenden Server)
+# E2E (benötigt laufenden Server auf Port 8000)
 cd frontend && pnpm exec playwright test
 ```
 
-Weitere Informationen: [USAGE.md](USAGE.md) · [DEVELOPMENT.md](DEVELOPMENT.md)
+---
+
+## Projektstruktur
+
+```
+easter/
+├── backend/
+│   ├── app/
+│   │   ├── models/       # SQLAlchemy Modelle
+│   │   ├── routers/      # FastAPI Endpoints
+│   │   ├── schemas/      # Pydantic Schemas
+│   │   ├── services/     # Bildverarbeitung, Maze-Generator
+│   │   └── db/           # Session, Engine, Seed-Script
+│   └── data/
+│       └── content/      # Bibliothek-Assets (SVG-Icons, manifest.json)
+└── frontend/
+    ├── src/
+    │   ├── pages/        # Creator- und Player-Seiten
+    │   ├── minigames/    # Minispiel-Komponenten
+    │   ├── services/     # API Client
+    │   └── types/        # TypeScript-Typen
+    └── public/
+        └── audio/        # Sound-Effekte und Hintergrundmusik
+```
+
+---
+
+## Weiterführend
+
+- [USAGE.md](USAGE.md) — Anleitung für Ersteller und Spieler
+- [DEVELOPMENT.md](DEVELOPMENT.md) — Entwickler-Dokumentation, Architektur, ADRs
