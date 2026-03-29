@@ -139,7 +139,7 @@ export default function MazeConfigForm({ value, onChange, gameId, stationId }: P
               type="button"
               onClick={() => handleGenerate(currentDifficulty)}
               disabled={generating || !gameId || !stationId}
-              className="text-xs text-blue-600 hover:text-blue-700 font-medium disabled:opacity-40"
+              className="text-xs text-blue-600 hover:text-blue-700 active:text-blue-800 font-medium disabled:opacity-40 min-h-[44px] px-2"
             >
               🔄 Neu generieren
             </button>

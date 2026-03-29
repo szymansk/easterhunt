@@ -39,7 +39,7 @@ export default function PlayerLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-yellow-50">
+    <div className="min-h-screen bg-yellow-50 select-none">
       {/* Music toggle button — fixed top-right */}
       <button
         onClick={handleMusicToggle}

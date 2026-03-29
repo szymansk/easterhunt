@@ -88,10 +88,10 @@ export default function LibraryBrowser({
                 setActiveCategory(cat)
                 setPreview(null)
               }}
-              className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+              className={`shrink-0 rounded-full px-3 py-2 min-h-[44px] text-xs font-medium transition-colors ${
                 activeCategory === cat
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300'
               }`}
             >
               {cat}
@@ -168,7 +168,7 @@ export default function LibraryBrowser({
           <button
             type="button"
             onClick={handleClose}
-            className="rounded-lg px-4 py-2 text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 transition-colors"
+            className="rounded-lg px-4 py-2 min-h-[44px] text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 active:bg-gray-100 transition-colors"
           >
             Abbrechen
           </button>
@@ -176,7 +176,7 @@ export default function LibraryBrowser({
             type="button"
             onClick={handleConfirm}
             disabled={!preview}
-            className="rounded-lg px-4 py-2 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="rounded-lg px-4 py-2 min-h-[44px] text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             Auswählen
           </button>

@@ -83,7 +83,7 @@ export default function NumberRiddleGame({
           {options.map((value) => {
             const state = buttonStates[value] ?? 'idle'
 
-            let bgClass = 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+            let bgClass = 'bg-blue-100 text-blue-800 hover:bg-blue-200 active:bg-blue-300'
             let borderClass = 'border-transparent'
             if (state === 'correct') {
               bgClass = 'bg-green-100 text-green-800'

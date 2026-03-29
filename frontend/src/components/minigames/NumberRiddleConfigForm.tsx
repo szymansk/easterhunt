@@ -123,7 +123,7 @@ export default function NumberRiddleConfigForm({ value, onChange, errors }: Prop
           <button
             type="button"
             onClick={handleAutoFill}
-            className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+            className="text-xs text-blue-600 hover:text-blue-800 active:text-blue-900 font-medium min-h-[44px] px-2"
             data-testid="auto-fill-btn"
           >
             Auto-Fill
@@ -168,7 +168,7 @@ export default function NumberRiddleConfigForm({ value, onChange, errors }: Prop
         <button
           type="button"
           onClick={() => setShowPreview((p) => !p)}
-          className="text-sm font-medium text-blue-600 hover:text-blue-800 underline"
+          className="text-sm font-medium text-blue-600 hover:text-blue-800 active:text-blue-900 underline min-h-[44px] px-1"
           data-testid="preview-toggle"
         >
           {showPreview ? 'Vorschau ausblenden' : 'Vorschau anzeigen'}

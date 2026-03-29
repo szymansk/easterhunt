@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Touch optimization: prevent double-tap zoom on all interactive elements */
+button,
+a,
+input[type='checkbox'],
+input[type='radio'],
+select {
+  touch-action: manipulation;
+}
+
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20% { transform: translateX(-8px); }

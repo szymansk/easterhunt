@@ -63,7 +63,7 @@ function SortableStationRow({ station, onEdit }: SortableStationRowProps) {
     <div ref={setNodeRef} style={style} className="flex items-center gap-3 bg-white rounded-xl shadow-sm p-3 border border-gray-100">
       {/* Drag handle */}
       <button
-        className="touch-none cursor-grab active:cursor-grabbing p-1 text-gray-400 hover:text-gray-600"
+        className="touch-none cursor-grab active:cursor-grabbing p-1 text-gray-400 hover:text-gray-600 min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Verschieben"
         {...attributes}
         {...listeners}
@@ -98,7 +98,7 @@ function SortableStationRow({ station, onEdit }: SortableStationRowProps) {
       {/* Edit button */}
       <button
         onClick={onEdit}
-        className="px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors shrink-0"
+        className="px-3 py-2 min-h-[44px] text-sm font-medium text-blue-600 hover:bg-blue-50 active:bg-blue-100 rounded-lg transition-colors shrink-0"
       >
         Bearbeiten
       </button>

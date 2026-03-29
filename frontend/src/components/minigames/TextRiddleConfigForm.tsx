@@ -95,7 +95,7 @@ export default function TextRiddleConfigForm({ value, onChange, errors }: Props)
             <button
               type="button"
               onClick={addOption}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+              className="text-sm text-blue-600 hover:text-blue-700 active:text-blue-800 font-medium min-h-[44px] px-2"
             >
               + Hinzufügen
             </button>
@@ -126,7 +126,7 @@ export default function TextRiddleConfigForm({ value, onChange, errors }: Props)
                 <button
                   type="button"
                   onClick={() => removeOption(i)}
-                  className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                  className="p-1 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-red-500 active:text-red-600 transition-colors"
                   aria-label="Entfernen"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
