@@ -5,7 +5,7 @@ import NumberRiddleConfigForm from '../../components/minigames/NumberRiddleConfi
 import PictureRiddleConfigForm from '../../components/minigames/PictureRiddleConfigForm'
 import PuzzleConfigForm from '../../components/minigames/PuzzleConfigForm'
 import TextRiddleConfigForm from '../../components/minigames/TextRiddleConfigForm'
-import { BigButton, Card, ErrorMessage, LoadingSpinner, Modal } from '../../components/ui'
+import { BigButton, Card, ErrorMessage, ImageUpload, LoadingSpinner, Modal } from '../../components/ui'
 import { getStation, listStations, updateStation } from '../../services/api'
 import type { MiniGameConfig, Station } from '../../types'
 import { MiniGameType } from '../../types'
@@ -177,27 +177,14 @@ export default function StationEditorPage() {
       {/* Image upload area */}
       <Card className="mb-6">
         <h2 className="text-sm font-semibold text-gray-700 mb-3">Stationsbild</h2>
-        <div className="flex items-center gap-4">
-          <div className="w-20 h-20 rounded-xl bg-gray-100 flex items-center justify-center overflow-hidden shrink-0">
-            {station.image_path ? (
-              <img src={station.image_path} alt="" className="w-full h-full object-cover" loading="lazy" />
-            ) : (
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            )}
-          </div>
-          <div className="flex-1">
-            {station.image_path ? (
-              <p className="text-sm text-gray-600 mb-2 truncate">{station.image_path}</p>
-            ) : (
-              <p className="text-sm text-amber-600 mb-2">Kein Bild ausgewählt</p>
-            )}
-            <button className="text-sm font-medium text-blue-600 hover:text-blue-700 active:text-blue-800 min-h-[44px] px-1">
-              Bild hochladen
-            </button>
-          </div>
-        </div>
+        <ImageUpload
+          gameId={gameId!}
+          stationId={stationId!}
+          currentImageUrl={station.image_path}
+          onUploaded={(imagePath) => {
+            setStation((s) => s ? { ...s, image_path: imagePath } : s)
+          }}
+        />
       </Card>
 
       {/* Mini game type selection */}

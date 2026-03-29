@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { ApiError } from '../../services/api'
+import Modal from './Modal'
 
 interface ImageUploadProps {
   gameId: string
@@ -19,7 +20,9 @@ export default function ImageUpload({
   currentImageUrl,
   onUploaded,
 }: ImageUploadProps) {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const galleryInputRef = useRef<HTMLInputElement>(null)
+  const cameraInputRef = useRef<HTMLInputElement>(null)
+  const [showModal, setShowModal] = useState(false)
   const [preview, setPreview] = useState<string | null>(currentImageUrl ?? null)
   const [progress, setProgress] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -63,22 +66,38 @@ export default function ImageUpload({
     e.target.value = ''
   }
 
-  function handleReplace() {
-    inputRef.current?.click()
+  function openGallery() {
+    setShowModal(false)
+    galleryInputRef.current?.click()
+  }
+
+  function openCamera() {
+    setShowModal(false)
+    cameraInputRef.current?.click()
   }
 
   const isUploading = progress !== null
 
   return (
     <div className="flex flex-col items-center gap-3">
-      {/* Hidden file input */}
+      {/* Hidden gallery input (no capture — opens photo library) */}
       <input
-        ref={inputRef}
+        ref={galleryInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        aria-label="Bild aus Fotomediathek auswählen"
+        onChange={handleChange}
+        disabled={isUploading}
+      />
+      {/* Hidden camera input */}
+      <input
+        ref={cameraInputRef}
         type="file"
         accept="image/*"
         capture="environment"
         className="hidden"
-        aria-label="Bild auswählen"
+        aria-label="Foto mit Kamera aufnehmen"
         onChange={handleChange}
         disabled={isUploading}
       />
@@ -93,7 +112,7 @@ export default function ImageUpload({
       ) : (
         <button
           type="button"
-          onClick={() => inputRef.current?.click()}
+          onClick={() => setShowModal(true)}
           disabled={isUploading}
           className="w-full max-w-xs aspect-video rounded-xl border-2 border-dashed border-gray-300
                      flex flex-col items-center justify-center gap-2 text-gray-400
@@ -101,7 +120,7 @@ export default function ImageUpload({
                      disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span className="text-3xl">📷</span>
-          <span className="text-sm font-medium">Bild auswählen oder Kamera</span>
+          <span className="text-sm font-medium">Bild hochladen</span>
         </button>
       )}
 
@@ -128,7 +147,7 @@ export default function ImageUpload({
       {preview && !isUploading && (
         <button
           type="button"
-          onClick={handleReplace}
+          onClick={() => setShowModal(true)}
           className="text-sm text-blue-600 underline hover:text-blue-800"
         >
           Bild ersetzen
@@ -141,6 +160,36 @@ export default function ImageUpload({
           {error}
         </p>
       )}
+
+      {/* Upload source modal */}
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Bild hochladen">
+        <div className="flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={openGallery}
+            className="flex items-center gap-3 w-full p-4 rounded-xl border-2 border-gray-200
+                       hover:border-blue-400 hover:bg-blue-50 transition-colors text-left"
+          >
+            <span className="text-2xl">🖼️</span>
+            <div>
+              <p className="font-medium text-gray-800">Fotomediathek</p>
+              <p className="text-sm text-gray-500">Bild aus der Galerie auswählen</p>
+            </div>
+          </button>
+          <button
+            type="button"
+            onClick={openCamera}
+            className="flex items-center gap-3 w-full p-4 rounded-xl border-2 border-gray-200
+                       hover:border-blue-400 hover:bg-blue-50 transition-colors text-left"
+          >
+            <span className="text-2xl">📷</span>
+            <div>
+              <p className="font-medium text-gray-800">Kamera</p>
+              <p className="text-sm text-gray-500">Foto direkt aufnehmen</p>
+            </div>
+          </button>
+        </div>
+      </Modal>
     </div>
   )
 }
