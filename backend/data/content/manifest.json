@@ -43,23 +43,23 @@
       "id": "task-haushalt-1",
       "mini_game_type": "picture_riddle",
       "category": "haushalt",
-      "reference_item_ids": ["item-cup", "item-spoon"],
-      "correct_answer_id": "item-cup",
+      "reference_item_ids": ["item-cup"],
+      "correct_answer_id": "item-spoon",
       "distractor_ids": ["item-ball", "item-book", "item-hat"]
     },
     {
       "id": "task-haushalt-2",
       "mini_game_type": "picture_riddle",
       "category": "haushalt",
-      "reference_item_ids": ["item-spoon", "item-cup"],
-      "correct_answer_id": "item-spoon",
+      "reference_item_ids": ["item-spoon"],
+      "correct_answer_id": "item-cup",
       "distractor_ids": ["item-car", "item-apple", "item-crayon"]
     },
     {
       "id": "task-kita-1",
       "mini_game_type": "picture_riddle",
       "category": "kita",
-      "reference_item_ids": ["item-book", "item-crayon"],
+      "reference_item_ids": ["item-crayon"],
       "correct_answer_id": "item-book",
       "distractor_ids": ["item-car", "item-banana", "item-scissors"]
     },
@@ -67,7 +67,7 @@
       "id": "task-kita-2",
       "mini_game_type": "picture_riddle",
       "category": "kita",
-      "reference_item_ids": ["item-crayon", "item-scissors"],
+      "reference_item_ids": ["item-book"],
       "correct_answer_id": "item-crayon",
       "distractor_ids": ["item-ball", "item-banana", "item-shirt"]
     },
@@ -107,8 +107,8 @@
       "id": "task-kleidung-1",
       "mini_game_type": "picture_riddle",
       "category": "kleidung",
-      "reference_item_ids": ["item-shirt", "item-hat"],
-      "correct_answer_id": "item-shirt",
+      "reference_item_ids": ["item-shirt"],
+      "correct_answer_id": "item-hat",
       "distractor_ids": ["item-ball", "item-bread", "item-book"]
     },
     {

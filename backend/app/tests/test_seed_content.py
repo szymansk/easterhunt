@@ -68,3 +68,18 @@ def test_manifest_valid_json():
     assert "tasks" in data
     assert len(data["items"]) >= 10
     assert len(data["tasks"]) >= 5
+
+
+def test_picture_riddle_reference_answer_disjoint():
+    """Reference items must not appear in the answer set (correct + distractors)."""
+    with MANIFEST_PATH.open() as f:
+        data = json.load(f)
+    for task in data["tasks"]:
+        if task.get("mini_game_type") != "picture_riddle":
+            continue
+        refs = set(task.get("reference_item_ids", []))
+        answers = {task["correct_answer_id"]} | set(task.get("distractor_ids", []))
+        overlap = refs & answers
+        assert not overlap, (
+            f"Task {task['id']}: reference items {refs} overlap with answers {answers}: {overlap}"
+        )

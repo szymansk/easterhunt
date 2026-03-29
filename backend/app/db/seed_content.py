@@ -17,10 +17,26 @@ from app.models import Base, LibraryItem, LibraryTask, MiniGameType
 MANIFEST_PATH = Path(__file__).parent.parent.parent / "data" / "content" / "manifest.json"
 
 
+def _validate_manifest(manifest: dict) -> None:
+    """Raise ValueError if any picture_riddle task has reference/answer overlap."""
+    for task in manifest.get("tasks", []):
+        if task.get("mini_game_type") != "picture_riddle":
+            continue
+        refs = set(task.get("reference_item_ids", []))
+        answers = {task["correct_answer_id"]} | set(task.get("distractor_ids", []))
+        overlap = refs & answers
+        if overlap:
+            raise ValueError(
+                f"Task {task['id']}: reference_item_ids and answer set overlap: {overlap}"
+            )
+
+
 def seed(db: Session, manifest_path: Path = MANIFEST_PATH) -> dict[str, int]:
     """Seed library items and tasks from manifest. Returns counts of inserted records."""
     with manifest_path.open() as f:
         manifest = json.load(f)
+
+    _validate_manifest(manifest)
 
     items_inserted = 0
     for item_data in manifest.get("items", []):
