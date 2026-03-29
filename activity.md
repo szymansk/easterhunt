@@ -48,6 +48,35 @@ This file tracks progress across Ralph Wiggum sessions. Each session appends ent
 
 ---
 
+## [2026-03-29] Epic easter-hc6 Complete — Text/Audio-Rätsel
+
+### easter-hc6.1 - Text-Rätsel Datenmodell und API
+- `TextRiddleOption` (text, is_correct) + `TextRiddleConfig` with model_validator: exactly 1 correct
+- Fields: question_text, answer_mode (multiple_choice/single_tap), answer_options (2-6), tts_enabled
+- 5 new backend pytest tests covering 0/2 correct → 422, too few options → 422, tts flag
+
+### easter-hc6.2 - Text-Rätsel Player-Komponente
+- `TextRiddleGame`: question at font-size 20px, TTS button (44x44px) via Web Speech API (de-DE)
+- Answer cards (min 60px height): correct → green highlight + onComplete after 1s
+- Wrong → red highlight + shake animation, retry possible
+- No free-text input; `data-testid` attributes for testing
+
+### easter-hc6.3 - Text-Rätsel Creator Config
+- `TextRiddleConfigForm`: question_text with char counter, answer_mode radio buttons
+- Dynamic answer options (2-6), radio to mark correct, TTS checkbox
+- `NumberRiddleConfigForm`: task_type selector, prompt_text, correct/distractor number buttons
+- `StationEditorPage` wired up with new defaults and validation
+
+### easter-hc6.4 - Text-Rätsel Tests
+- 9 Vitest tests in TextRiddleGame.test.tsx covering all AC
+- TypeScript errors fixed across test files (globalThis, Mock import, unused params)
+
+### Final Test Status
+- Backend: 268 tests passing
+- Frontend: 108 tests passing (16 test files)
+
+---
+
 ## [2026-03-29] Epic easter-ngj Complete — Bilderrätsel Was fehlt?
 
 ### easter-ngj.1 - Bilderrätsel Datenmodell und API
