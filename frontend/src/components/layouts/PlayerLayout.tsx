@@ -45,12 +45,12 @@ export default function PlayerLayout() {
         ←
       </button>
 
-      {/* Music toggle button — fixed top-right, respects safe area */}
+      {/* Music toggle button — fixed bottom-right, avoids overlap with TTS buttons */}
       <button
         onClick={handleMusicToggle}
         aria-label={musicEnabled ? 'Musik ausschalten' : 'Musik einschalten'}
         className="fixed z-50 w-11 h-11 flex items-center justify-center rounded-full bg-white bg-opacity-80 shadow text-xl active:scale-95 transition-transform"
-        style={{ top: 'calc(0.75rem + env(safe-area-inset-top))', right: 'calc(0.75rem + env(safe-area-inset-right))' }}
+        style={{ bottom: 'calc(0.75rem + env(safe-area-inset-bottom))', right: 'calc(0.75rem + env(safe-area-inset-right))' }}
         data-testid="music-toggle"
       >
         {musicEnabled ? '🎵' : '🔇'}

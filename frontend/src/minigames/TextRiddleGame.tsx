@@ -7,7 +7,6 @@ interface TextRiddleGameProps {
   questionText: string
   answerMode: 'multiple_choice' | 'single_tap'
   answerOptions: TextRiddleOption[]
-  ttsEnabled: boolean
   onComplete?: () => void
 }
 
@@ -16,7 +15,6 @@ type AnswerState = 'idle' | 'correct' | 'wrong'
 export default function TextRiddleGame({
   questionText,
   answerOptions,
-  ttsEnabled,
   onComplete,
 }: TextRiddleGameProps) {
   const [answerStates, setAnswerStates] = useState<Record<number, AnswerState>>({})
@@ -52,7 +50,7 @@ export default function TextRiddleGame({
           >
             {questionText}
           </p>
-          {ttsEnabled && (
+          {tts.isTTSAvailable() && (
             <button
               onClick={() => tts.speak(questionText)}
               aria-label="Frage vorlesen"
@@ -102,7 +100,7 @@ export default function TextRiddleGame({
               >
                 {option.text}
               </button>
-              {ttsEnabled && tts.isTTSAvailable() && (
+              {tts.isTTSAvailable() && (
                 <button
                   onClick={() => tts.speak(option.text)}
                   aria-label="Antwort vorlesen"

@@ -3,6 +3,10 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import TextRiddleGame from './TextRiddleGame'
 import type { TextRiddleOption } from '../types'
 
+vi.mock('../hooks/useTTS', () => ({
+  useTTS: vi.fn(() => ({ isTTSAvailable: () => false, speak: vi.fn() })),
+}))
+
 const answerOptions: TextRiddleOption[] = [
   { text: 'Grün', is_correct: true },
   { text: 'Rot', is_correct: false },
@@ -16,7 +20,7 @@ describe('TextRiddleGame', () => {
         questionText="Welche Farbe hat Gras?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
       />,
     )
     const questionEl = screen.getByText('Welche Farbe hat Gras?')
@@ -33,7 +37,7 @@ describe('TextRiddleGame', () => {
         questionText="Welche Farbe hat Gras?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
       />,
     )
     expect(screen.getByText('Grün')).toBeTruthy()
@@ -41,23 +45,27 @@ describe('TextRiddleGame', () => {
     expect(screen.getByText('Blau')).toBeTruthy()
   })
 
-  it('TTS button rendered only when ttsEnabled=true', () => {
-    const { rerender } = render(
+  it('TTS button hidden when isTTSAvailable returns false', async () => {
+    const { useTTS } = await import('../hooks/useTTS')
+    vi.mocked(useTTS).mockReturnValue({ isTTSAvailable: () => false, speak: vi.fn() })
+    render(
       <TextRiddleGame
         questionText="Q?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
       />,
     )
     expect(screen.queryByTestId('tts-button')).toBeNull()
+  })
 
-    rerender(
+  it('TTS button shown when isTTSAvailable returns true', async () => {
+    const { useTTS } = await import('../hooks/useTTS')
+    vi.mocked(useTTS).mockReturnValue({ isTTSAvailable: () => true, speak: vi.fn() })
+    render(
       <TextRiddleGame
         questionText="Q?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={true}
       />,
     )
     expect(screen.getByTestId('tts-button')).toBeTruthy()
@@ -71,7 +79,7 @@ describe('TextRiddleGame', () => {
         questionText="Welche Farbe hat Gras?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
         onComplete={onComplete}
       />,
     )
@@ -94,7 +102,7 @@ describe('TextRiddleGame', () => {
         questionText="Welche Farbe hat Gras?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
         onComplete={onComplete}
       />,
     )
@@ -116,7 +124,7 @@ describe('TextRiddleGame', () => {
         questionText="Welche Farbe hat Gras?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
       />,
     )
 
@@ -132,7 +140,7 @@ describe('TextRiddleGame', () => {
         questionText="Welche Farbe hat Gras?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
       />,
     )
 
@@ -147,7 +155,7 @@ describe('TextRiddleGame', () => {
         questionText="Q?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
       />,
     )
     expect(container.querySelector('input[type="text"]')).toBeNull()
@@ -160,7 +168,7 @@ describe('TextRiddleGame', () => {
         questionText="Q?"
         answerMode="multiple_choice"
         answerOptions={answerOptions}
-        ttsEnabled={false}
+
       />,
     )
     const card = screen.getByTestId('answer-option-0')

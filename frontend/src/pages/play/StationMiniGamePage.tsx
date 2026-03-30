@@ -60,7 +60,6 @@ function MiniGameRouter({
           questionText={String(config.question_text ?? 'Was ist die Antwort?')}
           answerOptions={(config.answer_options as import('../../types').TextRiddleOption[]) ?? []}
           answerMode={(config.answer_mode as 'multiple_choice' | 'single_tap') ?? 'multiple_choice'}
-          ttsEnabled={Boolean(config.tts_enabled ?? false)}
           onComplete={onComplete}
         />
       )
