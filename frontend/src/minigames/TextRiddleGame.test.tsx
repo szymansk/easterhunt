@@ -4,7 +4,7 @@ import TextRiddleGame from './TextRiddleGame'
 import type { TextRiddleOption } from '../types'
 
 vi.mock('../hooks/useTTS', () => ({
-  useTTS: vi.fn(() => ({ isTTSAvailable: () => false, speak: vi.fn() })),
+  useTTS: vi.fn(() => ({ isTTSAvailable: () => false, speak: vi.fn(), stop: vi.fn() })),
 }))
 
 const answerOptions: TextRiddleOption[] = [
@@ -47,7 +47,7 @@ describe('TextRiddleGame', () => {
 
   it('TTS button hidden when isTTSAvailable returns false', async () => {
     const { useTTS } = await import('../hooks/useTTS')
-    vi.mocked(useTTS).mockReturnValue({ isTTSAvailable: () => false, speak: vi.fn() })
+    vi.mocked(useTTS).mockReturnValue({ isTTSAvailable: () => false, speak: vi.fn(), stop: vi.fn() })
     render(
       <TextRiddleGame
         questionText="Q?"
@@ -60,7 +60,7 @@ describe('TextRiddleGame', () => {
 
   it('TTS button shown when isTTSAvailable returns true', async () => {
     const { useTTS } = await import('../hooks/useTTS')
-    vi.mocked(useTTS).mockReturnValue({ isTTSAvailable: () => true, speak: vi.fn() })
+    vi.mocked(useTTS).mockReturnValue({ isTTSAvailable: () => true, speak: vi.fn(), stop: vi.fn() })
     render(
       <TextRiddleGame
         questionText="Q?"
