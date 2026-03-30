@@ -17,10 +17,12 @@ dev:
 # Build frontend and copy to backend/dist
 build:
 	cd $(FRONTEND_DIR) && pnpm build
+	rm -rf $(BACKEND_DIR)/dist
 	cp -r $(FRONTEND_DIR)/dist $(BACKEND_DIR)/dist
 
 # Serve: backend serves frontend build as static files
 serve:
+	rm -rf $(BACKEND_DIR)/dist
 	cp -r $(FRONTEND_DIR)/dist $(BACKEND_DIR)/dist
 	cd $(BACKEND_DIR) && uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
 
