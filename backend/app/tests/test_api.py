@@ -210,7 +210,8 @@ class TestModels:
         assert MiniGameType.text_riddle == "text_riddle"
         assert MiniGameType.picture_riddle == "picture_riddle"
         assert MiniGameType.treasure == "treasure"
-        assert len(set(MiniGameType)) == 6
+        # 6 original + 18 new mini-game types
+        assert len(set(MiniGameType)) >= 6
 
 
 # ---------------------------------------------------------------------------

@@ -14,6 +14,24 @@ import MazeGame from '../../minigames/MazeGame'
 import TextRiddleGame from '../../minigames/TextRiddleGame'
 import PictureRiddleGame from '../../minigames/PictureRiddleGame'
 import TreasureGame from '../../components/minigames/TreasureGame'
+import MemoryGame from '../../minigames/MemoryGame'
+import SoundMatchGame from '../../minigames/SoundMatchGame'
+import ColorSortGame from '../../minigames/ColorSortGame'
+import SpotDifferenceGame from '../../minigames/SpotDifferenceGame'
+import ShadowMatchGame from '../../minigames/ShadowMatchGame'
+import BalloonPopGame from '../../minigames/BalloonPopGame'
+import CatchFishGame from '../../minigames/CatchFishGame'
+import WhackAMoleGame from '../../minigames/WhackAMoleGame'
+import BuildObjectGame from '../../minigames/BuildObjectGame'
+import SequenceSortGame from '../../minigames/SequenceSortGame'
+import DecorateGame from '../../minigames/DecorateGame'
+import HiddenObjectGame from '../../minigames/HiddenObjectGame'
+import ComparisonGame from '../../minigames/ComparisonGame'
+import RhythmGame from '../../minigames/RhythmGame'
+import CauseEffectGame from '../../minigames/CauseEffectGame'
+import AvoidObstaclesGame from '../../minigames/AvoidObstaclesGame'
+import RolePlayGame from '../../minigames/RolePlayGame'
+import LogicPuzzleGame from '../../minigames/LogicPuzzleGame'
 
 function MiniGameRouter({
   station,
@@ -75,6 +93,60 @@ function MiniGameRouter({
 
     case MiniGameType.treasure:
       return <TreasureGame imageUrl={station.image_path} onComplete={onComplete} />
+
+    case MiniGameType.memory:
+      return <MemoryGame config={config as unknown as import('../../types').MemoryConfig} onComplete={onComplete} />
+
+    case MiniGameType.sound_match:
+      return <SoundMatchGame config={config as unknown as import('../../types').SoundMatchConfig} onComplete={onComplete} />
+
+    case MiniGameType.color_sort:
+      return <ColorSortGame config={config as unknown as import('../../types').ColorSortConfig} onComplete={onComplete} />
+
+    case MiniGameType.spot_difference:
+      return <SpotDifferenceGame config={config as unknown as import('../../types').SpotDifferenceConfig} onComplete={onComplete} />
+
+    case MiniGameType.shadow_match:
+      return <ShadowMatchGame config={config as unknown as import('../../types').ShadowMatchConfig} onComplete={onComplete} />
+
+    case MiniGameType.balloon_pop:
+      return <BalloonPopGame config={config as unknown as import('../../types').BalloonPopConfig} onComplete={onComplete} />
+
+    case MiniGameType.catch_fish:
+      return <CatchFishGame config={config as unknown as import('../../types').CatchFishConfig} onComplete={onComplete} />
+
+    case MiniGameType.whack_a_mole:
+      return <WhackAMoleGame config={config as unknown as import('../../types').WhackAMoleConfig} onComplete={onComplete} />
+
+    case MiniGameType.build_object:
+      return <BuildObjectGame config={config as unknown as import('../../types').BuildObjectConfig} onComplete={onComplete} />
+
+    case MiniGameType.sequence_sort:
+      return <SequenceSortGame config={config as unknown as import('../../types').SequenceSortConfig} onComplete={onComplete} />
+
+    case MiniGameType.decorate:
+      return <DecorateGame config={config as unknown as import('../../types').DecorateConfig} onComplete={onComplete} />
+
+    case MiniGameType.hidden_object:
+      return <HiddenObjectGame config={config as unknown as import('../../types').HiddenObjectConfig} onComplete={onComplete} />
+
+    case MiniGameType.comparison:
+      return <ComparisonGame config={config as unknown as import('../../types').ComparisonConfig} onComplete={onComplete} />
+
+    case MiniGameType.rhythm:
+      return <RhythmGame config={config as unknown as import('../../types').RhythmConfig} onComplete={onComplete} />
+
+    case MiniGameType.cause_effect:
+      return <CauseEffectGame config={config as unknown as import('../../types').CauseEffectConfig} onComplete={onComplete} />
+
+    case MiniGameType.avoid_obstacles:
+      return <AvoidObstaclesGame config={config as unknown as import('../../types').AvoidObstaclesConfig} onComplete={onComplete} />
+
+    case MiniGameType.role_play:
+      return <RolePlayGame config={config as unknown as import('../../types').RolePlayConfig} onComplete={onComplete} />
+
+    case MiniGameType.logic_puzzle:
+      return <LogicPuzzleGame config={config as unknown as import('../../types').LogicPuzzleConfig} onComplete={onComplete} />
 
     default:
       return (

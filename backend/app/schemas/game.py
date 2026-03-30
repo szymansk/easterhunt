@@ -126,6 +126,302 @@ class TreasureConfig(BaseModel):
     type: Literal["treasure"]
 
 
+# New mini-game configs
+
+
+class MemoryPair(BaseModel):
+    id: str
+    image_url: str
+    label: str
+
+
+class MemoryConfig(BaseModel):
+    type: Literal["memory"]
+    pairs: list[MemoryPair] = Field(..., min_length=4, max_length=12)
+    grid_cols: int = Field(default=4)
+
+    @model_validator(mode="after")
+    def validate_pairs(self) -> "MemoryConfig":
+        if len(self.pairs) % 2 != 0:
+            raise ValueError("pairs count must be even")
+        if self.grid_cols not in {2, 3, 4}:
+            raise ValueError("grid_cols must be 2, 3, or 4")
+        return self
+
+
+class SoundMatchItem(BaseModel):
+    image_url: str
+    label: str
+
+
+class SoundMatchConfig(BaseModel):
+    type: Literal["sound_match"]
+    sound_url: str
+    correct_item: SoundMatchItem
+    distractors: list[SoundMatchItem] = Field(..., min_length=2, max_length=3)
+
+
+class ColorSortBucket(BaseModel):
+    id: str
+    color: str
+    label: str
+    item_ids: list[str]
+
+
+class ColorSortItem(BaseModel):
+    id: str
+    color: str
+    label: str
+    emoji: str
+
+
+class ColorSortConfig(BaseModel):
+    type: Literal["color_sort"]
+    buckets: list[ColorSortBucket] = Field(..., min_length=2, max_length=4)
+    items: list[ColorSortItem] = Field(..., min_length=4, max_length=8)
+
+
+class SpotDiffTarget(BaseModel):
+    id: str
+    label: str
+    x_pct: float
+    y_pct: float
+    radius_pct: float = Field(..., ge=1, le=30)
+
+
+class SpotDifferenceConfig(BaseModel):
+    type: Literal["spot_difference"]
+    image_url: str
+    prompt: str
+    targets: list[SpotDiffTarget] = Field(..., min_length=1, max_length=8)
+
+
+class ShadowMatchOption(BaseModel):
+    id: str
+    image_url: str
+    label: str
+    is_correct: bool
+
+
+class ShadowMatchConfig(BaseModel):
+    type: Literal["shadow_match"]
+    silhouette_image_url: str
+    prompt: str
+    options: list[ShadowMatchOption] = Field(..., min_length=2, max_length=4)
+
+    @model_validator(mode="after")
+    def validate_exactly_one_correct(self) -> "ShadowMatchConfig":
+        correct_count = sum(1 for o in self.options if o.is_correct)
+        if correct_count != 1:
+            raise ValueError("Exactly one option must be correct")
+        return self
+
+
+class BalloonPopConfig(BaseModel):
+    type: Literal["balloon_pop"]
+    prompt: str
+    target_count: int
+    balloon_emoji: str
+    total_balloons: int = Field(..., ge=3, le=12)
+
+    @model_validator(mode="after")
+    def validate_counts(self) -> "BalloonPopConfig":
+        if self.target_count > self.total_balloons:
+            raise ValueError("target_count must be <= total_balloons")
+        return self
+
+
+class CatchFishConfig(BaseModel):
+    type: Literal["catch_fish"]
+    prompt: str
+    target_count: int
+    fish_emoji: str
+    total_fish: int
+    animation_speed: Literal["slow", "medium", "fast"]
+
+    @model_validator(mode="after")
+    def validate_counts(self) -> "CatchFishConfig":
+        if self.target_count > self.total_fish:
+            raise ValueError("target_count must be <= total_fish")
+        return self
+
+
+class WhackAMoleConfig(BaseModel):
+    type: Literal["whack_a_mole"]
+    duration_s: int = Field(..., ge=10, le=60)
+    grid_size: int
+    appear_ms: int = Field(..., ge=400, le=2000)
+    mole_emoji: str
+    target_score: int = Field(..., ge=1)
+
+    @model_validator(mode="after")
+    def validate_grid_size(self) -> "WhackAMoleConfig":
+        if self.grid_size not in {3, 4, 6}:
+            raise ValueError("grid_size must be 3, 4, or 6")
+        return self
+
+
+class BuildObjectPart(BaseModel):
+    id: str
+    image_url: str
+    label: str
+    slot_x_pct: float
+    slot_y_pct: float
+    width_pct: float
+    height_pct: float
+
+
+class BuildObjectConfig(BaseModel):
+    type: Literal["build_object"]
+    background_image: str
+    parts: list[BuildObjectPart] = Field(..., min_length=2, max_length=8)
+    prompt: str
+
+
+class SequenceSortStep(BaseModel):
+    id: str
+    image_url: str
+    label: str
+    correct_order: int
+
+
+class SequenceSortConfig(BaseModel):
+    type: Literal["sequence_sort"]
+    steps: list[SequenceSortStep] = Field(..., min_length=3, max_length=5)
+    prompt: str
+
+
+class DecorateSticker(BaseModel):
+    id: str
+    image_url: str
+    label: str
+
+
+class DecorateConfig(BaseModel):
+    type: Literal["decorate"]
+    base_image: str
+    prompt: str
+    stickers: list[DecorateSticker] = Field(..., min_length=2, max_length=12)
+    colors: list[str] = Field(..., min_length=2, max_length=8)
+
+
+class HiddenObjectTarget(BaseModel):
+    id: str
+    label: str
+    x_pct: float
+    y_pct: float
+    radius_pct: float
+
+
+class HiddenObjectConfig(BaseModel):
+    type: Literal["hidden_object"]
+    scene_image: str
+    prompt: str
+    targets: list[HiddenObjectTarget] = Field(..., min_length=2, max_length=8)
+
+
+class ComparisonItem(BaseModel):
+    image_url: str
+    label: str
+    value: int
+
+
+class ComparisonConfig(BaseModel):
+    type: Literal["comparison"]
+    question: str
+    left_item: ComparisonItem
+    right_item: ComparisonItem
+    correct_side: Literal["left", "right"]
+    comparison_type: Literal["size", "count"]
+
+
+class RhythmBeat(BaseModel):
+    delay_ms: int
+
+
+class RhythmConfig(BaseModel):
+    type: Literal["rhythm"]
+    pattern: list[RhythmBeat] = Field(..., min_length=2, max_length=5)
+    prompt: str
+    max_attempts: int
+    tolerance_ms: int = Field(default=250, ge=100, le=500)
+
+
+class CauseEffectObject(BaseModel):
+    id: str
+    x_pct: float
+    y_pct: float
+    image_url: str
+    label: str
+    animation: Literal["bounce", "spin", "flash", "grow"]
+    sound: Literal["snap", "success"] | None = None
+
+
+class CauseEffectConfig(BaseModel):
+    type: Literal["cause_effect"]
+    scene_image: str
+    prompt: str
+    objects: list[CauseEffectObject] = Field(..., min_length=2, max_length=8)
+    require_all_tapped: bool
+
+
+class AvoidObstaclesConfig(BaseModel):
+    type: Literal["avoid_obstacles"]
+    obstacle_speed: int
+    lives: int = Field(..., ge=1, le=3)
+    target_distance: int = Field(..., ge=100, le=1000)
+    character_emoji: str
+    obstacle_emoji: str
+
+    @model_validator(mode="after")
+    def validate_speed(self) -> "AvoidObstaclesConfig":
+        if self.obstacle_speed not in {1, 2, 3}:
+            raise ValueError("obstacle_speed must be 1, 2, or 3")
+        return self
+
+
+class RolePlayStep(BaseModel):
+    id: str
+    object_image: str
+    object_label: str
+    action_label: str
+    x_pct: float
+    y_pct: float
+    sound: Literal["snap", "success"] | None = None
+
+
+class RolePlayConfig(BaseModel):
+    type: Literal["role_play"]
+    scene_image: str
+    prompt: str
+    steps: list[RolePlayStep] = Field(..., min_length=2, max_length=6)
+    ordered: bool
+
+
+class LogicElement(BaseModel):
+    id: str
+    type: Literal["switch", "button"]
+    x_pct: float
+    y_pct: float
+    image_off: str
+    image_on: str
+    label: str
+
+
+class LogicPuzzleConfig(BaseModel):
+    type: Literal["logic_puzzle"]
+    scene_image: str
+    prompt: str
+    elements: list[LogicElement] = Field(..., min_length=2, max_length=6)
+    solution: list[str]
+
+    @model_validator(mode="after")
+    def validate_solution(self) -> "LogicPuzzleConfig":
+        if len(self.solution) != len(self.elements):
+            raise ValueError("solution length must equal elements length")
+        return self
+
+
 MiniGameConfig = Annotated[
     Union[
         PuzzleConfig,
@@ -134,6 +430,24 @@ MiniGameConfig = Annotated[
         TextRiddleConfig,
         PictureRiddleConfig,
         TreasureConfig,
+        MemoryConfig,
+        SoundMatchConfig,
+        ColorSortConfig,
+        SpotDifferenceConfig,
+        ShadowMatchConfig,
+        BalloonPopConfig,
+        CatchFishConfig,
+        WhackAMoleConfig,
+        BuildObjectConfig,
+        SequenceSortConfig,
+        DecorateConfig,
+        HiddenObjectConfig,
+        ComparisonConfig,
+        RhythmConfig,
+        CauseEffectConfig,
+        AvoidObstaclesConfig,
+        RolePlayConfig,
+        LogicPuzzleConfig,
     ],
     Field(discriminator="type"),
 ]

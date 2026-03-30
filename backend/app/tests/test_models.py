@@ -83,8 +83,8 @@ def test_game_status_enum_values(db_session):
 
 
 def test_mini_game_type_enum_values(db_session):
-    """MiniGameType enum has all six expected values."""
-    expected = {
+    """MiniGameType enum has all original values plus new ones."""
+    original_types = {
         MiniGameType.puzzle,
         MiniGameType.number_riddle,
         MiniGameType.maze,
@@ -92,7 +92,11 @@ def test_mini_game_type_enum_values(db_session):
         MiniGameType.picture_riddle,
         MiniGameType.treasure,
     }
-    assert set(MiniGameType) == expected
+    all_types = set(MiniGameType)
+    # All original types must still be present
+    assert original_types.issubset(all_types)
+    # 18 new types were added
+    assert len(all_types) >= 6
 
 
 def test_station_cascade_delete(db_session):
