@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { PictureRiddleAnswerOption, PictureRiddleReferenceItem } from '../types'
 import { useAudio } from '../hooks/useAudio'
+import { useTTS } from '../hooks/useTTS'
 
 interface PictureRiddleGameProps {
   referenceItems: PictureRiddleReferenceItem[]
@@ -17,6 +18,7 @@ export default function PictureRiddleGame({
 }: PictureRiddleGameProps) {
   const [answerStates, setAnswerStates] = useState<Record<number, AnswerState>>({})
   const audio = useAudio()
+  const tts = useTTS()
 
   function handleTap(index: number, isCorrect: boolean) {
     if (answerStates[index] === 'wrong') return
@@ -39,7 +41,18 @@ export default function PictureRiddleGame({
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-start p-4">
       {/* Prompt */}
-      <p className="text-lg font-bold text-gray-700 mt-4 mb-3 text-center">Was gehört dazu?</p>
+      <div className="flex items-center justify-center gap-2 mt-4 mb-3">
+        <p className="text-lg font-bold text-gray-700 text-center">Was gehört dazu?</p>
+        {tts.isTTSAvailable() && (
+          <button
+            onClick={() => tts.speak('Was gehört dazu?')}
+            aria-label="Vorlesen"
+            className="flex-shrink-0 text-lg active:scale-90 transition-transform"
+          >
+            🔊
+          </button>
+        )}
+      </div>
 
       {/* Reference area: 2 images side by side */}
       <div className="flex gap-3 justify-center mb-5">
@@ -55,6 +68,15 @@ export default function PictureRiddleGame({
             <span className="mt-1 text-xs text-gray-600 font-medium text-center max-w-[100px] truncate">
               {item.label}
             </span>
+            {tts.isTTSAvailable() && (
+              <button
+                onClick={() => tts.speak(item.label)}
+                aria-label={`${item.label} vorlesen`}
+                className="mt-1 text-sm active:scale-90 transition-transform"
+              >
+                🔊
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -97,6 +119,15 @@ export default function PictureRiddleGame({
               <span className="mt-1 text-xs text-gray-700 font-medium text-center leading-tight">
                 {option.label}
               </span>
+              {tts.isTTSAvailable() && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); tts.speak(option.label) }}
+                  aria-label={`${option.label} vorlesen`}
+                  className="mt-1 text-sm active:scale-90 transition-transform"
+                >
+                  🔊
+                </button>
+              )}
             </button>
           )
         })}

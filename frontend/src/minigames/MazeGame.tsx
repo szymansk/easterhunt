@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import type { MazeData } from '../types'
 import { useAudio } from '../hooks/useAudio'
+import { useTTS } from '../hooks/useTTS'
 
 interface MazeGameProps {
   mazeData: MazeData
@@ -40,6 +41,7 @@ function canMove(
 export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
   const { walls, start, goal } = mazeData
   const audio = useAudio()
+  const tts = useTTS()
 
   const [avatarRow, setAvatarRow] = useState(start.row)
   const [avatarCol, setAvatarCol] = useState(start.col)
@@ -145,7 +147,18 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
     <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center p-4">
       <div className="max-w-sm w-full bg-white rounded-2xl shadow-lg p-4 text-center">
         <div className="text-3xl mb-2">🌿</div>
-        <h2 className="text-lg font-bold text-gray-800 mb-3">Finde den Weg!</h2>
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <h2 className="text-lg font-bold text-gray-800">Finde den Weg!</h2>
+          {tts.isTTSAvailable() && (
+            <button
+              onClick={() => tts.speak('Finde den Weg!')}
+              aria-label="Vorlesen"
+              className="flex-shrink-0 text-lg active:scale-90 transition-transform"
+            >
+              🔊
+            </button>
+          )}
+        </div>
 
         <div className="flex justify-center overflow-hidden rounded-xl border-4 border-amber-700 bg-amber-50">
           <svg
@@ -203,7 +216,18 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
           </svg>
         </div>
 
-        <p className="text-xs text-gray-400 mt-2">Ziehe den Hasen zum Osterei</p>
+        <div className="flex items-center justify-center gap-2 mt-2">
+          <p className="text-xs text-gray-400">Ziehe den Hasen zum Osterei</p>
+          {tts.isTTSAvailable() && (
+            <button
+              onClick={() => tts.speak('Ziehe den Hasen zum Osterei')}
+              aria-label="Vorlesen"
+              className="flex-shrink-0 text-sm active:scale-90 transition-transform"
+            >
+              🔊
+            </button>
+          )}
+        </div>
 
         {completed && (
           <div className="mt-3 text-green-600 font-bold text-lg">

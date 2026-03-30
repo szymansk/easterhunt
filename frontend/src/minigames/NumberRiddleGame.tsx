@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAudio } from '../hooks/useAudio'
+import { useTTS } from '../hooks/useTTS'
 
 interface NumberRiddleGameProps {
   taskType: 'count' | 'assign' | 'plus_minus'
@@ -38,6 +39,7 @@ export default function NumberRiddleGame({
   const [options] = useState(() => shuffleArray([correctAnswer, ...distractorAnswers]))
   const [buttonStates, setButtonStates] = useState<Record<number, ButtonState>>({})
   const audio = useAudio()
+  const tts = useTTS()
 
   function handleTap(value: number) {
     const isCorrect = value === correctAnswer
@@ -72,10 +74,32 @@ export default function NumberRiddleGame({
               alt={promptText}
               className="w-32 h-32 mx-auto object-contain rounded-xl"
             />
-            <p className="mt-2 text-lg font-bold text-gray-800">{promptText}</p>
+            <div className="flex items-center justify-center gap-2 mt-2">
+              <p className="text-lg font-bold text-gray-800">{promptText}</p>
+              {tts.isTTSAvailable() && (
+                <button
+                  onClick={() => tts.speak(promptText)}
+                  aria-label="Vorlesen"
+                  className="flex-shrink-0 text-lg active:scale-90 transition-transform"
+                >
+                  🔊
+                </button>
+              )}
+            </div>
           </div>
         ) : (
-          <h2 className="text-xl font-bold text-gray-800 mb-6">{promptText}</h2>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <h2 className="text-xl font-bold text-gray-800">{promptText}</h2>
+            {tts.isTTSAvailable() && (
+              <button
+                onClick={() => tts.speak(promptText)}
+                aria-label="Vorlesen"
+                className="flex-shrink-0 text-lg active:scale-90 transition-transform"
+              >
+                🔊
+              </button>
+            )}
+          </div>
         )}
 
         {/* Answer buttons grid */}
@@ -94,16 +118,26 @@ export default function NumberRiddleGame({
             }
 
             return (
-              <button
-                key={value}
-                onClick={() => handleTap(value)}
-                className={`rounded-xl border-2 ${borderClass} ${bgClass} font-bold text-2xl active:scale-95 transition-transform ${state === 'wrong' ? 'animate-shake' : ''}`}
-                style={{ minWidth: '60px', minHeight: '60px' }}
-                data-testid={`answer-btn-${value}`}
-                aria-label={`Antwort ${value}`}
-              >
-                {value}
-              </button>
+              <div key={value} className="flex flex-col items-center gap-1">
+                <button
+                  onClick={() => handleTap(value)}
+                  className={`rounded-xl border-2 ${borderClass} ${bgClass} font-bold text-2xl active:scale-95 transition-transform ${state === 'wrong' ? 'animate-shake' : ''}`}
+                  style={{ minWidth: '60px', minHeight: '60px' }}
+                  data-testid={`answer-btn-${value}`}
+                  aria-label={`Antwort ${value}`}
+                >
+                  {value}
+                </button>
+                {tts.isTTSAvailable() && (
+                  <button
+                    onClick={() => tts.speak(String(value))}
+                    aria-label={`${value} vorlesen`}
+                    className="text-sm active:scale-90 transition-transform"
+                  >
+                    🔊
+                  </button>
+                )}
+              </div>
             )
           })}
         </div>

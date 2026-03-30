@@ -92,16 +92,26 @@ export default function TextRiddleGame({
           }
 
           return (
-            <button
-              key={i}
-              onClick={() => handleTap(i, option.is_correct)}
-              data-testid={`answer-option-${i}`}
-              aria-label={option.text}
-              className={`w-full px-4 font-semibold text-left rounded-2xl border-2 ${borderClass} ${bgClass} active:scale-95 transition-transform shadow ${isWrong ? 'animate-shake' : ''}`}
-              style={{ minHeight: '60px', fontSize: '16px' }}
-            >
-              {option.text}
-            </button>
+            <div key={i} className="flex items-center gap-2">
+              <button
+                onClick={() => handleTap(i, option.is_correct)}
+                data-testid={`answer-option-${i}`}
+                aria-label={option.text}
+                className={`flex-1 px-4 font-semibold text-left rounded-2xl border-2 ${borderClass} ${bgClass} active:scale-95 transition-transform shadow ${isWrong ? 'animate-shake' : ''}`}
+                style={{ minHeight: '60px', fontSize: '16px' }}
+              >
+                {option.text}
+              </button>
+              {ttsEnabled && tts.isTTSAvailable() && (
+                <button
+                  onClick={() => tts.speak(option.text)}
+                  aria-label="Antwort vorlesen"
+                  className="flex-shrink-0 ml-1 text-lg active:scale-90 transition-transform"
+                >
+                  🔊
+                </button>
+              )}
+            </div>
           )
         })}
       </div>
