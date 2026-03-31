@@ -1,4 +1,5 @@
 import type { LogicPuzzleConfig } from '../../types'
+import { AssetPicker } from '../../components/ui'
 
 interface Props {
   value: LogicPuzzleConfig
@@ -45,13 +46,10 @@ export default function LogicPuzzleConfigForm({ value, onChange, errors }: Props
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Szenenbild-URL</label>
-        <input
-          type="text"
+        <AssetPicker
           value={value.scene_image}
-          onChange={(e) => update({ scene_image: e.target.value })}
-          placeholder="https://..."
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          onChange={(url) => update({ scene_image: url })}
+          label="Szenenbild"
         />
       </div>
       <div>
@@ -105,6 +103,16 @@ export default function LogicPuzzleConfigForm({ value, onChange, errors }: Props
                   <button type="button" onClick={() => removeElement(i)} className="text-gray-400 hover:text-red-500 px-1">✕</button>
                 )}
               </div>
+              <AssetPicker
+                value={el.image_off}
+                onChange={(url) => updateElement(i, { image_off: url })}
+                label="Bild AUS"
+              />
+              <AssetPicker
+                value={el.image_on}
+                onChange={(url) => updateElement(i, { image_on: url })}
+                label="Bild AN"
+              />
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import type { CauseEffectConfig } from '../../types'
+import { AssetPicker } from '../../components/ui'
 
 interface Props {
   value: CauseEffectConfig
@@ -34,13 +35,10 @@ export default function CauseEffectConfigForm({ value, onChange, errors }: Props
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Szenenbild-URL</label>
-        <input
-          type="text"
+        <AssetPicker
           value={value.scene_image}
-          onChange={(e) => update({ scene_image: e.target.value })}
-          placeholder="https://..."
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          onChange={(url) => update({ scene_image: url })}
+          label="Szenenbild"
         />
       </div>
       <div>
@@ -100,6 +98,11 @@ export default function CauseEffectConfigForm({ value, onChange, errors }: Props
                   <button type="button" onClick={() => removeObject(i)} className="text-gray-400 hover:text-red-500 px-1">✕</button>
                 )}
               </div>
+              <AssetPicker
+                value={obj.image_url}
+                onChange={(url) => updateObject(i, { image_url: url })}
+                label="Objekt-Bild"
+              />
             </div>
           ))}
         </div>
