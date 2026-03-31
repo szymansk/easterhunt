@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- nest base -->
+  <ellipse cx="50" cy="72" rx="36" ry="14" fill="#92400e"/>
+  <ellipse cx="50" cy="70" rx="32" ry="12" fill="#b45309"/>
+  <!-- nest texture lines -->
+  <path d="M20 68 Q35 60 50 68 Q65 60 80 68" fill="none" stroke="#92400e" stroke-width="2"/>
+  <path d="M22 72 Q37 64 50 72 Q63 64 78 72" fill="none" stroke="#92400e" stroke-width="2"/>
+  <path d="M18 65 Q50 55 82 65" fill="none" stroke="#78350f" stroke-width="1.5"/>
+  <!-- eggs in nest -->
+  <ellipse cx="36" cy="63" rx="11" ry="14" fill="#fde68a"/>
+  <ellipse cx="50" cy="61" rx="11" ry="14" fill="#34d399"/>
+  <ellipse cx="64" cy="63" rx="11" ry="14" fill="#f87171"/>
+  <!-- egg details -->
+  <path d="M26 60 Q36 56 46 60" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+  <path d="M40 58 Q50 54 60 58" fill="none" stroke="#059669" stroke-width="1.5"/>
+</svg>

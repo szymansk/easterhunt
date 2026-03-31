@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- cloud shape (overlapping circles) -->
+  <circle cx="35" cy="55" r="18" fill="white"/>
+  <circle cx="52" cy="48" r="22" fill="white"/>
+  <circle cx="70" cy="55" r="16" fill="white"/>
+  <circle cx="42" cy="62" r="16" fill="white"/>
+  <circle cx="60" cy="60" r="16" fill="white"/>
+  <!-- base fill -->
+  <rect x="17" y="55" width="69" height="20" fill="white"/>
+  <!-- outline for definition -->
+  <path d="M17 68 Q17 55 35 55 Q38 37 52 37 Q65 37 70 48 Q78 46 80 55 Q88 57 80 68 Z" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+</svg>

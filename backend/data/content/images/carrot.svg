@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- carrot body -->
+  <polygon points="50,90 30,35 70,35" fill="#f59e0b"/>
+  <!-- carrot lines -->
+  <line x1="44" y1="42" x2="42" y2="82" stroke="#d97706" stroke-width="1.5"/>
+  <line x1="56" y1="42" x2="58" y2="82" stroke="#d97706" stroke-width="1.5"/>
+  <!-- green top -->
+  <path d="M50 35 C45 20 32 18 35 8 C40 15 44 22 50 28" fill="#34d399"/>
+  <path d="M50 35 C50 18 55 12 60 5 C58 15 55 24 50 32" fill="#34d399"/>
+  <path d="M50 35 C42 22 30 25 25 15 C34 18 44 24 50 32" fill="#34d399"/>
+  <path d="M50 35 C58 22 70 25 75 15 C66 18 56 24 50 32" fill="#34d399"/>
+</svg>

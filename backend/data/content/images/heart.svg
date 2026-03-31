@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- heart shape using two circles + bottom diamond approach -->
+  <path d="M50 82 C50 82 10 58 10 35 C10 20 22 12 35 18 C42 21 48 28 50 32 C52 28 58 21 65 18 C78 12 90 20 90 35 C90 58 50 82 50 82 Z" fill="#f87171"/>
+  <!-- highlight -->
+  <ellipse cx="35" cy="30" rx="8" ry="5" fill="#fbcfe8" opacity="0.6" transform="rotate(-20 35 30)"/>
+</svg>

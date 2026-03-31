@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- body -->
+  <circle cx="50" cy="65" r="24" fill="#f59e0b"/>
+  <!-- head -->
+  <circle cx="50" cy="40" r="16" fill="#f59e0b"/>
+  <!-- wing -->
+  <ellipse cx="30" cy="65" rx="10" ry="6" fill="#fde68a" transform="rotate(-20 30 65)"/>
+  <!-- eyes -->
+  <circle cx="44" cy="37" r="3" fill="#1e293b"/>
+  <circle cx="45" cy="36" r="1" fill="white"/>
+  <!-- beak -->
+  <polygon points="50,44 44,48 56,48" fill="#f87171"/>
+  <!-- feet -->
+  <line x1="42" y1="88" x2="38" y2="96" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="42" y1="96" x2="34" y2="96" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+  <line x1="42" y1="96" x2="42" y2="100" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+  <line x1="58" y1="88" x2="62" y2="96" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="62" y1="96" x2="70" y2="96" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+  <line x1="62" y1="96" x2="62" y2="100" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+</svg>

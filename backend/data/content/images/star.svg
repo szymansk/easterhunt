@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- 5-point star -->
+  <polygon points="50,8 61,38 93,38 68,58 78,88 50,70 22,88 32,58 7,38 39,38" fill="#f59e0b"/>
+  <polygon points="50,20 58,40 80,40 64,54 70,76 50,62 30,76 36,54 20,40 42,40" fill="#fde68a"/>
+</svg>
