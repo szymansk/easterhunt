@@ -28,6 +28,22 @@ import { getStation, listStations, updateStation } from '../../services/api'
 import type { MiniGameConfig, Station } from '../../types'
 import { MiniGameType } from '../../types'
 
+const REQUIRES_EXTERNAL_URLS = new Set<MiniGameType>([
+  MiniGameType.picture_riddle,
+  MiniGameType.memory,
+  MiniGameType.sound_match,
+  MiniGameType.spot_difference,
+  MiniGameType.shadow_match,
+  MiniGameType.build_object,
+  MiniGameType.sequence_sort,
+  MiniGameType.decorate,
+  MiniGameType.hidden_object,
+  MiniGameType.comparison,
+  MiniGameType.cause_effect,
+  MiniGameType.role_play,
+  MiniGameType.logic_puzzle,
+])
+
 const MINI_GAME_TYPES: { type: MiniGameType; label: string; icon: string }[] = [
   { type: MiniGameType.puzzle, label: 'Puzzle', icon: '🧩' },
   { type: MiniGameType.number_riddle, label: 'Zahlenrätsel', icon: '🔢' },
@@ -309,6 +325,7 @@ export default function StationEditorPage() {
   const [config, setConfig] = useState<MiniGameConfig>(defaultConfig(MiniGameType.puzzle))
   const [configErrors, setConfigErrors] = useState<Record<string, string>>({})
   const [typeChangeTarget, setTypeChangeTarget] = useState<MiniGameType | null>(null)
+  const [hideUrlGames, setHideUrlGames] = useState(false)
 
   useEffect(() => {
     if (!gameId || !stationId) return
@@ -403,9 +420,23 @@ export default function StationEditorPage() {
       {/* Mini game type selection — hidden for treasure stations */}
       {miniGameType !== MiniGameType.treasure && (
         <Card className="mb-6">
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">Minispiel-Typ</h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-gray-700">Minispiel-Typ</h2>
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <span className="text-xs text-gray-500">Nur ohne externe URLs</span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={hideUrlGames}
+                onClick={() => setHideUrlGames(v => !v)}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${hideUrlGames ? 'bg-blue-500' : 'bg-gray-300'}`}
+              >
+                <span className={`inline-block h-3.5 w-3.5 rounded-full bg-white shadow transition-transform ${hideUrlGames ? 'translate-x-4' : 'translate-x-1'}`} />
+              </button>
+            </label>
+          </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
-            {MINI_GAME_TYPES.map(({ type, label, icon }) => {
+            {MINI_GAME_TYPES.filter(({ type }) => !hideUrlGames || !REQUIRES_EXTERNAL_URLS.has(type)).map(({ type, label, icon }) => {
               const selected = miniGameType === type
               return (
                 <button
