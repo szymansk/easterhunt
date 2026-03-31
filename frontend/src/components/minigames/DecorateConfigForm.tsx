@@ -1,3 +1,4 @@
+import { AssetPicker } from '../../components/ui'
 import type { DecorateConfig } from '../../types'
 
 interface Props {
@@ -29,14 +30,7 @@ export default function DecorateConfigForm({ value, onChange, errors }: Props) {
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Basisbild-URL</label>
-        <input
-          type="text"
-          value={value.base_image}
-          onChange={(e) => update({ base_image: e.target.value })}
-          placeholder="https://..."
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-        />
+        <AssetPicker value={value.base_image} onChange={(url) => update({ base_image: url })} label="Basisbild" />
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Aufgabe</label>
@@ -73,13 +67,7 @@ export default function DecorateConfigForm({ value, onChange, errors }: Props) {
         <div className="space-y-2">
           {value.stickers.map((sticker, i) => (
             <div key={i} className="flex gap-2 items-center">
-              <input
-                type="text"
-                value={sticker.image_url}
-                onChange={(e) => updateSticker(i, { image_url: e.target.value })}
-                placeholder="Bild-URL"
-                className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
-              />
+              <AssetPicker value={sticker.image_url} onChange={(url) => updateSticker(i, { image_url: url })} label="Sticker-Bild" />
               <input
                 type="text"
                 value={sticker.label}

@@ -1,3 +1,4 @@
+import { AssetPicker } from '../../components/ui'
 import type { SequenceSortConfig } from '../../types'
 
 interface Props {
@@ -61,13 +62,7 @@ export default function SequenceSortConfigForm({ value, onChange, errors }: Prop
                 placeholder="Bezeichnung"
                 className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
               />
-              <input
-                type="text"
-                value={step.image_url}
-                onChange={(e) => updateStep(i, { image_url: e.target.value })}
-                placeholder="Bild-URL"
-                className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
-              />
+              <AssetPicker value={step.image_url} onChange={(url) => updateStep(i, { image_url: url })} label="Bild" />
               {value.steps.length > 3 && (
                 <button type="button" onClick={() => removeStep(i)} className="text-gray-400 hover:text-red-500 px-2">✕</button>
               )}

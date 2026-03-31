@@ -1,3 +1,4 @@
+import { AssetPicker } from '../../components/ui'
 import type { ComparisonConfig } from '../../types'
 
 interface Props {
@@ -62,12 +63,10 @@ export default function ComparisonConfigForm({ value, onChange, errors }: Props)
               placeholder="Bezeichnung"
               className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
             />
-            <input
-              type="text"
+            <AssetPicker
               value={value[side].image_url}
-              onChange={(e) => update({ [side]: { ...value[side], image_url: e.target.value } })}
-              placeholder="Bild-URL"
-              className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+              onChange={(url) => update({ [side]: { ...value[side], image_url: url } })}
+              label={side === 'left_item' ? 'Linkes Objekt (Bild)' : 'Rechtes Objekt (Bild)'}
             />
             <input
               type="number"
