@@ -1,5 +1,6 @@
 import type { MemoryConfig } from '../../types'
 import { MiniGameType } from '../../types'
+import { AssetPicker } from '../../components/ui'
 
 interface Props {
   value: MemoryConfig
@@ -63,13 +64,13 @@ export default function MemoryConfigForm({ value, onChange, errors }: Props) {
         <div className="space-y-2">
           {value.pairs.map((pair, i) => (
             <div key={i} className="flex gap-2 items-center">
-              <input
-                type="text"
-                value={pair.image_url}
-                onChange={(e) => updatePair(i, { image_url: e.target.value })}
-                placeholder="Bild-URL"
-                className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
-              />
+              <div className="flex-1">
+                <AssetPicker
+                  value={pair.image_url}
+                  onChange={(url) => updatePair(i, { image_url: url })}
+                  label="Bild"
+                />
+              </div>
               <input
                 type="text"
                 value={pair.label}

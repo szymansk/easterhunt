@@ -1,4 +1,5 @@
 import type { SpotDifferenceConfig } from '../../types'
+import { AssetPicker } from '../../components/ui'
 
 interface Props {
   value: SpotDifferenceConfig
@@ -31,13 +32,10 @@ export default function SpotDifferenceConfigForm({ value, onChange, errors }: Pr
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Bild-URL</label>
-        <input
-          type="text"
+        <AssetPicker
           value={value.image_url}
-          onChange={(e) => update({ image_url: e.target.value })}
-          placeholder="https://..."
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          onChange={(url) => update({ image_url: url })}
+          label="Szenenbild"
         />
       </div>
       <div>

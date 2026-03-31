@@ -1,4 +1,5 @@
 import type { BuildObjectConfig } from '../../types'
+import { AssetPicker } from '../../components/ui'
 
 interface Props {
   value: BuildObjectConfig
@@ -34,13 +35,10 @@ export default function BuildObjectConfigForm({ value, onChange, errors }: Props
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Hintergrundbild-URL</label>
-        <input
-          type="text"
+        <AssetPicker
           value={value.background_image}
-          onChange={(e) => update({ background_image: e.target.value })}
-          placeholder="https://..."
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          onChange={(url) => update({ background_image: url })}
+          label="Hintergrundbild"
         />
       </div>
       <div>
@@ -74,13 +72,13 @@ export default function BuildObjectConfigForm({ value, onChange, errors }: Props
                   placeholder="Name"
                   className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
                 />
-                <input
-                  type="text"
-                  value={part.image_url}
-                  onChange={(e) => updatePart(i, { image_url: e.target.value })}
-                  placeholder="Bild-URL"
-                  className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                />
+                <div className="flex-1">
+                  <AssetPicker
+                    value={part.image_url}
+                    onChange={(url) => updatePart(i, { image_url: url })}
+                    label="Teil-Bild"
+                  />
+                </div>
                 {value.parts.length > 2 && (
                   <button type="button" onClick={() => removePart(i)} className="text-gray-400 hover:text-red-500 px-2">✕</button>
                 )}
