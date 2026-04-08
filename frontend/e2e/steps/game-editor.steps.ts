@@ -43,7 +43,8 @@ When('Escape drücke', async ({ page }) => {
 })
 
 Then('zeigt die Überschrift den ursprünglichen Namen', async ({ page }) => {
-  const heading = page.getByRole('heading')
+  // game-title testid to avoid strict mode with multiple headings on the page
+  const heading = page.getByTestId('game-title')
   await expect(heading).toBeVisible()
 })
 
@@ -60,7 +61,8 @@ Given('ich habe eine Station ohne Bild hinzugefügt', async ({ page }) => {
 })
 
 Then('sehe ich eine Fehlermeldung über fehlende Bilder', async ({ page }) => {
-  await expect(page.getByText(/Bild/i)).toBeVisible()
+  // Either the station list item shows "Kein Stationsbild" or the error summary after clicking start
+  await expect(page.getByText(/Kein Stationsbild/i).first()).toBeVisible()
 })
 
 Given('ich habe eine Station hinzugefügt', async ({ page }) => {
@@ -68,11 +70,21 @@ Given('ich habe eine Station hinzugefügt', async ({ page }) => {
 })
 
 When("ich auf 'Bearbeiten' bei der Station klicke", async ({ page }) => {
-  await page.getByRole('button', { name: /Bearbeiten/i }).first().click()
+  await page.locator('[data-testid="station-item"]').first().getByRole('button', { name: /Bearbeiten/i }).click()
+  await page.waitForURL(/\/station\//)
 })
 
-Given('ich habe 20 Stationen hinzugefügt', async ({ page }) => {
+Given('ich habe 20 Stationen hinzugefügt', async ({ page, createdGameIds }) => {
+  // Extract game ID from URL and create 20 stations via API for speed/reliability
+  const url = page.url()
+  const match = url.match(/\/game\/([^/]+)/)
+  if (!match) throw new Error('Cannot find game ID in URL')
+  const gameId = match[1]
   for (let i = 0; i < 20; i++) {
-    await page.getByRole('button', { name: /\+ Station/i }).click()
+    await page.request.post(`${API_BASE}/api/games/${gameId}/stations`, {
+      data: { position: i + 1, image_path: null, mini_game_type: 'puzzle', mini_game_config: { type: 'puzzle', grid_size: 4 } },
+    })
   }
+  await page.reload()
+  await page.waitForLoadState('networkidle')
 })

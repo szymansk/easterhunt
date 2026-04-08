@@ -29,9 +29,18 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
     >
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
       <div className="relative bg-white rounded-xl shadow-xl p-6 max-w-lg w-full mx-4">
-        {title && (
-          <h2 className="text-xl font-bold text-gray-800 mb-4">{title}</h2>
-        )}
+        <div className="flex items-start justify-between mb-4">
+          {title && (
+            <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+          )}
+          <button
+            onClick={onClose}
+            aria-label="Abbrechen"
+            className="ml-4 p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
+          >
+            ✕
+          </button>
+        </div>
         {children}
       </div>
     </div>

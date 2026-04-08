@@ -326,6 +326,7 @@ export default function GameEditorPage() {
   }
 
   const atMax = stations.length >= MAX_STATIONS
+  const hasPlayableStations = stations.some((s) => s.mini_game_type !== MiniGameType.treasure)
 
   return (
     <div>
@@ -479,12 +480,12 @@ export default function GameEditorPage() {
           <>
             <BigButton
               onClick={handleStartGame}
-              disabled={starting || stations.length === 0}
+              disabled={starting || !hasPlayableStations}
               className="w-full"
             >
               {starting ? 'Starte…' : '▶ Spiel starten'}
             </BigButton>
-            {stations.length === 0 && (
+            {!hasPlayableStations && (
               <p className="text-xs text-gray-500 text-center mt-2">
                 Mindestens eine Station erforderlich
               </p>

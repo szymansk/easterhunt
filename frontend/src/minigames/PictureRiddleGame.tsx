@@ -60,6 +60,7 @@ export default function PictureRiddleGame({
           <div key={i} className="flex flex-col items-center">
             <div className="w-[100px] h-[100px] rounded-xl overflow-hidden bg-white shadow border border-gray-100">
               <img
+                data-testid="reference-img"
                 src={item.image_url}
                 alt={item.label}
                 className="w-full h-full object-contain"
@@ -106,6 +107,7 @@ export default function PictureRiddleGame({
               style={{ minHeight: '80px' }}
               data-testid="answer-btn"
               data-state={state}
+              data-correct={option.is_correct ? 'true' : 'false'}
               aria-label={option.label}
             >
               <div

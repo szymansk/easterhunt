@@ -11,15 +11,26 @@ Given('die App ist geöffnet', async ({ page }) => {
 })
 
 When('ich auf {string} klicke', async ({ page }, label: string) => {
-  // Prefer button within type-selector to avoid strict-mode violations when
-  // a config panel has a similarly-named button (e.g. "Puzzle" vs "Puzzle generieren").
+  // 1. Prefer button within type-selector to avoid strict-mode violations when
+  //    a config panel has a similarly-named button (e.g. "Puzzle" vs "Puzzle generieren").
   const typeSelector = page.locator('[data-testid="mini-game-type-selector"]')
   const inTypeSelector = typeSelector.getByRole('button', { name: label })
   if (await inTypeSelector.count() > 0) {
     await inTypeSelector.click()
-  } else {
-    await page.getByRole('button', { name: label }).click()
+    return
   }
+
+  // 2. For answer buttons — scope via data-testid to avoid matching TTS/vorlesen
+  //    buttons that share a substring of the answer label (e.g. "Ei" in "Startseite",
+  //    "5" in "5 vorlesen").
+  const answerBtn = page.locator('[data-testid="answer-btn"], [data-testid="number-btn"]').filter({ hasText: label })
+  if (await answerBtn.count() > 0) {
+    await answerBtn.first().click()
+    return
+  }
+
+  // 3. Fallback: standard role match.
+  await page.getByRole('button', { name: label }).click()
 })
 
 When('ich die URL {string} aufrufe', async ({ page }, path: string) => {

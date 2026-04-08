@@ -14,19 +14,19 @@ Funktionalität: Spielliste im Creator
 
   Szenario: Spiel bearbeiten
     * es existiert ein Spiel "Ostern 2025"
-    Wenn ich auf "Bearbeiten" klicke
+    Wenn ich bei "Ostern 2025" auf "Bearbeiten" klicke
     Dann bin ich im Spiel-Editor für "Ostern 2025"
 
   Szenario: Spiel löschen mit Bestätigung
     * es existiert ein Spiel "Test Spiel"
-    Wenn ich auf "Löschen" klicke
+    Wenn ich bei "Test Spiel" auf "Löschen" klicke
     Dann erscheint ein Bestätigungs-Dialog
-    Wenn ich auf "Bestätigen" klicke
+    Wenn ich auf "Löschen" klicke
     Dann ist "Test Spiel" nicht mehr in der Liste
 
   Szenario: Spiel löschen abbrechen
     * es existiert ein Spiel "Wichtiges Spiel"
-    Wenn ich auf "Löschen" klicke
+    Wenn ich bei "Wichtiges Spiel" auf "Löschen" klicke
     Dann erscheint ein Bestätigungs-Dialog
     Wenn ich auf "Abbrechen" klicke
     Dann ist "Wichtiges Spiel" noch in der Liste

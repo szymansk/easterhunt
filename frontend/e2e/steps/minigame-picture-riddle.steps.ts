@@ -47,36 +47,36 @@ Then('sehe ich {int} Referenzbilder', async ({ page }, count: number) => {
 })
 
 Then('ich sehe {int} Antwortoptionen im Raster', async ({ page }, count: number) => {
-  await expect(page.locator('[data-testid="answer-img"]')).toHaveCount(count)
+  await expect(page.locator('[data-testid="answer-btn"]')).toHaveCount(count)
 })
 
 When('ich auf das richtige Antwortbild tippe', async ({ page }) => {
-  await page.locator('[data-testid="answer-img"][data-correct="true"]').click()
+  await page.locator('[data-testid="answer-btn"][data-correct="true"]').click()
 })
 
 Then('wird das Bild grün umrandet', async ({ page }) => {
   await expect(
-    page.locator('[data-testid="answer-img"].correct, [data-testid="answer-img"][data-state="correct"]')
+    page.locator('[data-testid="answer-btn"].correct, [data-testid="answer-btn"][data-state="correct"]')
   ).toBeVisible()
 })
 
 When('ich auf ein falsches Antwortbild tippe', async ({ page }) => {
-  await page.locator('[data-testid="answer-img"][data-correct="false"]').first().click()
+  await page.locator('[data-testid="answer-btn"][data-correct="false"]').first().click()
 })
 
 Then('wird das Bild rot umrandet', async ({ page }) => {
   await expect(
-    page.locator('[data-testid="answer-img"].wrong, [data-testid="answer-img"][data-state="wrong"]')
+    page.locator('[data-testid="answer-btn"].wrong, [data-testid="answer-btn"][data-state="wrong"]')
   ).toBeVisible()
 })
 
 Then('nach kurzer Zeit sind alle Bilder wieder auswählbar', async ({ page }) => {
   await page.waitForTimeout(1000)
-  await expect(page.locator('[data-testid="answer-img"]').first()).toBeEnabled()
+  await expect(page.locator('[data-testid="answer-btn"]').first()).toBeEnabled()
 })
 
 Then('haben alle Antwortbilder eine Mindestgröße von {int}px', async ({ page }, size: number) => {
-  const imgs = page.locator('[data-testid="answer-img"]')
+  const imgs = page.locator('[data-testid="answer-btn"]')
   const count = await imgs.count()
   for (let i = 0; i < count; i++) {
     const box = await imgs.nth(i).boundingBox()

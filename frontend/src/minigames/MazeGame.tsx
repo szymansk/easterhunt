@@ -196,6 +196,7 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
 
             {/* Goal marker (Easter egg) */}
             <ellipse
+              data-testid="maze-goal"
               cx={goalCx}
               cy={goalCy}
               rx={r * 0.85}
@@ -229,6 +230,7 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
 
             {/* Avatar (bunny) */}
             <circle
+              data-testid="maze-avatar"
               cx={cx}
               cy={cy}
               r={r}

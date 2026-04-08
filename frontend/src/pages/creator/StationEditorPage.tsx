@@ -443,6 +443,7 @@ export default function StationEditorPage() {
                   key={type}
                   type="button"
                   onClick={() => handleTypeSelect(type)}
+                  data-active={selected ? 'true' : undefined}
                   className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-colors ${
                     selected
                       ? 'border-blue-500 bg-blue-50'

@@ -7,7 +7,11 @@ async function createStartedGame(page: import('@playwright/test').Page, stationC
   const game = await gameRes.json()
   createdGameIds.push(game.id)
 
-  for (let i = 1; i <= stationCount; i++) {
+  // Note: games are auto-created with 1 default "treasure" station at position 1.
+  // Each station we insert at a given position pushes existing stations up by 1.
+  // We create stationCount-1 additional stations to get stationCount total.
+  const additionalCount = stationCount - 1
+  for (let i = 1; i <= additionalCount; i++) {
     await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
       data: {
         position: i,
@@ -61,15 +65,18 @@ When('ich auf Station {int} klicke', async ({ page }, index: number) => {
 })
 
 Then('bleibe ich auf der Player-Übersicht', async ({ page }) => {
-  await expect(page).toHaveURL(/\/play$/)
+  await expect(page).toHaveURL(/\/play\/[^/]+$/)
 })
 
 Then('bin ich im Minispiel von Station {int}', async ({ page }, _index: number) => {
-  await expect(page).toHaveURL(/\/play\//)
+  await expect(page).toHaveURL(/\/play\/.*\/station\//)
 })
 
 Given('ich habe Station {int} abgeschlossen', async ({ page, createdGameIds }, _index: number) => {
   const gameId = await createStartedGame(page, 3, createdGameIds)
+  // Create progress record and complete station 1 via API
+  await page.request.post(`${API_BASE}/api/games/${gameId}/progress`)
+  await page.request.put(`${API_BASE}/api/games/${gameId}/progress/complete-station`)
   await page.goto(`/play/${gameId}`)
   await page.waitForLoadState('networkidle')
 })
@@ -96,10 +103,16 @@ Then('ändert sich das Musik-Icon', async ({ page }) => {
 
 Given('ich habe alle {int} Stationen abgeschlossen', async ({ page, createdGameIds }, count: number) => {
   const gameId = await createStartedGame(page, count, createdGameIds)
+  // Create progress and complete all stations
+  await page.request.post(`${API_BASE}/api/games/${gameId}/progress`)
+  for (let i = 0; i < count; i++) {
+    await page.request.put(`${API_BASE}/api/games/${gameId}/progress/complete-station`)
+  }
   await page.goto(`/play/${gameId}`)
   await page.waitForLoadState('networkidle')
 })
 
 Then('sehe ich die Glückwunsch-Seite', async ({ page }) => {
-  await expect(page).toHaveURL(/\/(play\/complete|congratulations|success)/)
+  // URL is /play/GAMEID/complete after all stations are completed
+  await expect(page).toHaveURL(/\/play\/.*\/complete|\/congratulations|\/success/)
 })

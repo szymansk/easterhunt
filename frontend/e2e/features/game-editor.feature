@@ -24,11 +24,11 @@ Funktionalität: Spiel-Editor
     Und die Stationsanzahl erhöht sich um 1
 
   Szenario: Spiel starten ohne Stationen ist deaktiviert
-    Dann ist der Button 'Spiel starten' deaktiviert
+    Dann ist der Button '▶ Spiel starten' deaktiviert
 
   Szenario: Spiel starten mit unvollständiger Station zeigt Fehler
     * ich habe eine Station ohne Bild hinzugefügt
-    Wenn ich auf 'Spiel starten' klicke
+    Wenn ich auf '▶ Spiel starten' klicke
     Dann sehe ich eine Fehlermeldung über fehlende Bilder
 
   Szenario: Station bearbeiten öffnet Editor

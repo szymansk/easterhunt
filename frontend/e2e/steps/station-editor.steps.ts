@@ -21,7 +21,7 @@ Given('ich bin im Stations-Editor für Station {int}', async ({ page, createdGam
 })
 
 Then("ist {string} als aktiver Typ markiert", async ({ page }, type: string) => {
-  const btn = page.getByRole('button', { name: type })
+  const btn = page.locator('[data-testid="mini-game-type-selector"]').getByRole('button', { name: type })
   await expect(btn).toBeVisible()
   // Check for active state via class or aria
   const isActive = await btn.evaluate((el) =>
@@ -42,7 +42,7 @@ Given('{string} ist ausgewählt', async ({ page }, type: string) => {
 })
 
 Then("ist {string} immer noch ausgewählt", async ({ page }, type: string) => {
-  const btn = page.getByRole('button', { name: type })
+  const btn = page.locator('[data-testid="mini-game-type-selector"]').getByRole('button', { name: type })
   await expect(btn).toBeVisible()
 })
 
@@ -55,7 +55,7 @@ Given("ich habe {string} ausgewählt", async ({ page }, type: string) => {
 })
 
 Given('ich habe eine Frage eingegeben', async ({ page }) => {
-  await page.getByPlaceholder(/Frage/i).fill('Was legt die Henne?')
+  await page.getByLabel(/Frage/i).fill('Was legt die Henne?')
 })
 
 Given('ich habe mindestens 2 Antwortoptionen eingegeben', async ({ page }) => {

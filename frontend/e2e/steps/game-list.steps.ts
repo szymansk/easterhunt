@@ -5,11 +5,19 @@ Given('ich bin auf der Creator-Startseite {string}', async ({ page }, path: stri
   await page.waitForLoadState('networkidle')
 })
 
+When('ich bei {string} auf {string} klicke', async ({ page }, gameName: string, label: string) => {
+  const gameRow = page.locator('[data-testid="game-list-item"]').filter({ hasText: gameName })
+  await gameRow.getByRole('button', { name: label }).click()
+})
+
 Then('werde ich zum Spiel-Editor weitergeleitet', async ({ page }) => {
-  await expect(page).toHaveURL(/\/creator\//)
+  await page.waitForURL(/\/creator\/game\//)
 })
 
 Then('das neue Spiel erscheint in der Liste', async ({ page }) => {
+  // Navigate back to list to verify the game appears
+  await page.goto('/creator')
+  await page.waitForLoadState('networkidle')
   await expect(page.locator('[data-testid="game-list-item"]').first()).toBeVisible()
 })
 
@@ -44,5 +52,7 @@ Given('es existiert ein Spiel im Status {string}', async ({ page, createdGameIds
 })
 
 Then('sehe ich ein Status-Badge mit {string}', async ({ page }, status: string) => {
-  await expect(page.getByText(status)).toBeVisible()
+  // Scope to the specific E2E test game row to avoid accumulated test data interference
+  const gameRow = page.locator('[data-testid="game-list-item"]').filter({ hasText: 'E2E-Statustest' })
+  await expect(gameRow.getByText(status)).toBeVisible()
 })

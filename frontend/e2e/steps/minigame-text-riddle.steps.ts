@@ -65,13 +65,13 @@ Given('TTS ist aktiviert', async ({ page }) => {
 })
 
 Then('sehe ich einen Vorlesen-Button', async ({ page }) => {
-  await expect(page.getByRole('button', { name: /vorlesen|TTS|lesen/i })).toBeVisible()
+  await expect(page.getByTestId("tts-button")).toBeVisible()
 })
 
 When('ich auf den Vorlesen-Button klicke', async ({ page }) => {
-  await page.getByRole('button', { name: /vorlesen|TTS|lesen/i }).click()
+  await page.getByTestId('tts-button').click()
 })
 
 Then('wird die Frage vorgelesen', async ({ page }) => {
-  await expect(page.getByRole('button', { name: /vorlesen|TTS|lesen/i })).toBeVisible()
+  await expect(page.getByTestId("tts-button")).toBeVisible()
 })

@@ -65,7 +65,7 @@ export default function PuzzleConfigForm({ value, onChange, errors, gameId, stat
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-testid="puzzle-config">
       <label className="block text-sm font-medium text-gray-700">Rastergröße</label>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {GRID_OPTIONS.map((opt) => {

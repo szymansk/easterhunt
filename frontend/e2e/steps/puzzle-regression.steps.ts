@@ -245,7 +245,7 @@ When('ich ein zweites zufälliges JPEG über {string} hochlade', async ({ page }
 // ---------------------------------------------------------------------------
 
 When('ich auf "Bearbeiten" bei Station {int} klicke', async ({ page }, index: number) => {
-  await page.getByRole('button', { name: 'Bearbeiten' }).nth(index - 1).click()
+  await page.locator('[data-testid="station-item"]').nth(index - 1).getByRole('link', { name: 'Bearbeiten' }).click()
   await page.waitForURL(/\/station\//)
 })
 

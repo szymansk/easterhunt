@@ -17,7 +17,7 @@ Funktionalität: Stations-Editor
     * 'Puzzle' ist ausgewählt
     Wenn ich auf 'Zahlenrätsel' klicke
     Dann erscheint ein Bestätigungs-Dialog
-    Wenn ich auf 'Bestätigen' klicke
+    Wenn ich auf 'Wechseln' klicke
     Dann ist 'Zahlenrätsel' als aktiver Typ markiert
 
   Szenario: Minispiel-Typ wechseln abbrechen

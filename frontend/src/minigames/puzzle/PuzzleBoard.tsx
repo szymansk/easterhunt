@@ -69,8 +69,9 @@ export default function PuzzleBoard({
           return (
             <div
               key={slot.index}
-              data-testid={`slot-${slot.index}`}
+              data-testid="puzzle-slot"
               data-slot-index={slot.index}
+              data-filled={slot.occupiedBy ? 'true' : 'false'}
               className={`
                 relative aspect-square border-2 border-dashed rounded-md
                 flex items-center justify-center
@@ -104,7 +105,7 @@ export default function PuzzleBoard({
           trayTiles.map((tile) => (
             <div
               key={tile.id}
-              data-testid={`tile-${tile.index}`}
+              data-testid="puzzle-piece"
               data-tile-id={tile.id}
               className="relative rounded-md overflow-hidden border-2 border-gray-300 cursor-grab active:cursor-grabbing"
               style={{ width: `calc(${100 / Math.max(cols, 3)}% - 8px)`, aspectRatio: '1' }}

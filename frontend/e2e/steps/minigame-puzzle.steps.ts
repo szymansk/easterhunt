@@ -1,6 +1,9 @@
+import { fileURLToPath } from 'url'
+import * as fs from 'fs'
+import * as path from 'path'
 import { Given, When, Then, expect, API_BASE } from './fixtures'
 
-Given('ich bin im Puzzle-Minispiel mit {int} Teilen \\(2x2\\)', async ({ page, createdGameIds }, _count: number) => {
+async function createPuzzleStation(page: import('@playwright/test').Page, createdGameIds: string[]) {
   const gameRes = await page.request.post(`${API_BASE}/api/games`, {
     data: { name: 'E2E-Puzzle' },
   })
@@ -10,13 +13,34 @@ Given('ich bin im Puzzle-Minispiel mit {int} Teilen \\(2x2\\)', async ({ page, c
   const stationRes = await page.request.post(`${API_BASE}/api/games/${game.id}/stations`, {
     data: {
       position: 1,
-      image_path: 'test-placeholder.jpg',
+      image_path: null,
       mini_game_type: 'puzzle',
       mini_game_config: { type: 'puzzle', grid_size: 4 },
     },
   })
   const station = await stationRes.json()
+
+  // Upload a real image so puzzle can be generated
+  const __filename = fileURLToPath(import.meta.url)
+  const __dirname = path.dirname(__filename)
+  const imgPath = path.resolve(__dirname, '../../public/icon-192.png')
+  const imgBuffer = fs.readFileSync(imgPath)
+  await page.request.fetch(`${API_BASE}/api/games/${game.id}/stations/${station.id}/image`, {
+    method: 'POST',
+    multipart: {
+      file: { name: 'icon-192.png', mimeType: 'image/png', buffer: imgBuffer },
+    },
+  })
+
+  // Generate puzzle tiles
+  await page.request.post(`${API_BASE}/api/games/${game.id}/stations/${station.id}/puzzle/generate?grid_size=4`)
+
   await page.request.post(`${API_BASE}/api/games/${game.id}/start`)
+  return { game, station }
+}
+
+Given('ich bin im Puzzle-Minispiel mit {int} Teilen \\(2x2\\)', async ({ page, createdGameIds }, _count: number) => {
+  const { game, station } = await createPuzzleStation(page, createdGameIds)
   await page.goto(`/play/${game.id}/station/${station.id}`)
   await page.waitForLoadState('networkidle')
 })
@@ -57,7 +81,7 @@ Then('springt das Teil zurück in die Ablage', async ({ page }) => {
 When('ich alle {int} Puzzleteile korrekt platziere', async ({ page }, count: number) => {
   for (let i = 0; i < count; i++) {
     const piece = page.locator('[data-testid="puzzle-piece"]').first()
-    const slot = page.locator('[data-testid="puzzle-slot"]:not([data-filled="true"])').first()
+    const slot = page.locator('[data-testid="puzzle-slot"][data-filled="false"]').first()
     const pieceBox = await piece.boundingBox()
     const slotBox = await slot.boundingBox()
     if (pieceBox && slotBox) {
