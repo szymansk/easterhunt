@@ -246,7 +246,7 @@ When('ich ein zweites zufälliges JPEG über {string} hochlade', async ({ page }
 
 When('ich auf "Bearbeiten" bei Station {int} klicke', async ({ page }, index: number) => {
   await page.getByRole('button', { name: 'Bearbeiten' }).nth(index - 1).click()
-  await page.waitForLoadState('networkidle')
+  await page.waitForURL(/\/station\//)
 })
 
 Then('bin ich im Stations-Editor für Station {int}', async ({ page }, _index: number) => {
@@ -254,7 +254,7 @@ Then('bin ich im Stations-Editor für Station {int}', async ({ page }, _index: n
 })
 
 When('ich "Puzzle" als Minispiel-Typ wähle', async ({ page }) => {
-  await page.getByRole('button', { name: /Puzzle/ }).click()
+  await page.locator('[data-testid="mini-game-type-selector"]').getByRole('button', { name: /Puzzle/ }).click()
   // Dismiss type-change confirmation modal if it appears
   const confirmBtn = page.getByRole('button', { name: 'Wechseln' })
   if (await confirmBtn.isVisible({ timeout: 500 }).catch(() => false)) {
@@ -383,7 +383,7 @@ When('das Puzzle generiert wird', async ({ page }) => {
  * Note: the strict EXIF-dimension regression (landscape+EXIF→portrait) is covered by
  * the backend pytest test TestExifOrientationPuzzle.
  */
-Then('sind alle Puzzle-Teile hochkant (Höhe > Breite)', async ({ page }) => {
+Then('sind alle Puzzle-Teile hochkant \\(Höhe > Breite\\)', async ({ page }) => {
   await expect(page.locator('[data-testid="tile-tray"] [data-testid^="tile-"]').first()).toBeVisible()
 
   const tileImgs = page.locator('[data-testid^="tile-"] img')

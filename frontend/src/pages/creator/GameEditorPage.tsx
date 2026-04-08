@@ -86,7 +86,7 @@ function SortableStationRow({ station, game, onEdit, onDelete }: SortableStation
   }
 
   return (
-    <div ref={setNodeRef} style={style} className="flex items-center gap-3 bg-white rounded-xl shadow-sm p-3 border border-gray-100">
+    <div ref={setNodeRef} style={style} data-testid="station-item" className="flex items-center gap-3 bg-white rounded-xl shadow-sm p-3 border border-gray-100">
       {/* Drag handle — hidden for treasure */}
       {isTreasure ? (
         <div className="min-w-[44px] min-h-[44px]" />
@@ -363,6 +363,7 @@ export default function GameEditorPage() {
         ) : (
           <button
             onClick={() => setNameEditing(true)}
+            data-testid="game-title"
             className="flex items-center gap-2 group text-left"
             aria-label="Spielname bearbeiten"
           >

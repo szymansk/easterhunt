@@ -2,7 +2,7 @@
 Funktionalität: Minispiel - Puzzle
 
   Hintergrund:
-    Gegeben ich bin im Puzzle-Minispiel mit 4 Teilen (2x2)
+    * ich bin im Puzzle-Minispiel mit 4 Teilen (2x2)
 
   Szenario: Puzzle-Board wird angezeigt
     Dann sehe ich ein Zielraster mit 4 leeren Feldern

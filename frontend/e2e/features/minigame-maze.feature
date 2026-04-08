@@ -2,7 +2,7 @@
 Funktionalität: Minispiel - Labyrinth
 
   Hintergrund:
-    Gegeben ich bin im Labyrinth-Minispiel
+    * ich bin im Labyrinth-Minispiel
 
   Szenario: Labyrinth wird angezeigt
     Dann sehe ich einen SVG-Spielbereich

@@ -38,7 +38,7 @@ Then('die Puzzle-Konfiguration ist sichtbar', async ({ page }) => {
 })
 
 Given('{string} ist ausgewählt', async ({ page }, type: string) => {
-  await page.getByRole('button', { name: type }).click()
+  await page.locator('[data-testid="mini-game-type-selector"]').getByRole('button', { name: type }).click()
 })
 
 Then("ist {string} immer noch ausgewählt", async ({ page }, type: string) => {
@@ -51,7 +51,7 @@ Given('das Bild-Upload-Modal ist geöffnet', async ({ page }) => {
 })
 
 Given("ich habe {string} ausgewählt", async ({ page }, type: string) => {
-  await page.getByRole('button', { name: type }).click()
+  await page.locator('[data-testid="mini-game-type-selector"]').getByRole('button', { name: type }).click()
 })
 
 Given('ich habe eine Frage eingegeben', async ({ page }) => {

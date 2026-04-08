@@ -2,7 +2,7 @@
 Funktionalität: Minispiel - Zahlenrätsel
 
   Hintergrund:
-    Gegeben ich bin im Zahlenrätsel-Minispiel
+    * ich bin im Zahlenrätsel-Minispiel
     Und die Aufgabe lautet '3 + 2'
     Und die korrekte Antwort ist '5'
     Und die Distraktoren sind '3', '7'

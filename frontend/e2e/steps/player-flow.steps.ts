@@ -80,12 +80,6 @@ Then('ist Station {int} als abgeschlossen markiert', async ({ page }, index: num
   ).toBeVisible()
 })
 
-Then('Station {int} ist jetzt die aktuelle Station', async ({ page }, index: number) => {
-  await expect(
-    page.locator('[data-testid="station-card"]').nth(index - 1).locator('[data-testid="current-badge"]')
-  ).toBeVisible()
-})
-
 Then('Station {int} ist noch gesperrt', async ({ page }, index: number) => {
   await expect(
     page.locator('[data-testid="station-card"]').nth(index - 1)

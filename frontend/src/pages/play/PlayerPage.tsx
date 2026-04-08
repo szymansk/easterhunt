@@ -105,8 +105,9 @@ export default function PlayerPage() {
             return (
               <div
                 key={station.id}
-                data-testid={`station-${stationNumber}`}
+                data-testid="station-card"
                 data-status={status}
+                data-locked={status === 'locked' ? 'true' : undefined}
                 onClick={() => handleStationTap(station.id, station.position)}
                 className={[
                   'rounded-2xl p-4 flex items-center gap-4 shadow transition-transform',
@@ -118,6 +119,7 @@ export default function PlayerPage() {
                 ].join(' ')}
               >
                 <div
+                  data-testid={status === 'completed' ? 'completed-badge' : status === 'current' ? 'current-badge' : undefined}
                   className={[
                     'w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0',
                     status === 'completed'

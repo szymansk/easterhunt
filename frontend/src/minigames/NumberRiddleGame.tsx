@@ -123,7 +123,8 @@ export default function NumberRiddleGame({
                   onClick={() => handleTap(value)}
                   className={`rounded-xl border-2 ${borderClass} ${bgClass} font-bold text-2xl active:scale-95 transition-transform ${state === 'wrong' ? 'animate-shake' : ''}`}
                   style={{ minWidth: '60px', minHeight: '60px' }}
-                  data-testid={`answer-btn-${value}`}
+                  data-testid="number-btn"
+                  data-state={state}
                   aria-label={`Antwort ${value}`}
                 >
                   {value}

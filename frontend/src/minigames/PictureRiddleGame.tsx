@@ -104,7 +104,8 @@ export default function PictureRiddleGame({
               onClick={() => handleTap(i, option.is_correct)}
               className={`flex flex-col items-center justify-center p-2 rounded-2xl border-2 ${borderClass} ${bgClass} active:scale-95 transition-transform shadow`}
               style={{ minHeight: '80px' }}
-              data-testid={`answer-option-${i}`}
+              data-testid="answer-btn"
+              data-state={state}
               aria-label={option.label}
             >
               <div

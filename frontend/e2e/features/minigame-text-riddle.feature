@@ -2,7 +2,7 @@
 Funktionalität: Minispiel - Texträtsel
 
   Hintergrund:
-    Gegeben ich bin im Texträtsel-Minispiel mit der Frage 'Was legt die Henne?'
+    * ich bin im Texträtsel-Minispiel mit der Frage 'Was legt die Henne?'
     Und die Antwortoptionen sind 'Ei', 'Milch', 'Wolle'
     Und die korrekte Antwort ist 'Ei'
 
@@ -27,7 +27,7 @@ Funktionalität: Minispiel - Texträtsel
     Dann sind die Antwortbuttons wieder anklickbar
 
   Szenario: TTS-Button liest Frage vor (wenn aktiviert)
-    Gegeben TTS ist aktiviert
+    * TTS ist aktiviert
     Dann sehe ich einen Vorlesen-Button
     Wenn ich auf den Vorlesen-Button klicke
     Dann wird die Frage vorgelesen

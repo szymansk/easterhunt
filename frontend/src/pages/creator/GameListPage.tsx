@@ -89,7 +89,7 @@ export default function GameListPage() {
       ) : (
         <div className="grid gap-4">
           {games.map((game) => (
-            <Card key={game.id} className="flex items-center justify-between">
+            <Card key={game.id} data-testid="game-list-item" className="flex items-center justify-between">
               <div className="flex-1 min-w-0 mr-4">
                 <div className="flex items-center gap-3 flex-wrap">
                   <span className="font-semibold text-gray-800 truncate">{game.name}</span>

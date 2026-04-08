@@ -2,7 +2,7 @@
 Funktionalität: Minispiel - Bilderrätsel 'Was gehört dazu?'
 
   Hintergrund:
-    Gegeben ich bin im Bilderrätsel-Minispiel
+    * ich bin im Bilderrätsel-Minispiel
     Und es werden 2 Referenzbilder angezeigt
     Und es werden 4 Antwortbilder im 2x2-Raster angezeigt
 

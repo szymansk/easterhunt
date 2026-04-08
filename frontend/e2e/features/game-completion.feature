@@ -2,7 +2,7 @@
 Funktionalität: Spiel-Abschluss-Bildschirm
 
   Hintergrund:
-    Gegeben alle Stationen sind abgeschlossen
+    * alle Stationen sind abgeschlossen
     Und ich bin auf der Glückwunsch-Seite
 
   Szenario: Glückwunsch-Bildschirm zeigt Feierlichkeiten

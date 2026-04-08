@@ -11,7 +11,15 @@ Given('die App ist geöffnet', async ({ page }) => {
 })
 
 When('ich auf {string} klicke', async ({ page }, label: string) => {
-  await page.getByRole('button', { name: label }).click()
+  // Prefer button within type-selector to avoid strict-mode violations when
+  // a config panel has a similarly-named button (e.g. "Puzzle" vs "Puzzle generieren").
+  const typeSelector = page.locator('[data-testid="mini-game-type-selector"]')
+  const inTypeSelector = typeSelector.getByRole('button', { name: label })
+  if (await inTypeSelector.count() > 0) {
+    await inTypeSelector.click()
+  } else {
+    await page.getByRole('button', { name: label }).click()
+  }
 })
 
 When('ich die URL {string} aufrufe', async ({ page }, path: string) => {
@@ -88,7 +96,7 @@ Then('erscheint eine Erfolgsmeldung', async ({ page }) => {
 // ── Editor / Creator shared ───────────────────────────────────────────────────
 
 Then('bin ich im Spiel-Editor', async ({ page }) => {
-  await expect(page).toHaveURL(/\/creator\/[^/]+$/)
+  await expect(page).toHaveURL(/\/creator\/game\/[^/]+$/)
 })
 
 Then('bin ich im Stations-Editor', async ({ page }) => {

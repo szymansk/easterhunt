@@ -93,7 +93,8 @@ export default function TextRiddleGame({
             <div key={i} className="flex items-center gap-2">
               <button
                 onClick={() => handleTap(i, option.is_correct)}
-                data-testid={`answer-option-${i}`}
+                data-testid="answer-btn"
+                data-state={state}
                 aria-label={option.text}
                 className={`flex-1 px-4 font-semibold text-left rounded-2xl border-2 ${borderClass} ${bgClass} active:scale-95 transition-transform shadow ${isWrong ? 'animate-shake' : ''}`}
                 style={{ minHeight: '60px', fontSize: '16px' }}

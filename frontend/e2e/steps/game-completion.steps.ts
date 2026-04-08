@@ -32,10 +32,6 @@ Given('ich bin auf der Glückwunsch-Seite', async ({ page }) => {
   await page.waitForLoadState('networkidle')
 })
 
-Then('bin ich auf der Player-Übersicht', async ({ page }) => {
-  await expect(page).toHaveURL(/\/play$/)
-})
-
 Then('Station 1 ist wieder die aktuelle Station', async ({ page }) => {
   await expect(
     page.locator('[data-testid="station-card"]').first().locator('[data-testid="current-badge"]')

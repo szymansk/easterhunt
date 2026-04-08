@@ -2,7 +2,7 @@
 Funktionalität: Spiel-Editor
 
   Hintergrund:
-    Gegeben ich habe ein neues Spiel erstellt
+    * ich habe ein neues Spiel erstellt
     Und ich bin im Spiel-Editor
 
   Szenario: Spielname bearbeiten
@@ -27,15 +27,15 @@ Funktionalität: Spiel-Editor
     Dann ist der Button 'Spiel starten' deaktiviert
 
   Szenario: Spiel starten mit unvollständiger Station zeigt Fehler
-    Gegeben ich habe eine Station ohne Bild hinzugefügt
+    * ich habe eine Station ohne Bild hinzugefügt
     Wenn ich auf 'Spiel starten' klicke
     Dann sehe ich eine Fehlermeldung über fehlende Bilder
 
   Szenario: Station bearbeiten öffnet Editor
-    Gegeben ich habe eine Station hinzugefügt
+    * ich habe eine Station hinzugefügt
     Wenn ich auf 'Bearbeiten' bei der Station klicke
     Dann bin ich im Stations-Editor
 
   Szenario: Maximale Stationsanzahl (20)
-    Gegeben ich habe 20 Stationen hinzugefügt
+    * ich habe 20 Stationen hinzugefügt
     Dann ist der Button '+ Station' deaktiviert

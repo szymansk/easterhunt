@@ -1,7 +1,7 @@
 # language: de
 Funktionalität: Home Page
   Hintergrund:
-    Gegeben die App ist geöffnet
+    * die App ist geöffnet
 
   Szenario: Startseite zeigt Willkommenstext
     Dann sehe ich den Text "Willkommen zur Osterschnitzeljagd!"
@@ -22,6 +22,6 @@ Funktionalität: Home Page
     Und ich sehe den Button "Zur Startseite"
 
   Szenario: Zurück zur Startseite von 404
-    Gegeben ich bin auf der 404-Seite
+    * ich bin auf der 404-Seite
     Wenn ich auf "Zur Startseite" klicke
     Dann bin ich auf der Seite "/"

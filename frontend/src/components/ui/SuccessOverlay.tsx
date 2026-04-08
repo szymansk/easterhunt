@@ -9,6 +9,7 @@ export default function SuccessOverlay({
 }: SuccessOverlayProps) {
   return (
     <div
+      data-testid="station-complete"
       className="fixed inset-0 z-50 flex items-center justify-center bg-green-500 bg-opacity-90 animate-pulse"
       onClick={onClose}
       role="alert"

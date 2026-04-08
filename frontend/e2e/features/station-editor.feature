@@ -2,7 +2,7 @@
 Funktionalität: Stations-Editor
 
   Hintergrund:
-    Gegeben ich bin im Stations-Editor für Station 1
+    * ich bin im Stations-Editor für Station 1
 
   Szenario: Zurück zum Spiel-Editor
     Wenn ich auf '← Zurück' klicke
@@ -14,14 +14,14 @@ Funktionalität: Stations-Editor
     Und die Puzzle-Konfiguration ist sichtbar
 
   Szenario: Minispiel-Typ wechseln mit Bestätigung
-    Gegeben 'Puzzle' ist ausgewählt
+    * 'Puzzle' ist ausgewählt
     Wenn ich auf 'Zahlenrätsel' klicke
     Dann erscheint ein Bestätigungs-Dialog
     Wenn ich auf 'Bestätigen' klicke
     Dann ist 'Zahlenrätsel' als aktiver Typ markiert
 
   Szenario: Minispiel-Typ wechseln abbrechen
-    Gegeben 'Puzzle' ist ausgewählt
+    * 'Puzzle' ist ausgewählt
     Wenn ich auf 'Zahlenrätsel' klicke
     Und auf 'Abbrechen' klicke
     Dann ist 'Puzzle' immer noch ausgewählt
@@ -33,12 +33,12 @@ Funktionalität: Stations-Editor
     Und ich sehe die Option 'Kamera'
 
   Szenario: Bild-Modal schließen
-    Gegeben das Bild-Upload-Modal ist geöffnet
+    * das Bild-Upload-Modal ist geöffnet
     Wenn ich auf 'Abbrechen' klicke
     Dann ist das Modal nicht mehr sichtbar
 
   Szenario: Konfiguration speichern
-    Gegeben ich habe 'Texträtsel' ausgewählt
+    * ich habe 'Texträtsel' ausgewählt
     Und ich habe eine Frage eingegeben
     Und ich habe mindestens 2 Antwortoptionen eingegeben
     Wenn ich auf 'Speichern' klicke

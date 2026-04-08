@@ -325,7 +325,7 @@ export default function StationEditorPage() {
   const [config, setConfig] = useState<MiniGameConfig>(defaultConfig(MiniGameType.puzzle))
   const [configErrors, setConfigErrors] = useState<Record<string, string>>({})
   const [typeChangeTarget, setTypeChangeTarget] = useState<MiniGameType | null>(null)
-  const [hideUrlGames, setHideUrlGames] = useState(false)
+  const [hideUrlGames, setHideUrlGames] = useState(true)
 
   useEffect(() => {
     if (!gameId || !stationId) return
@@ -435,7 +435,7 @@ export default function StationEditorPage() {
               </button>
             </label>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+          <div data-testid="mini-game-type-selector" className="grid grid-cols-2 gap-2 sm:grid-cols-5">
             {MINI_GAME_TYPES.filter(({ type }) => !hideUrlGames || !REQUIRES_EXTERNAL_URLS.has(type)).map(({ type, label, icon }) => {
               const selected = miniGameType === type
               return (

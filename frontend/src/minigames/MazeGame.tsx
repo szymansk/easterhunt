@@ -47,6 +47,7 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
   const [avatarCol, setAvatarCol] = useState(start.col)
   const [completed, setCompleted] = useState(false)
   const [wallHit, setWallHit] = useState(false)
+  const [touching, setTouching] = useState(false)
 
   const svgRef = useRef<SVGSVGElement>(null)
   const lastGridPos = useRef({ row: start.row, col: start.col })
@@ -81,17 +82,24 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
 
       if (targetRow === curRow && targetCol === curCol) return
 
-      // Only allow single-step movement in cardinal directions
+      // Snap diagonal movement to dominant cardinal axis so slightly
+      // diagonal finger swipes still register as intentional moves.
       const dRow = targetRow - curRow
       const dCol = targetCol - curCol
-      if (Math.abs(dRow) + Math.abs(dCol) !== 1) return
+      const moveRow = Math.abs(dRow) >= Math.abs(dCol)
+        ? curRow + Math.sign(dRow)
+        : curRow
+      const moveCol = Math.abs(dCol) > Math.abs(dRow)
+        ? curCol + Math.sign(dCol)
+        : curCol
+      if (moveRow === curRow && moveCol === curCol) return
 
-      if (canMove(walls, curRow, curCol, targetRow, targetCol)) {
-        lastGridPos.current = { row: targetRow, col: targetCol }
-        setAvatarRow(targetRow)
-        setAvatarCol(targetCol)
+      if (canMove(walls, curRow, curCol, moveRow, moveCol)) {
+        lastGridPos.current = { row: moveRow, col: moveCol }
+        setAvatarRow(moveRow)
+        setAvatarCol(moveCol)
 
-        if (targetRow === goal.row && targetCol === goal.col) {
+        if (moveRow === goal.row && moveCol === goal.col) {
           setCompleted(true)
           audio.play('celebration')
           onComplete?.()
@@ -106,6 +114,14 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
     },
     [completed, walls, goal, onComplete, audio],
   )
+
+  function onTouchStart() {
+    setTouching(true)
+  }
+
+  function onTouchEnd() {
+    setTouching(false)
+  }
 
   function onTouchMove(e: React.TouchEvent<SVGSVGElement>) {
     e.preventDefault()
@@ -163,10 +179,13 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
         <div className="flex justify-center overflow-hidden rounded-xl border-4 border-amber-700 bg-amber-50">
           <svg
             ref={svgRef}
+            data-testid="maze-grid"
             viewBox={`0 0 ${svgWidth} ${svgHeight}`}
             width="100%"
             style={{ touchAction: 'none', maxWidth: '100%', display: 'block' }}
             onMouseMove={onMouseMove}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
             onTouchMove={onTouchMove}
           >
             {/* Floor */}
@@ -195,14 +214,27 @@ export default function MazeGame({ mazeData, onComplete }: MazeGameProps) {
               🥚
             </text>
 
+            {/* Avatar touch indicator — visible ring when finger is on screen */}
+            {touching && (
+              <circle
+                cx={cx}
+                cy={cy}
+                r={r * 1.8}
+                fill="none"
+                stroke="#f59e0b"
+                strokeWidth={2}
+                opacity={0.6}
+              />
+            )}
+
             {/* Avatar (bunny) */}
             <circle
               cx={cx}
               cy={cy}
               r={r}
-              fill={wallHit ? '#ef4444' : '#86efac'}
+              fill={wallHit ? '#ef4444' : touching ? '#4ade80' : '#86efac'}
               stroke={wallHit ? '#dc2626' : '#16a34a'}
-              strokeWidth={1.5}
+              strokeWidth={touching ? 2.5 : 1.5}
             />
             <text
               x={cx}
